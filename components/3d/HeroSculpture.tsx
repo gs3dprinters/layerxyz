@@ -35,37 +35,42 @@ export function HeroSculpture() {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    // Luxury Studio Lighting
-    const ambientLight = new THREE.AmbientLight(0xfff8f0, 0.9);
+    // Luxury Studio Lighting for Warm Sandstone
+    const ambientLight = new THREE.AmbientLight(0xfff7ec, 0.75);
     scene.add(ambientLight);
 
-    // Warm Key Light (top-right-front)
-    const keyLight = new THREE.DirectionalLight(0xfff2e6, 2.8);
-    keyLight.position.set(3, 4.5, 3.5);
+    // Soft Key Light (top-right-front)
+    const keyLight = new THREE.DirectionalLight(0xfff5ea, 2.2);
+    keyLight.position.set(2.5, 3.5, 3.0);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width = 1024;
     keyLight.shadow.mapSize.height = 1024;
-    keyLight.shadow.bias = -0.0008;
+    keyLight.shadow.bias = -0.0006;
     scene.add(keyLight);
 
-    // Cool Fill Light (left-mid)
-    const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.4);
-    fillLight.position.set(-3.5, 1.5, 2.5);
+    // Gentle Cool Fill Light (left-mid)
+    const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.2);
+    fillLight.position.set(-3.0, 1.5, 2.0);
     scene.add(fillLight);
 
-    // Crisp Rim / Back Light (highlights head, hair, shoulders, collar)
-    const rimLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    rimLight.position.set(0, 3.5, -3);
+    // Subtle Rim Light (highlights contours of head, hair, shoulders)
+    const rimLight = new THREE.DirectionalLight(0xffffff, 1.6);
+    rimLight.position.set(0, 3.2, -2.8);
     scene.add(rimLight);
 
+    // Gentle Frontal Eye-Level Fill (reveals eyes, facial contours, beard, shirt folds)
+    const frontLight = new THREE.DirectionalLight(0xfff8ee, 0.85);
+    frontLight.position.set(0.4, 0.6, 3.2);
+    scene.add(frontLight);
+
     // Subtle upward bounce from ground
-    const bounceLight = new THREE.DirectionalLight(0xf5f3ee, 0.6);
+    const bounceLight = new THREE.DirectionalLight(0xf5f3ee, 0.45);
     bounceLight.position.set(0, -2, 1);
     scene.add(bounceLight);
 
-    // Soft Contact Shadow Plane
+    // Soft Contact Shadow Plane beneath the statue
     const groundGeo = new THREE.PlaneGeometry(12, 12);
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.14 });
+    const groundMat = new THREE.ShadowMaterial({ opacity: 0.16 });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -1.15;
@@ -100,11 +105,20 @@ export function HeroSculpture() {
 
     controls.addEventListener('start', onUserInteraction);
 
-    // Material for the statue: Charcoal matte stone/resin with micro-highlights
-    const statueMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1f1f1f,
-      roughness: 0.36,
-      metalness: 0.08,
+    // Premium Warm Sandstone Material (#C8B89F) with natural matte stone finish
+    const sandstoneMaterial = new THREE.MeshStandardMaterial({
+      color: new THREE.Color('#C8B89F'),
+      roughness: 0.76,
+      metalness: 0.0,
+      flatShading: false,
+    });
+
+    // Dark Charcoal / Black Pedestal Material (#161616)
+    const pedestalMaterial = new THREE.MeshStandardMaterial({
+      color: new THREE.Color('#161616'),
+      roughness: 0.44,
+      metalness: 0.05,
+      flatShading: false,
     });
 
     const statueGroup = new THREE.Group();
@@ -128,7 +142,7 @@ export function HeroSculpture() {
       const scaledBox = geometry.boundingBox!;
       const yOffset = scaledBox.min.y;
 
-      const mesh = new THREE.Mesh(geometry, statueMaterial);
+      const mesh = new THREE.Mesh(geometry, sandstoneMaterial);
       mesh.castShadow = true;
       mesh.receiveShadow = true;
       mesh.position.y = -yOffset - 1.15; // Align bottom cleanly with ground plane
@@ -147,7 +161,17 @@ export function HeroSculpture() {
           if (child instanceof THREE.Mesh) {
             child.castShadow = true;
             child.receiveShadow = true;
-            child.material = statueMaterial;
+
+            // Apply Warm Sandstone to person bust and Dark Charcoal to pedestal
+            const isSandstone = 
+              child.material?.name === 'SandstoneMaterial' ||
+              (child.geometry?.attributes?.position?.count && child.geometry.attributes.position.count > 10000);
+
+            if (isSandstone) {
+              child.material = sandstoneMaterial;
+            } else {
+              child.material = pedestalMaterial;
+            }
           }
         });
 
@@ -223,7 +247,8 @@ export function HeroSculpture() {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
-      statueMaterial.dispose();
+      sandstoneMaterial.dispose();
+      pedestalMaterial.dispose();
       groundGeo.dispose();
       groundMat.dispose();
     };
