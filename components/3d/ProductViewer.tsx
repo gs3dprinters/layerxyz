@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 import { Maximize, RotateCcw, Play, Pause } from 'lucide-react';
 
 const swatches = [
@@ -122,43 +123,80 @@ export function ProductViewer({
     };
 
     if (effectiveModelPath) {
-      const loader = new GLTFLoader();
-      loader.load(
-        effectiveModelPath,
-        (gltf) => {
-          gltf.scene.traverse((child) => {
-            if (child instanceof THREE.Mesh) {
-              child.castShadow = true;
-              child.receiveShadow = true;
-              if (child.material) {
-                // Keep original maps but adjust base properties
-                child.material.roughness = Math.max(0.3, child.material.roughness || 0.4);
-                child.material.metalness = Math.min(0.3, child.material.metalness || 0.1);
+      if (effectiveModelPath.toLowerCase().endsWith('.stl')) {
+        const stlLoader = new STLLoader();
+        stlLoader.load(
+          effectiveModelPath,
+          (geometry) => {
+            geometry.computeVertexNormals();
+            geometry.center();
+            
+            geometry.computeBoundingBox();
+            const box = geometry.boundingBox || new THREE.Box3().setFromBufferAttribute(geometry.attributes.position as THREE.BufferAttribute);
+            const size = box.getSize(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const scale = 2.2 / (maxDim || 1);
+            geometry.scale(scale, scale, scale);
+
+            const mat = new THREE.MeshStandardMaterial({
+              color: activeColor,
+              roughness: 0.38,
+              metalness: 0.1,
+            });
+            const mesh = new THREE.Mesh(geometry, mat);
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            // CAD STLs typically have Z-up; rotate to Y-up
+            mesh.rotation.x = -Math.PI / 2;
+
+            scene.add(mesh);
+            modelRef.current = mesh;
+            setLoading(false);
+          },
+          undefined,
+          (err) => {
+            console.error('Error loading STL model:', err);
+            setError(true);
+            loadFallback();
+          }
+        );
+      } else {
+        const loader = new GLTFLoader();
+        loader.load(
+          effectiveModelPath,
+          (gltf) => {
+            gltf.scene.traverse((child) => {
+              if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                if (child.material) {
+                  child.material.roughness = Math.max(0.3, child.material.roughness || 0.4);
+                  child.material.metalness = Math.min(0.3, child.material.metalness || 0.1);
+                }
               }
-            }
-          });
-          
-          // Center and scale model
-          const box = new THREE.Box3().setFromObject(gltf.scene);
-          const center = box.getCenter(new THREE.Vector3());
-          const size = box.getSize(new THREE.Vector3());
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const scale = 2 / maxDim;
-          
-          gltf.scene.scale.setScalar(scale);
-          gltf.scene.position.sub(center.multiplyScalar(scale));
-          
-          scene.add(gltf.scene);
-          modelRef.current = gltf.scene;
-          setLoading(false);
-        },
-        undefined,
-        (err) => {
-          console.error('Error loading model:', err);
-          setError(true);
-          loadFallback();
-        }
-      );
+            });
+            
+            const box = new THREE.Box3().setFromObject(gltf.scene);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const scale = 2 / maxDim;
+            
+            gltf.scene.scale.setScalar(scale);
+            gltf.scene.position.sub(center.multiplyScalar(scale));
+            
+            scene.add(gltf.scene);
+            modelRef.current = gltf.scene;
+            setLoading(false);
+          },
+          undefined,
+          (err) => {
+            console.error('Error loading GLTF model:', err);
+            setError(true);
+            loadFallback();
+          }
+        );
+      }
     } else {
       loadFallback();
     }

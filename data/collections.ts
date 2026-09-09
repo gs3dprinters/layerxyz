@@ -23,8 +23,8 @@ export const COLLECTIONS: Collection[] = [
     slug: 'figurines',
     name: 'Figurines',
     tagline: 'Characters, people and ideas made physical.',
-    description: 'From mythical creatures to contemplative figures, our figurine collection brings digital sculptures into the physical world with extraordinary detail and craftsmanship.',
-    productSlugs: ['the-guardian', 'mythic-dragon', 'the-architect'],
+    description: 'From mythical creatures to contemplative figures and bespoke portrait statues, our figurine collection brings digital sculptures into the physical world with extraordinary detail and craftsmanship.',
+    productSlugs: ['kala-portrait-statue', 'the-guardian', 'mythic-dragon', 'the-architect'],
     color: '#3F3D56',
   },
   {

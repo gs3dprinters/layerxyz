@@ -49,6 +49,43 @@ export interface Product {
 
 const BASE_PRODUCTS: Product[] = [
   {
+    id: 'prod_kala',
+    slug: 'kala-portrait-statue',
+    name: 'Kalanidhi Bespoke Portrait Statue',
+    description: 'Artisan figurative sculpture with realistic anatomical detail.',
+    longDescription: 'A custom figurative commission celebrating portrait craftsmanship and advanced additive manufacturing. Digitally sculpted with precise anatomical fidelity, fabricated with high-density structural core, and hand-conditioned with a museum-grade finish.',
+    price: 8490,
+    comparePrice: 10990,
+    category: 'figurines',
+    images: ['/images/products/kala-statue-optimized.jpg'],
+    model: '/models/kala-final-print.stl',
+    sizes: [
+      { label: 'S (Desk)', dimensions: '150 × 90 × 90 mm', price: 4990 },
+      { label: 'M (Studio)', dimensions: '250 × 150 × 150 mm', price: 8490 },
+      { label: 'L (Exhibition)', dimensions: '400 × 240 × 240 mm', price: 16990 },
+    ],
+    materials: [
+      { label: 'Studio PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+    ],
+    finishes: [
+      { label: 'Obsidian Matte', slug: 'obsidian-matte' },
+      { label: 'Hand-Smoothed Satin', slug: 'satin-sealed' },
+      { label: 'Museum Bronze', slug: 'bronze-effect' },
+    ],
+    available: true,
+    madeToOrder: true,
+    badge: 'Flagship',
+    details: {
+      description: 'An authentic bespoke artisan statue commissioned and crafted in our Tiruppur studio. Features sub-50-micron surface resolution capturing authentic portrait expressions and posture.',
+      shipping: 'Made to order. Carefully packed in shock-absorbing foam. Ships across India in 5–8 business days.',
+      care: 'Display on a flat, stable surface. Dust with a soft micro-fiber cloth. Avoid prolonged direct UV sunlight.',
+      specifications: 'Source Model: /models/kala-final-print.stl · Resolution: 0.08mm layer pitch · Finishing: Multi-stage primer and tactile conditioning',
+    },
+    colors: ['#1E1E1E', '#ECEAE4', '#8B8680'],
+    relatedSlugs: ['the-guardian', 'the-architect', 'sculptural-form-i'],
+  },
+  {
     id: 'prod_001',
     slug: 'sculptural-form-i',
     name: 'Sculptural Form I',

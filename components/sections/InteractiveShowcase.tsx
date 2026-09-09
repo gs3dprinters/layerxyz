@@ -29,7 +29,11 @@ export default function InteractiveShowcase() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
           className="w-full aspect-[4/5] md:aspect-[16/10] relative rounded-2xl overflow-hidden bg-[#E8E5DE]"
         >
-          <ProductViewer productName="Sculptural Form I" fallbackColor="#2A2A2A" />
+          <ProductViewer 
+            modelPath="/models/kala-final-print.stl"
+            productName="Kalanidhi Bespoke Portrait Statue" 
+            fallbackColor="#1E1E1E" 
+          />
           
           <div className="absolute bottom-6 left-0 w-full text-center pointer-events-none">
             <span className="inline-block px-4 py-2 bg-white/80 backdrop-blur text-xs text-[#181818] tracking-widest uppercase rounded-full shadow-sm">
