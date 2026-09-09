@@ -35,12 +35,12 @@ export function HeroSculpture() {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    // Luxury Studio Lighting for Warm Sandstone
-    const ambientLight = new THREE.AmbientLight(0xfff7ec, 0.75);
+    // Luxury Studio Lighting for Light Black / Graphite Sculpture
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
     scene.add(ambientLight);
 
     // Soft Key Light (top-right-front)
-    const keyLight = new THREE.DirectionalLight(0xfff5ea, 2.2);
+    const keyLight = new THREE.DirectionalLight(0xfff8f0, 2.4);
     keyLight.position.set(2.5, 3.5, 3.0);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width = 1024;
@@ -49,22 +49,22 @@ export function HeroSculpture() {
     scene.add(keyLight);
 
     // Gentle Cool Fill Light (left-mid)
-    const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.2);
+    const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.3);
     fillLight.position.set(-3.0, 1.5, 2.0);
     scene.add(fillLight);
 
-    // Subtle Rim Light (highlights contours of head, hair, shoulders)
-    const rimLight = new THREE.DirectionalLight(0xffffff, 1.6);
+    // Rim Light (highlights contours of head, hair, shoulders to pop from ivory background)
+    const rimLight = new THREE.DirectionalLight(0xffffff, 2.2);
     rimLight.position.set(0, 3.2, -2.8);
     scene.add(rimLight);
 
     // Gentle Frontal Eye-Level Fill (reveals eyes, facial contours, beard, shirt folds)
-    const frontLight = new THREE.DirectionalLight(0xfff8ee, 0.85);
+    const frontLight = new THREE.DirectionalLight(0xffffff, 0.95);
     frontLight.position.set(0.4, 0.6, 3.2);
     scene.add(frontLight);
 
     // Subtle upward bounce from ground
-    const bounceLight = new THREE.DirectionalLight(0xf5f3ee, 0.45);
+    const bounceLight = new THREE.DirectionalLight(0xf5f3ee, 0.5);
     bounceLight.position.set(0, -2, 1);
     scene.add(bounceLight);
 
@@ -105,19 +105,19 @@ export function HeroSculpture() {
 
     controls.addEventListener('start', onUserInteraction);
 
-    // Premium Light Grey Architectural Stone Material (#D2D2D0) with natural matte finish
+    // Premium Light Black / Graphite Sculpture Material (#323232)
     const statueMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#D2D2D0'),
-      roughness: 0.72,
-      metalness: 0.0,
+      color: new THREE.Color('#323232'),
+      roughness: 0.44,
+      metalness: 0.05,
       flatShading: false,
     });
 
-    // Dark Charcoal / Black Pedestal Material (#161616)
+    // Deep Dark Charcoal / Black Pedestal Material (#141414)
     const pedestalMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#161616'),
-      roughness: 0.44,
-      metalness: 0.05,
+      color: new THREE.Color('#141414'),
+      roughness: 0.38,
+      metalness: 0.06,
       flatShading: false,
     });
 
@@ -162,8 +162,9 @@ export function HeroSculpture() {
             child.castShadow = true;
             child.receiveShadow = true;
 
-            // Apply Light Grey to person bust and Dark Charcoal to pedestal
+            // Apply Light Black to person bust and Deep Charcoal to pedestal
             const isStatue = 
+              child.material?.name === 'LightBlackMaterial' ||
               child.material?.name === 'LightGreyMaterial' ||
               child.material?.name === 'SandstoneMaterial' ||
               (child.geometry?.attributes?.position?.count && child.geometry.attributes.position.count > 10000);
