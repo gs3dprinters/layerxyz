@@ -1,164 +1,263 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 
 export function HeroSculpture() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const width = containerRef.current.clientWidth;
-    const height = containerRef.current.clientHeight;
+    const container = containerRef.current;
+    const width = container.clientWidth || window.innerWidth / 2;
+    const height = container.clientHeight || window.innerHeight;
+    const isMobile = window.innerWidth < 768;
 
     const scene = new THREE.Scene();
     
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 5);
+    // Camera setup - responsive framing
+    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 50);
+    const defaultCamDistance = isMobile ? 4.2 : 3.3;
+    camera.position.set(0, 0.35, defaultCamDistance);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    containerRef.current.appendChild(renderer.domElement);
+    // @ts-ignore
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    container.appendChild(renderer.domElement);
 
-    // Warm Studio Lighting
-    const ambientLight = new THREE.AmbientLight('#ffffff', 0.6);
+    // Luxury Studio Lighting
+    const ambientLight = new THREE.AmbientLight(0xfff8f0, 0.9);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight('#fff0dd', 2.5);
-    keyLight.position.set(2, 4, 3);
+    // Warm Key Light (top-right-front)
+    const keyLight = new THREE.DirectionalLight(0xfff2e6, 2.8);
+    keyLight.position.set(3, 4.5, 3.5);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width = 1024;
     keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.bias = -0.0008;
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight('#e6f0ff', 1.5);
-    fillLight.position.set(-3, -1, 1);
+    // Cool Fill Light (left-mid)
+    const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.4);
+    fillLight.position.set(-3.5, 1.5, 2.5);
     scene.add(fillLight);
 
-    // Ground plane for subtle reflection/shadow
-    const groundGeo = new THREE.PlaneGeometry(10, 10);
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.05 });
+    // Crisp Rim / Back Light (highlights head, hair, shoulders, collar)
+    const rimLight = new THREE.DirectionalLight(0xffffff, 2.2);
+    rimLight.position.set(0, 3.5, -3);
+    scene.add(rimLight);
+
+    // Subtle upward bounce from ground
+    const bounceLight = new THREE.DirectionalLight(0xf5f3ee, 0.6);
+    bounceLight.position.set(0, -2, 1);
+    scene.add(bounceLight);
+
+    // Soft Contact Shadow Plane
+    const groundGeo = new THREE.PlaneGeometry(12, 12);
+    const groundMat = new THREE.ShadowMaterial({ opacity: 0.14 });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -1.5;
+    ground.position.y = -1.15;
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // Create elegant abstract sculpture
-    const group = new THREE.Group();
-    
-    // Smooth custom shape
-    const shape = new THREE.Shape();
-    shape.moveTo(0, 0.5);
-    shape.quadraticCurveTo(0.5, 0.5, 0.5, 0);
-    shape.quadraticCurveTo(0.5, -0.5, 0, -0.5);
-    shape.quadraticCurveTo(-0.5, -0.5, -0.5, 0);
-    shape.quadraticCurveTo(-0.5, 0.5, 0, 0.5);
+    // OrbitControls with smooth inertia
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enablePan = false; // Keep statue always centered
+    controls.minDistance = isMobile ? 2.8 : 2.2;
+    controls.maxDistance = isMobile ? 6.0 : 4.8;
+    controls.maxPolarAngle = Math.PI / 2 - 0.04; // Don't look below ground
+    controls.minPolarAngle = Math.PI / 6; // Don't flip upside down
+    controls.target.set(0, 0.05, 0);
 
-    const extrudeSettings = {
-      depth: 0.3,
-      bevelEnabled: true,
-      bevelSegments: 32,
-      steps: 2,
-      bevelSize: 0.15,
-      bevelThickness: 0.15,
-      curveSegments: 64,
+    // Subtle auto-rotation: ~25s per full 360 turn
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1.3;
+
+    let resumeAutoRotateTimeout: NodeJS.Timeout | null = null;
+
+    const onUserInteraction = () => {
+      setHasInteracted(true);
+      controls.autoRotate = false;
+      if (resumeAutoRotateTimeout) clearTimeout(resumeAutoRotateTimeout);
+      resumeAutoRotateTimeout = setTimeout(() => {
+        controls.autoRotate = true;
+      }, 3500); // Resume auto-rotate 3.5s after user stops dragging
     };
 
-    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-    geometry.center();
+    controls.addEventListener('start', onUserInteraction);
 
-    const material = new THREE.MeshStandardMaterial({
-      color: '#2A2A2A',
-      roughness: 0.5,
+    // Material for the statue: Charcoal matte stone/resin with micro-highlights
+    const statueMaterial = new THREE.MeshStandardMaterial({
+      color: 0x1f1f1f,
+      roughness: 0.36,
       metalness: 0.08,
     });
 
-    // Create a composition of overlapping shapes
-    const numShapes = 3;
-    for (let i = 0; i < numShapes; i++) {
-      const mesh = new THREE.Mesh(geometry, material);
-      const scale = 1 - (i * 0.15);
-      mesh.scale.setScalar(scale);
-      mesh.position.z = (i - 1) * 0.2;
-      mesh.position.x = Math.sin(i * Math.PI) * 0.2;
-      mesh.rotation.z = i * (Math.PI / 4);
+    const statueGroup = new THREE.Group();
+    scene.add(statueGroup);
+
+    // Setup and normalize mesh
+    const setupMesh = (geometry: THREE.BufferGeometry) => {
+      geometry.computeVertexNormals();
+      geometry.center();
+      geometry.computeBoundingBox();
+
+      const box = geometry.boundingBox || new THREE.Box3();
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const targetHeight = 2.3;
+      const scale = targetHeight / (maxDim || 1);
+      geometry.scale(scale, scale, scale);
+
+      // Re-center after scale
+      geometry.computeBoundingBox();
+      const scaledBox = geometry.boundingBox!;
+      const yOffset = scaledBox.min.y;
+
+      const mesh = new THREE.Mesh(geometry, statueMaterial);
       mesh.castShadow = true;
       mesh.receiveShadow = true;
-      group.add(mesh);
-    }
+      mesh.position.y = -yOffset - 1.15; // Align bottom cleanly with ground plane
 
-    scene.add(group);
-
-    // Mouse Parallax
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-
-    const onDocumentMouseMove = (event: MouseEvent) => {
-      const windowHalfX = window.innerWidth / 2;
-      const windowHalfY = window.innerHeight / 2;
-      mouseX = (event.clientX - windowHalfX) * 0.001;
-      mouseY = (event.clientY - windowHalfY) * 0.001;
+      statueGroup.add(mesh);
+      setLoading(false);
     };
 
-    document.addEventListener('mousemove', onDocumentMouseMove);
+    // Load actual GLB model
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load(
+      '/models/kala-final-print.glb',
+      (gltf) => {
+        const root = gltf.scene;
+        root.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+            child.material = statueMaterial;
+          }
+        });
 
+        const box = new THREE.Box3().setFromObject(root);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const targetHeight = 2.3;
+        const scale = targetHeight / (maxDim || 1);
+
+        root.scale.setScalar(scale);
+        root.position.x = -center.x * scale;
+        root.position.z = -center.z * scale;
+        root.position.y = -box.min.y * scale - 1.15; // Sit on ground plane
+
+        statueGroup.add(root);
+        setLoading(false);
+      },
+      undefined,
+      (err) => {
+        console.warn('GLB load failed, attempting STL fallback:', err);
+        const stlLoader = new STLLoader();
+        stlLoader.load(
+          '/models/kala-final-print.stl',
+          (geometry) => {
+            // STL CAD coordinates are Z-up; rotate geometry to Y-up
+            geometry.rotateX(-Math.PI / 2);
+            setupMesh(geometry);
+          },
+          undefined,
+          (stlErr) => {
+            console.error('All loaders failed:', stlErr);
+            setLoading(false);
+          }
+        );
+      }
+    );
+
+    // Animation Loop
     let animationId: number;
     const animate = () => {
       animationId = requestAnimationFrame(animate);
-
-      // Elegant auto-rotation
-      group.rotation.y += 0.002;
-      group.rotation.x = Math.sin(Date.now() * 0.0005) * 0.1;
-
-      // Smooth parallax interpolation
-      targetX = mouseX * 0.5;
-      targetY = mouseY * 0.5;
-      
-      group.position.x += (targetX - group.position.x) * 0.02;
-      group.position.y += (-targetY - group.position.y) * 0.02;
-
+      controls.update();
       renderer.render(scene, camera);
     };
-
     animate();
 
+    // Resize Handler
     const handleResize = () => {
-      if (!containerRef.current) return;
-      const w = containerRef.current.clientWidth;
-      const h = containerRef.current.clientHeight;
+      if (!container) return;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      const mobile = window.innerWidth < 768;
+
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
+      controls.minDistance = mobile ? 2.8 : 2.2;
+      controls.maxDistance = mobile ? 6.0 : 4.8;
       renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      document.removeEventListener('mousemove', onDocumentMouseMove);
+      controls.removeEventListener('start', onUserInteraction);
+      if (resumeAutoRotateTimeout) clearTimeout(resumeAutoRotateTimeout);
       cancelAnimationFrame(animationId);
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
+      controls.dispose();
+
+      if (container && renderer.domElement && container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
       }
       renderer.dispose();
-      geometry.dispose();
-      material.dispose();
+      statueMaterial.dispose();
+      groundGeo.dispose();
+      groundMat.dispose();
     };
   }, []);
 
   return (
-    <div 
-      className="absolute inset-0 pointer-events-none" 
-      ref={containerRef}
-      aria-hidden="true"
-    />
+    <div className="relative w-full h-full flex items-center justify-center select-none touch-none">
+      {/* Three.js canvas container */}
+      <div 
+        ref={containerRef} 
+        className="w-full h-full cursor-grab active:cursor-grabbing outline-none"
+      />
+
+      {/* Elegant minimal loading indicator */}
+      {loading && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F5F3EE]/80 backdrop-blur-sm z-10 transition-opacity duration-500">
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-[#181818] animate-ping" />
+            <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#181818] font-medium">
+              LOADING OBJECT
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Subtle user guidance: fades out after first interaction */}
+      {!loading && !hasInteracted && (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none z-10 bg-white/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#E8E5DE] shadow-sm transition-opacity duration-700">
+          <span className="text-[11px] font-medium tracking-widest uppercase text-[#181818]">
+            DRAG TO ROTATE
+          </span>
+        </div>
+      )}
+    </div>
   );
 }
 
