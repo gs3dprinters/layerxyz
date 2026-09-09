@@ -105,10 +105,10 @@ export function HeroSculpture() {
 
     controls.addEventListener('start', onUserInteraction);
 
-    // Premium Warm Sandstone Material (#C8B89F) with natural matte stone finish
-    const sandstoneMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#C8B89F'),
-      roughness: 0.76,
+    // Premium Light Grey Architectural Stone Material (#D2D2D0) with natural matte finish
+    const statueMaterial = new THREE.MeshStandardMaterial({
+      color: new THREE.Color('#D2D2D0'),
+      roughness: 0.72,
       metalness: 0.0,
       flatShading: false,
     });
@@ -142,7 +142,7 @@ export function HeroSculpture() {
       const scaledBox = geometry.boundingBox!;
       const yOffset = scaledBox.min.y;
 
-      const mesh = new THREE.Mesh(geometry, sandstoneMaterial);
+      const mesh = new THREE.Mesh(geometry, statueMaterial);
       mesh.castShadow = true;
       mesh.receiveShadow = true;
       mesh.position.y = -yOffset - 1.15; // Align bottom cleanly with ground plane
@@ -162,13 +162,14 @@ export function HeroSculpture() {
             child.castShadow = true;
             child.receiveShadow = true;
 
-            // Apply Warm Sandstone to person bust and Dark Charcoal to pedestal
-            const isSandstone = 
+            // Apply Light Grey to person bust and Dark Charcoal to pedestal
+            const isStatue = 
+              child.material?.name === 'LightGreyMaterial' ||
               child.material?.name === 'SandstoneMaterial' ||
               (child.geometry?.attributes?.position?.count && child.geometry.attributes.position.count > 10000);
 
-            if (isSandstone) {
-              child.material = sandstoneMaterial;
+            if (isStatue) {
+              child.material = statueMaterial;
             } else {
               child.material = pedestalMaterial;
             }
@@ -247,7 +248,7 @@ export function HeroSculpture() {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
-      sandstoneMaterial.dispose();
+      statueMaterial.dispose();
       pedestalMaterial.dispose();
       groundGeo.dispose();
       groundMat.dispose();
