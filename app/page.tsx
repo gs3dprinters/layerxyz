@@ -1,59 +1,32 @@
-import React from "react";
-import { HeroSection } from "@/sections/HeroSection";
-import { TrustMarquee } from "@/sections/TrustMarquee";
-import { IntroSection } from "@/sections/IntroSection";
-import { ServicesSection } from "@/sections/ServicesSection";
-import { ScaleSection } from "@/sections/ScaleSection";
-import { WorkSection } from "@/sections/WorkSection";
-import { ModelShowcase } from "@/3d/ModelShowcase";
-import { ProcessSection } from "@/sections/ProcessSection";
-import { TechSpecsSection } from "@/sections/TechSpecsSection";
-import { MaterialSection } from "@/sections/MaterialSection";
-import { CustomIdeaSection } from "@/sections/CustomIdeaSection";
-import { FAQSection } from "@/sections/FAQSection";
-import { FinalCTASection } from "@/sections/FinalCTASection";
+import HeroSection from "@/sections/HeroSection";
+import FeaturedCollection from "@/sections/FeaturedCollection";
+import InteractiveShowcase from "@/sections/InteractiveShowcase";
+import ShopByCategory from "@/sections/ShopByCategory";
+import CustomCTASection from "@/sections/CustomCTASection";
+import SelectedWorkSection from "@/sections/SelectedWorkSection";
+import LargeScaleSection from "@/sections/LargeScaleSection";
+import WhyLayerxyz from "@/sections/WhyLayerxyz";
+import FAQSection from "@/sections/FAQSection";
+import FinalCTASection from "@/sections/FinalCTASection";
 
-export default function HomePage() {
+export const metadata = {
+  title: "Layerxyz | Custom 3D Printed Objects",
+  description: "Designed digitally. Made physically. Custom 3D printed objects, sculptures and products — made to order.",
+};
+
+export default function Home() {
   return (
-    <div className="relative w-full overflow-hidden bg-background">
-      {/* 1. Hero Section */}
+    <main className="min-h-screen bg-[#F5F3EE] flex flex-col w-full overflow-hidden">
       <HeroSection />
-
-      {/* 2. Trust Marquee Capability Strip */}
-      <TrustMarquee />
-
-      {/* 3. Editorial Intro */}
-      <IntroSection />
-
-      {/* 4. Core Services (02 / SERVICES) */}
-      <ServicesSection />
-
-      {/* 5. Scale Visualization (Desktop to Statement) */}
-      <ScaleSection />
-
-      {/* 6. Selected Works Gallery (03 / WORK) */}
-      <WorkSection limit={6} />
-
-      {/* 7. Interactive 3D Model Inspection */}
-      <ModelShowcase />
-
-      {/* 8. 4-Stage Fabrication Pipeline (04 / PROCESS) */}
-      <ProcessSection />
-
-      {/* 9. Technical Tolerances & Quality Standards */}
-      <TechSpecsSection />
-
-      {/* 10. Material System Selector */}
-      <MaterialSection />
-
-      {/* 11. Bespoke Custom Idea Callout */}
-      <CustomIdeaSection />
-
-      {/* 12. FAQ Accordion */}
+      <FeaturedCollection />
+      <InteractiveShowcase />
+      <ShopByCategory />
+      <CustomCTASection />
+      <SelectedWorkSection />
+      <LargeScaleSection />
+      <WhyLayerxyz />
       <FAQSection />
-
-      {/* 13. Final Conversion CTA */}
       <FinalCTASection />
-    </div>
+    </main>
   );
 }

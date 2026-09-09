@@ -1,35 +1,28 @@
-import React from "react";
-import Link from "next/link";
-import { ArrowLeft, Box } from "lucide-react";
-import { Button } from "@/ui/Button";
+import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-6 text-center">
-      <div className="w-16 h-16 rounded-full border border-border flex items-center justify-center text-foreground-muted mb-8">
-        <Box className="w-8 h-8" />
-      </div>
-
-      <div className="font-mono text-xs uppercase tracking-[0.3em] text-accent font-semibold mb-4">
-        ERROR // 404 MESH NOT FOUND
-      </div>
-
-      <h1 className="text-4xl sm:text-6xl font-normal tracking-tight text-foreground uppercase max-w-lg mb-6">
-        THIS OBJECT DOESN'T EXIST.
+    <div className="min-h-screen bg-[#F5F3EE] flex flex-col items-center justify-center p-4 text-center">
+      <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-[#181818] mb-4">
+        PAGE NOT FOUND
       </h1>
-
-      <p className="text-foreground-secondary text-sm sm:text-base max-w-md mb-10 leading-relaxed font-light">
-        The coordinates or slug you navigated to have not been materialized in our
-        studio directory.
+      <p className="text-lg text-[#777777] mb-12">
+        The page you're looking for doesn't exist.
       </p>
-
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        <Button href="/work" size="lg" icon>
-          Back to Work
-        </Button>
-        <Button href="/" variant="outline" size="lg">
-          Return to Studio Home
-        </Button>
+      
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Link 
+          href="/shop"
+          className="bg-[#181818] text-white px-8 py-4 rounded-full font-medium hover:bg-[#2A2A2A] transition-colors"
+        >
+          Continue Shopping
+        </Link>
+        <Link 
+          href="/"
+          className="bg-white text-[#181818] border border-[#E8E5DE] px-8 py-4 rounded-full font-medium hover:border-[#D4D0C8] transition-colors"
+        >
+          Go Home
+        </Link>
       </div>
     </div>
   );

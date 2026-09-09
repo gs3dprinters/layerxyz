@@ -224,3 +224,20 @@ export const PROJECTS: Project[] = [
     order: 6,
   },
 ];
+
+export function getProject(slug: string) {
+  const p = PROJECTS.find((project) => project.slug === slug);
+  if (!p) return undefined;
+  return {
+    ...p,
+    name: p.title,
+    material: p.specs.material,
+    dimensions: p.specs.dimensions,
+    weight: p.specs.weight,
+    challenge: p.narrative.challenge,
+    execution: p.narrative.execution,
+    result: p.narrative.result,
+    color: '#2A2A2A',
+  };
+}
+

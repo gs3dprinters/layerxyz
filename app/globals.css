@@ -3,29 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --background: #080808;
-  --surface: #0D0D0D;
-  --surface-raised: #141414;
-  --surface-card: #111111;
-  --foreground: #F5F5F2;
-  --foreground-secondary: #969696;
-  --foreground-muted: #5A5A5A;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.15);
-  --accent: #D4FF3F;
-  --font-geist-sans: -apple-system, BlinkMacSystemFont, "Geist", "Inter", "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-  --font-geist-mono: "Geist Mono", "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
+  /* Premium warm palette */
+  --background: #F5F3EE;
+  --background-secondary: #FAFAF8;
+  --background-white: #FFFFFF;
+  --foreground: #181818;
+  --foreground-secondary: #2A2A2A;
+  --foreground-muted: #777777;
+  --border: #E8E5DE;
+  --border-medium: #D4D0C8;
+  --accent: #B7FF00;
+  --accent-muted: rgba(183, 255, 0, 0.12);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Geist", "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
 }
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
   background-color: var(--background);
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
@@ -33,48 +37,41 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Restrained text highlight selection */
 ::selection {
   background-color: var(--accent);
-  color: #080808;
+  color: #181818;
 }
 
-/* Subtle editorial scrollbar */
+/* Premium scrollbar */
 @media (min-width: 768px) {
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-
   ::-webkit-scrollbar-track {
-    background: #080808;
+    background: var(--background);
   }
-
   ::-webkit-scrollbar-thumb {
-    background: #262626;
-    border-radius: 2px;
+    background: var(--border-medium);
+    border-radius: 3px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: #3f3f3f;
+    background: var(--foreground-muted);
   }
 }
 
-/* Slow rotation animation */
-@keyframes spinSlow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
 }
 
-.animate-spin-slow {
-  animation: spinSlow 30s linear infinite;
+/* Smooth image loading */
+img {
+  content-visibility: auto;
 }
 
-/* Reduced motion compliance */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -83,8 +80,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .animate-marquee {
-    animation: none !important;
   }
 }

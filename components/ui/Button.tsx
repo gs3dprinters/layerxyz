@@ -1,103 +1,57 @@
-"use client";
+import React from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
-import React, { forwardRef } from "react";
-import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+const buttonVariants = {
+  primary: 'bg-[#181818] text-white hover:bg-[#2A2A2A]',
+  secondary: 'bg-white border border-[#E8E5DE] text-[#181818] hover:bg-[#F5F3EE]',
+  outline: 'border border-[#181818] text-[#181818] hover:bg-[#181818] hover:text-white',
+  ghost: 'text-[#181818] hover:bg-[#E8E5DE]/50',
+};
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+const buttonSizes = {
+  sm: 'h-10 px-5 text-sm',
+  md: 'h-12 px-7 text-sm',
+  lg: 'h-14 px-9 text-base',
+};
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: keyof typeof buttonVariants;
+  size?: keyof typeof buttonSizes;
+  withArrow?: boolean;
   href?: string;
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "accent";
-  size?: "sm" | "md" | "lg";
-  icon?: boolean;
-  external?: boolean;
-  arrowType?: "right" | "up-right";
+  className?: string;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      children,
-      href,
-      variant = "primary",
-      size = "md",
-      icon = false,
-      external = false,
-      arrowType = "right",
-      ...props
-    },
-    ref
-  ) => {
-    const baseStyles =
-      "group relative inline-flex items-center justify-center font-mono text-xs tracking-wider uppercase transition-all duration-300 select-none cursor-pointer overflow-hidden border disabled:opacity-50 disabled:pointer-events-none";
-
-    const variantStyles = {
-      primary:
-        "bg-foreground text-background border-foreground hover:bg-transparent hover:text-foreground active:scale-[0.98]",
-      secondary:
-        "bg-surface-raised text-foreground border-border hover:border-foreground active:scale-[0.98]",
-      outline:
-        "bg-transparent text-foreground border-border hover:border-foreground active:scale-[0.98]",
-      ghost:
-        "bg-transparent text-foreground-secondary border-transparent hover:text-foreground active:scale-[0.98]",
-      accent:
-        "bg-accent text-background border-accent font-semibold hover:bg-transparent hover:text-accent hover:border-accent active:scale-[0.98]",
-    };
-
-    const sizeStyles = {
-      sm: "h-10 px-4 gap-2 rounded-[2px]",
-      md: "h-12 px-6 gap-3 rounded-[3px]",
-      lg: "h-14 px-8 gap-3 text-sm rounded-[4px]",
-    };
-
-    const ArrowIcon = arrowType === "up-right" ? ArrowUpRight : ArrowRight;
-
+export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+  ({ className = '', variant = 'primary', size = 'md', withArrow, href, children, ...props }, ref) => {
+    const baseClasses = 'inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-[#B7FF00]/50 disabled:opacity-50 disabled:pointer-events-none group';
+    
+    const combinedClasses = `${baseClasses} ${buttonVariants[variant]} ${buttonSizes[size]} ${className}`;
+    
     const content = (
       <>
-        <span className="relative z-10 transition-transform duration-300 group-hover:-translate-x-0.5">
-          {children}
-        </span>
-        {icon && (
-          <ArrowIcon className="relative z-10 w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:rotate-0" />
+        {children}
+        {withArrow && (
+          <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
         )}
       </>
     );
 
     if (href) {
-      if (external) {
-        return (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
-          >
-            {content}
-          </a>
-        );
-      }
       return (
-        <Link
-          href={href}
-          className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
-        >
+        <Link href={href} className={combinedClasses} ref={ref as React.Ref<HTMLAnchorElement>}>
           {content}
         </Link>
       );
     }
 
     return (
-      <button
-        ref={ref}
-        className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
-        {...props}
-      >
+      <button className={combinedClasses} ref={ref as React.Ref<HTMLButtonElement>} {...props}>
         {content}
       </button>
     );
   }
 );
 
-Button.displayName = "Button";
+Button.displayName = 'Button';

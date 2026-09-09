@@ -1,210 +1,165 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
 export function HeroSculpture() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    if (!containerRef.current) return;
 
-    // Dimensions
-    const width = container.clientWidth || 500;
-    const height = container.clientHeight || 500;
+    const width = containerRef.current.clientWidth;
+    const height = containerRef.current.clientHeight;
 
-    // Scene
     const scene = new THREE.Scene();
+    
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    camera.position.set(0, 0, 5);
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-    camera.position.set(0, 0.5, 4.2);
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: "high-performance",
-    });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
-    container.appendChild(renderer.domElement);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    containerRef.current.appendChild(renderer.domElement);
 
-    // Lighting (Studio Setup)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    // Warm Studio Lighting
+    const ambientLight = new THREE.AmbientLight('#ffffff', 0.6);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
-    keyLight.position.set(3, 4, 3);
+    const keyLight = new THREE.DirectionalLight('#fff0dd', 2.5);
+    keyLight.position.set(2, 4, 3);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 1024;
+    keyLight.shadow.mapSize.height = 1024;
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0xd4ff3f, 1.8);
-    rimLight.position.set(-3, 2, -2.5);
-    scene.add(rimLight);
-
-    const fillLight = new THREE.DirectionalLight(0x708090, 0.8);
-    fillLight.position.set(0, -3, 2);
+    const fillLight = new THREE.DirectionalLight('#e6f0ff', 1.5);
+    fillLight.position.set(-3, -1, 1);
     scene.add(fillLight);
 
-    // Group for object
-    const sculptureGroup = new THREE.Group();
-    scene.add(sculptureGroup);
+    // Ground plane for subtle reflection/shadow
+    const groundGeo = new THREE.PlaneGeometry(10, 10);
+    const groundMat = new THREE.ShadowMaterial({ opacity: 0.05 });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -1.5;
+    ground.receiveShadow = true;
+    scene.add(ground);
 
-    // Procedural Layered Monolith Sculpture
-    // Emulates a high-end generative 3D printed architectural artifact
-    const layers = 28;
-    const layerMeshes: THREE.Mesh[] = [];
+    // Create elegant abstract sculpture
+    const group = new THREE.Group();
+    
+    // Smooth custom shape
+    const shape = new THREE.Shape();
+    shape.moveTo(0, 0.5);
+    shape.quadraticCurveTo(0.5, 0.5, 0.5, 0);
+    shape.quadraticCurveTo(0.5, -0.5, 0, -0.5);
+    shape.quadraticCurveTo(-0.5, -0.5, -0.5, 0);
+    shape.quadraticCurveTo(-0.5, 0.5, 0, 0.5);
+
+    const extrudeSettings = {
+      depth: 0.3,
+      bevelEnabled: true,
+      bevelSegments: 32,
+      steps: 2,
+      bevelSize: 0.15,
+      bevelThickness: 0.15,
+      curveSegments: 64,
+    };
+
+    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    geometry.center();
 
     const material = new THREE.MeshStandardMaterial({
-      color: 0x181818,
-      roughness: 0.38,
-      metalness: 0.12,
-      flatShading: false,
+      color: '#2A2A2A',
+      roughness: 0.5,
+      metalness: 0.08,
     });
 
-    const edgeMaterial = new THREE.LineBasicMaterial({
-      color: 0x333333,
-      transparent: true,
-      opacity: 0.4,
-    });
-
-    for (let i = 0; i < layers; i++) {
-      const progress = i / layers;
-      const angle = progress * Math.PI * 2;
-      const radius = 0.95 + 0.25 * Math.sin(progress * 4 * Math.PI) * Math.cos(progress * 2 * Math.PI);
-      const heightStep = (progress - 0.5) * 2.4;
-
-      const shape = new THREE.Shape();
-      const points = 6;
-      for (let p = 0; p < points; p++) {
-        const theta = (p / points) * Math.PI * 2 + angle * 0.4;
-        const r = radius * (1 + 0.15 * Math.cos(theta * 3));
-        const x = r * Math.cos(theta);
-        const y = r * Math.sin(theta);
-        if (p === 0) shape.moveTo(x, y);
-        else shape.lineTo(x, y);
-      }
-      shape.closePath();
-
-      const extrudeSettings = {
-        steps: 1,
-        depth: 0.05,
-        bevelEnabled: true,
-        bevelThickness: 0.015,
-        bevelSize: 0.015,
-        bevelSegments: 2,
-      };
-
-      const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-      geometry.center();
-
+    // Create a composition of overlapping shapes
+    const numShapes = 3;
+    for (let i = 0; i < numShapes; i++) {
       const mesh = new THREE.Mesh(geometry, material);
-      mesh.position.y = heightStep;
-      mesh.rotation.x = Math.PI / 2;
-      mesh.rotation.z = angle * 0.3;
-
-      // Edges for 3D printed layer texture look
-      const edges = new THREE.EdgesGeometry(geometry);
-      const line = new THREE.LineSegments(edges, edgeMaterial);
-      mesh.add(line);
-
-      sculptureGroup.add(mesh);
-      layerMeshes.push(mesh);
+      const scale = 1 - (i * 0.15);
+      mesh.scale.setScalar(scale);
+      mesh.position.z = (i - 1) * 0.2;
+      mesh.position.x = Math.sin(i * Math.PI) * 0.2;
+      mesh.rotation.z = i * (Math.PI / 4);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      group.add(mesh);
     }
 
-    // Interactive mouse parallax
+    scene.add(group);
+
+    // Mouse Parallax
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
 
-    const onMouseMove = (event: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      targetX = x * 0.8;
-      targetY = y * 0.6;
+    const onDocumentMouseMove = (event: MouseEvent) => {
+      const windowHalfX = window.innerWidth / 2;
+      const windowHalfY = window.innerHeight / 2;
+      mouseX = (event.clientX - windowHalfX) * 0.001;
+      mouseY = (event.clientY - windowHalfY) * 0.001;
     };
 
-    window.addEventListener("mousemove", onMouseMove);
+    document.addEventListener('mousemove', onDocumentMouseMove);
 
-    // Resize Handler
-    const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    };
-
-    const resizeObserver = new ResizeObserver(handleResize);
-    resizeObserver.observe(container);
-
-    // Animation Loop
-    let animationFrameId: number;
-    let clock = new THREE.Clock();
-
+    let animationId: number;
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
+      animationId = requestAnimationFrame(animate);
 
-      // Smooth mouse follow
-      mouseX += (targetX - mouseX) * 0.05;
-      mouseY += (targetY - mouseY) * 0.05;
+      // Elegant auto-rotation
+      group.rotation.y += 0.002;
+      group.rotation.x = Math.sin(Date.now() * 0.0005) * 0.1;
 
-      // Turntable rotation
-      sculptureGroup.rotation.y += delta * 0.22;
-      sculptureGroup.rotation.x = mouseY * 0.5 + Math.sin(clock.elapsedTime * 0.5) * 0.05;
-      sculptureGroup.rotation.z = -mouseX * 0.3;
+      // Smooth parallax interpolation
+      targetX = mouseX * 0.5;
+      targetY = mouseY * 0.5;
+      
+      group.position.x += (targetX - group.position.x) * 0.02;
+      group.position.y += (-targetY - group.position.y) * 0.02;
 
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // Cleanup
+    const handleResize = () => {
+      if (!containerRef.current) return;
+      const w = containerRef.current.clientWidth;
+      const h = containerRef.current.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+
+    window.addEventListener('resize', handleResize);
+
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      resizeObserver.disconnect();
-      cancelAnimationFrame(animationFrameId);
-      if (container && renderer.domElement) {
-        container.removeChild(renderer.domElement);
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousemove', onDocumentMouseMove);
+      cancelAnimationFrame(animationId);
+      if (containerRef.current && renderer.domElement) {
+        containerRef.current.removeChild(renderer.domElement);
       }
       renderer.dispose();
+      geometry.dispose();
       material.dispose();
-      edgeMaterial.dispose();
-      layerMeshes.forEach((mesh) => {
-        mesh.geometry.dispose();
-      });
     };
   }, []);
 
   return (
-    <div
+    <div 
+      className="absolute inset-0 pointer-events-none" 
       ref={containerRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      data-cursor="drag"
-      className="relative w-full h-full min-h-[380px] lg:min-h-[560px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
-    >
-      {/* Studio Spec Overlay Tags */}
-      <div className="absolute top-4 left-4 z-10 font-mono text-[10px] uppercase tracking-widest text-foreground-muted pointer-events-none hidden sm:block">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-          <span>REALTIME 3D VIEWPORT</span>
-        </div>
-        <div className="text-foreground/40 mt-0.5">FORM / KINETIC MONOLITH 01</div>
-      </div>
-
-      <div className="absolute bottom-4 right-4 z-10 font-mono text-[10px] uppercase tracking-widest text-foreground-muted pointer-events-none hidden sm:block text-right">
-        <div>LAYER RESOLUTION: 0.12 MM</div>
-        <div className="text-foreground/40 mt-0.5">STUDIO SHADER / OBSIDIAN</div>
-      </div>
-    </div>
+      aria-hidden="true"
+    />
   );
 }
+
+export default HeroSculpture;

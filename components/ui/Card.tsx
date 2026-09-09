@@ -1,36 +1,31 @@
-import React from "react";
-import { cn } from "@/lib/utils";
+import React from 'react';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  padding?: 'none' | 'sm' | 'md' | 'lg';
   hoverEffect?: boolean;
-  cornerMarks?: boolean;
 }
 
-export function Card({
-  className,
-  children,
-  hoverEffect = true,
-  cornerMarks = false,
-  ...props
-}: CardProps) {
-  return (
-    <div
-      className={cn(
-        "relative bg-surface border border-border transition-all duration-500 rounded-[2px]",
-        hoverEffect && "hover:border-border-light hover:bg-surface-raised/80",
-        className
-      )}
-      {...props}
-    >
-      {cornerMarks && (
-        <>
-          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-foreground/30 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-foreground/30 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-foreground/30 pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-foreground/30 pointer-events-none" />
-        </>
-      )}
-      {children}
-    </div>
-  );
-}
+const paddingVariants = {
+  none: 'p-0',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+};
+
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className = '', padding = 'md', hoverEffect = false, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={`bg-white rounded-xl border border-[#E8E5DE] ${paddingVariants[padding]} ${
+          hoverEffect ? 'transition-shadow hover:shadow-lg' : ''
+        } ${className}`}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+Card.displayName = 'Card';

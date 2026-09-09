@@ -1,74 +1,38 @@
 "use client";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
-import React from "react";
-import { ArrowRight, MessageSquare } from "lucide-react";
-import { Button } from "@/ui/Button";
-import { trackEvent } from "@/lib/analytics";
-
-export function FinalCTASection() {
-  const whatsappNum = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919876543210";
-  const whatsappUrl = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(
-    "Hi Layerxyz, I have a project ready to build. Let's discuss."
-  )}`;
-
+export default function FinalCTASection() {
   return (
-    <section className="relative py-32 md:py-48 bg-surface-card border-t border-border overflow-hidden">
-      {/* Background Architectural Grid Lines */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      <div className="relative z-10 max-w-site mx-auto px-6 sm:px-10 lg:px-16 text-center">
-        <div className="font-mono text-xs uppercase tracking-[0.3em] text-accent font-semibold mb-6">
-          DIGITAL → PHYSICAL
-        </div>
-
-        <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-foreground uppercase leading-[0.92] max-w-5xl mx-auto">
-          READY TO MAKE <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground-secondary to-foreground/50">
-            IT REAL?
-          </span>
+    <section className="bg-[#F5F3EE] py-32 px-6 flex items-center justify-center text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+        className="max-w-4xl w-full"
+      >
+        <h2 className="text-6xl md:text-8xl font-sans font-semibold tracking-tighter text-[#181818] leading-[0.9] mb-8">
+          START YOUR<br />NEXT OBJECT.
         </h2>
-
-        <p className="mt-8 text-lg sm:text-xl text-foreground-secondary font-light max-w-xl mx-auto leading-relaxed">
-          Send us the idea. We'll take it from there.
+        <p className="text-lg md:text-xl text-[#777777] max-w-2xl mx-auto mb-12">
+          Whether you want to shop our collection or create something entirely new.
         </p>
-
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          <Button
-            href="/start-a-project"
-            size="lg"
-            icon
-            onClick={() => trackEvent("project_cta_click", { source: "final_cta" })}
-            className="px-10 text-xs font-semibold"
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link 
+            href="/shop"
+            className="inline-flex justify-center items-center px-8 py-4 bg-[#181818] text-white font-medium hover:bg-[#2A2A2A] transition-colors rounded-full w-full sm:w-auto"
           >
-            Start a Project
-          </Button>
-
-          <Button
-            href={whatsappUrl}
-            variant="outline"
-            size="lg"
-            external
-            onClick={() => trackEvent("whatsapp_click", { source: "final_cta" })}
-            className="px-8 text-xs text-foreground-secondary hover:text-foreground border-border hover:border-emerald-500/50"
+            SHOP COLLECTION
+          </Link>
+          <Link 
+            href="/custom"
+            className="inline-flex justify-center items-center px-8 py-4 bg-transparent text-[#181818] border border-[#D4D0C8] hover:border-[#181818] transition-colors rounded-full font-medium w-full sm:w-auto"
           >
-            <span className="flex items-center gap-2">
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
-              <span>WhatsApp Us</span>
-            </span>
-          </Button>
+            CREATE CUSTOM
+          </Link>
         </div>
-
-        {/* Location & Studio Stamp */}
-        <div className="mt-16 font-mono text-[11px] text-foreground-muted uppercase tracking-widest">
-          STUDIO LOCATION: TIRUPPUR, TAMIL NADU, INDIA • ZERO COMPROMISE FABRICATION
-        </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

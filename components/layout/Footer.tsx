@@ -1,164 +1,63 @@
-import React from "react";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Logo } from "./Logo";
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Logo } from './Logo';
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-  const whatsappNum = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919876543210";
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "studio@layerxyz.com";
-
   return (
-    <footer className="border-t border-border bg-surface-card text-foreground">
-      <div className="max-w-site mx-auto px-6 sm:px-10 lg:px-16 pt-20 pb-12">
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pb-16 border-b border-border">
-          {/* Brand Col */}
-          <div className="md:col-span-5 flex flex-col justify-between">
-            <div>
-              <Logo className="mb-4" />
-              <p className="text-foreground-secondary text-sm md:text-base max-w-sm leading-relaxed mb-6">
-                Professional custom 3D printing and fabrication studio. We turn
-                digital designs into physical objects with industrial precision
-                and studio-grade finishing.
-              </p>
-            </div>
-            <div className="font-mono text-xs text-foreground-muted space-y-1">
-              <div>STUDIO / FABRICATION LAB</div>
-              <div className="text-foreground-secondary">
-                Tiruppur, Tamil Nadu, India
-              </div>
-            </div>
+    <footer className="bg-[#F5F3EE] border-t border-[#E8E5DE] pt-16 pb-8 text-[#181818]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+          <div className="flex flex-col space-y-4">
+            <h3 className="font-semibold text-sm tracking-wider uppercase text-[#777777]">Shop</h3>
+            <Link href="/shop?category=sculptures" className="hover:text-[#B7FF00] transition-colors">Sculptures</Link>
+            <Link href="/shop?category=figurines" className="hover:text-[#B7FF00] transition-colors">Figurines</Link>
+            <Link href="/shop?category=home-objects" className="hover:text-[#B7FF00] transition-colors">Home Objects</Link>
+            <Link href="/shop?category=collectibles" className="hover:text-[#B7FF00] transition-colors">Collectibles</Link>
+            <Link href="/shop?category=limited" className="hover:text-[#B7FF00] transition-colors">Limited</Link>
           </div>
-
-          {/* Nav Links */}
-          <div className="md:col-span-2 space-y-4">
-            <div className="font-mono text-xs uppercase tracking-widest text-foreground-muted">
-              Navigation
-            </div>
-            <ul className="space-y-2.5 font-mono text-xs uppercase tracking-wider text-foreground-secondary">
-              <li>
-                <Link
-                  href="/work"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Selected Work
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/process"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Fabrication Process
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="hover:text-foreground transition-colors"
-                >
-                  About Studio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/start-a-project"
-                  className="text-accent hover:underline transition-colors"
-                >
-                  Start a Project →
-                </Link>
-              </li>
-            </ul>
+          
+          <div className="flex flex-col space-y-4">
+            <h3 className="font-semibold text-sm tracking-wider uppercase text-[#777777]">Company</h3>
+            <Link href="/about" className="hover:text-[#B7FF00] transition-colors">About</Link>
+            <Link href="/custom" className="hover:text-[#B7FF00] transition-colors">Custom</Link>
+            <Link href="/3d-studio" className="hover:text-[#B7FF00] transition-colors">3D Studio</Link>
+            <Link href="/work" className="hover:text-[#B7FF00] transition-colors">Work</Link>
           </div>
-
-          {/* Capabilities */}
-          <div className="md:col-span-2 space-y-4">
-            <div className="font-mono text-xs uppercase tracking-widest text-foreground-muted">
-              Capabilities
-            </div>
-            <ul className="space-y-2.5 font-mono text-xs tracking-wider text-foreground-secondary">
-              <li>Custom 3D Printing</li>
-              <li>Statues & Figurines</li>
-              <li>Functional Prototypes</li>
-              <li>Architectural Models</li>
-              <li>Multi-Piece Monoliths</li>
-              <li>Surface Conditioning</li>
-            </ul>
+          
+          <div className="flex flex-col space-y-4">
+            <h3 className="font-semibold text-sm tracking-wider uppercase text-[#777777]">Support</h3>
+            <Link href="/contact" className="hover:text-[#B7FF00] transition-colors">Contact</Link>
+            <Link href="/faq" className="hover:text-[#B7FF00] transition-colors">FAQ</Link>
+            <Link href="/shipping" className="hover:text-[#B7FF00] transition-colors">Shipping</Link>
+            <Link href="/returns" className="hover:text-[#B7FF00] transition-colors">Returns</Link>
           </div>
-
-          {/* Direct Contact */}
-          <div className="md:col-span-3 space-y-4">
-            <div className="font-mono text-xs uppercase tracking-widest text-foreground-muted">
-              Direct Inquiries
-            </div>
-            <ul className="space-y-3 font-mono text-xs tracking-wider">
-              <li>
-                <a
-                  href={`https://wa.me/${whatsappNum}?text=${encodeURIComponent(
-                    "Hello Layerxyz, I would like to inquire about a custom 3D build."
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-foreground hover:text-accent transition-colors"
-                >
-                  <span>WhatsApp Inquiries</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${contactEmail}`}
-                  className="inline-flex items-center gap-1.5 text-foreground hover:text-accent transition-colors"
-                >
-                  <span>{contactEmail}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-foreground-secondary hover:text-foreground transition-colors"
-                >
-                  <span>Instagram / @layerxyz</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border rounded-[2px] bg-surface font-mono text-[11px] text-foreground-secondary">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                <span>Fabrication queue active</span>
-              </div>
+          
+          <div className="flex flex-col space-y-4">
+            <h3 className="font-semibold text-sm tracking-wider uppercase text-[#777777]">Connect</h3>
+            <a href="#" className="hover:text-[#B7FF00] transition-colors">WhatsApp</a>
+            <a href="mailto:hello@layerxyz.com" className="hover:text-[#B7FF00] transition-colors">Email</a>
+            <a href="#" className="hover:text-[#B7FF00] transition-colors">Instagram</a>
+            
+            <div className="pt-4">
+              <h3 className="font-semibold text-sm tracking-wider uppercase text-[#777777] mb-3">Newsletter</h3>
+              <form className="flex border-b border-[#D4D0C8] pb-2">
+                <input 
+                  type="email" 
+                  placeholder="Email address" 
+                  className="bg-transparent border-none outline-none flex-grow text-sm placeholder:text-[#777777]"
+                  aria-label="Email address for newsletter"
+                />
+                <button type="button" aria-label="Subscribe" className="text-[#181818] hover:text-[#B7FF00] transition-colors">
+                  <ArrowRight size={18} />
+                </button>
+              </form>
             </div>
           </div>
         </div>
-
-        {/* Bottom Strip */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-foreground-muted">
-          <div>
-            © {currentYear} Layerxyz. All rights reserved. Made in Tiruppur, India.
-          </div>
-          <div className="flex items-center gap-6">
-            <span className="text-foreground-secondary">DIGITAL → PHYSICAL</span>
-            <span>•</span>
-            <span className="hover:text-foreground cursor-pointer transition-colors">
-              Privacy Notice
-            </span>
-            <span className="hover:text-foreground cursor-pointer transition-colors">
-              Terms of Fabrication
-            </span>
-          </div>
+        
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-[#E8E5DE] text-sm text-[#777777]">
+          <Logo className="mb-4 md:mb-0" />
+          <p>© 2025 LAYERXYZ — Tiruppur, Tamil Nadu</p>
         </div>
       </div>
     </footer>

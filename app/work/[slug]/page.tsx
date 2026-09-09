@@ -1,16 +1,7 @@
-import React from "react";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Layers, Cpu, Compass, Maximize2 } from "lucide-react";
-import { PROJECTS, Project } from "@/data/projects";
-import { Button } from "@/ui/Button";
-import { SectionBadge } from "@/ui/Badge";
-import { FinalCTASection } from "@/sections/FinalCTASection";
-
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { PROJECTS, getProject } from '@/data/projects';
+import Accordion from '@/ui/Accordion';
 
 export async function generateStaticParams() {
   return PROJECTS.map((project) => ({
@@ -18,221 +9,92 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
-  if (!project) return { title: "Project Not Found" };
-
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const project = getProject(resolvedParams.slug);
+  if (!project) return { title: 'Project Not Found | Layerxyz' };
+  
   return {
-    title: `${project.title} — Layerxyz Studio Archive`,
-    description: project.headline,
+    title: `${project.name} | Layerxyz`,
+    description: project.description,
   };
 }
 
-export default async function ProjectDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const project = getProject(resolvedParams.slug);
 
   if (!project) {
     notFound();
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground pt-28">
-      {/* Top Breadcrumb */}
-      <div className="max-w-site mx-auto px-6 sm:px-10 lg:px-16 pb-8 border-b border-border">
-        <Link
-          href="/work"
-          className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-foreground-muted hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to All Selected Works</span>
-        </Link>
-      </div>
+    <div className="min-h-screen bg-[#F5F3EE] pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <nav className="text-sm text-[#777777] mb-8 flex gap-2">
+          <Link href="/work" className="hover:text-[#181818] transition-colors">Selected Work</Link>
+          <span>/</span>
+          <span className="text-[#181818]">{project.name}</span>
+        </nav>
 
-      {/* Project Hero Header */}
-      <section className="max-w-site mx-auto px-6 sm:px-10 lg:px-16 pt-12 pb-16">
-        <div className="flex flex-wrap items-center gap-3 mb-6 font-mono text-xs">
-          <span className="text-accent bg-surface-raised px-2.5 py-1 rounded-[2px] border border-border">
-            {project.categoryLabel}
-          </span>
-          <span className="text-foreground-muted">YEAR // {project.year}</span>
-          <span className="text-foreground-muted">•</span>
-          <span className="text-foreground-muted">SCALE // {project.specs.scale}</span>
-        </div>
+        <header className="mb-12">
+          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-[#181818] mb-4">
+            {project.name}
+          </h1>
+          <div className="flex flex-wrap gap-4 text-sm font-medium text-[#777777]">
+            <span className="px-3 py-1 bg-white border border-[#E8E5DE] rounded-full">{project.category}</span>
+            <span className="px-3 py-1 bg-white border border-[#E8E5DE] rounded-full">{project.year}</span>
+          </div>
+        </header>
 
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-foreground uppercase leading-[0.98] max-w-4xl">
-          {project.title}
-        </h1>
+        <div 
+          className="w-full aspect-video md:aspect-[21/9] rounded-3xl mb-16 overflow-hidden border border-[#E8E5DE]"
+          style={{ background: project.color || 'linear-gradient(135deg, #E8E5DE, #D4D0C8)' }}
+        />
 
-        <p className="mt-6 text-xl sm:text-2xl text-foreground-secondary font-light max-w-3xl leading-relaxed">
-          {project.headline}
-        </p>
-      </section>
+        <div className="max-w-3xl mx-auto">
+          <div className="prose prose-lg text-[#2A2A2A] mb-16">
+            <h2 className="text-2xl font-semibold text-[#181818] mb-4">The Challenge</h2>
+            <p className="mb-8">{project.challenge || 'To create a physical manifestation of a complex digital design while maintaining precise tolerances and structural integrity.'}</p>
+            
+            <h2 className="text-2xl font-semibold text-[#181818] mb-4">Execution</h2>
+            <p className="mb-8">{project.execution || 'Utilizing advanced additive manufacturing techniques paired with meticulous hand-finishing to achieve a seamless, premium surface.'}</p>
+            
+            <h2 className="text-2xl font-semibold text-[#181818] mb-4">Result</h2>
+            <p className="mb-8">{project.result || 'An object that sits comfortably in the real world, bridging the gap between digital ideation and physical reality.'}</p>
+          </div>
 
-      {/* Hero Visual Presentation Banner */}
-      <div className="max-w-site mx-auto px-6 sm:px-10 lg:px-16 mb-20">
-        <div
-          className="relative w-full aspect-[16/9] max-h-[640px] bg-surface-card border border-border rounded-[2px] overflow-hidden flex items-center justify-center p-8 sm:p-16"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 50%, rgba(212, 255, 63, 0.07) 0%, transparent 60%), linear-gradient(135deg, #16181b 0%, #090a0c 100%)",
-          }}
-        >
-          {/* Subtle grid texture */}
-          <div
-            className="absolute inset-0 opacity-[0.05] pointer-events-none"
-            style={{
-              backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-              backgroundSize: "32px 32px",
-            }}
-          />
-
-          {/* Central Stylized 3D Wireframe Presentation Mockup */}
-          <div className="relative w-full max-w-lg aspect-square flex items-center justify-center">
-            <div className="w-full h-full rounded-full border border-white/10 flex items-center justify-center">
-              <div className="w-3/4 h-3/4 rounded-full border border-dashed border-accent/30 flex items-center justify-center">
-                <div className="w-1/2 h-1/2 rounded-full border border-white/20 flex flex-col items-center justify-center text-center p-4">
-                  <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
-                    {project.specs.scale}
-                  </span>
-                  <span className="font-mono text-[10px] text-foreground-muted mt-1">
-                    {project.specs.dimensions}
-                  </span>
+          <div className="border-t border-[#E8E5DE] mb-16 pt-8">
+            <Accordion title="Technical Specifications">
+              <div className="py-4 space-y-3 font-mono text-sm text-[#777777]">
+                <div className="flex justify-between border-b border-[#E8E5DE] pb-2">
+                  <span>Material</span>
+                  <span className="text-[#181818]">{project.material || 'Various'}</span>
+                </div>
+                <div className="flex justify-between border-b border-[#E8E5DE] pb-2">
+                  <span>Dimensions</span>
+                  <span className="text-[#181818]">{project.dimensions || 'Custom'}</span>
+                </div>
+                <div className="flex justify-between pb-2">
+                  <span>Weight</span>
+                  <span className="text-[#181818]">{project.weight || 'Custom'}</span>
                 </div>
               </div>
-            </div>
+            </Accordion>
           </div>
 
-          {/* Bottom Technical Stamps */}
-          <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between font-mono text-[11px] text-foreground-muted uppercase tracking-wider">
-            <div>OBJECT DIMENSIONS: {project.specs.dimensions}</div>
-            <div>VERIFIED SURFACE // TOLERANCE ±0.15MM</div>
+          <div className="bg-white p-12 rounded-3xl border border-[#E8E5DE] text-center">
+            <h2 className="text-2xl font-semibold text-[#181818] mb-4">Start a similar project</h2>
+            <p className="text-[#777777] mb-8">Have a vision in mind? Let's bring it to life.</p>
+            <Link 
+              href="/custom"
+              className="inline-block bg-[#181818] text-white px-8 py-4 rounded-full font-medium hover:bg-[#2A2A2A] transition-colors"
+            >
+              Request a quote
+            </Link>
           </div>
         </div>
       </div>
-
-      {/* Specifications Grid */}
-      <section className="max-w-site mx-auto px-6 sm:px-10 lg:px-16 py-16 border-y border-border">
-        <SectionBadge number="01" label="TECHNICAL SPECIFICATIONS" />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 font-mono text-xs">
-          <div className="p-6 bg-surface border border-border rounded-[2px]">
-            <span className="text-foreground-muted uppercase block mb-1">
-              Envelope Scale
-            </span>
-            <span className="text-foreground text-sm font-semibold block">
-              {project.specs.scale}
-            </span>
-            <span className="text-foreground-secondary text-[11px] mt-1 block">
-              {project.specs.dimensions}
-            </span>
-          </div>
-
-          <div className="p-6 bg-surface border border-border rounded-[2px]">
-            <span className="text-foreground-muted uppercase block mb-1">
-              Material System
-            </span>
-            <span className="text-foreground text-sm font-semibold block">
-              {project.specs.material}
-            </span>
-            <span className="text-foreground-secondary text-[11px] mt-1 block">
-              {project.specs.weight ? `Mass: ${project.specs.weight}` : "Precision Infill"}
-            </span>
-          </div>
-
-          <div className="p-6 bg-surface border border-border rounded-[2px]">
-            <span className="text-foreground-muted uppercase block mb-1">
-              Production Methodology
-            </span>
-            <span className="text-foreground text-sm font-semibold block">
-              {project.specs.production}
-            </span>
-          </div>
-
-          <div className="p-6 bg-surface border border-border rounded-[2px]">
-            <span className="text-foreground-muted uppercase block mb-1">
-              Surface & Assembly
-            </span>
-            <span className="text-foreground text-sm font-semibold block">
-              {project.specs.finishing}
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* Narrative Section */}
-      <section className="max-w-site mx-auto px-6 sm:px-10 lg:px-16 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-4">
-            <SectionBadge number="02" label="EXECUTION STORY" />
-            <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-foreground uppercase">
-              HOW WE MADE IT PHYSICAL.
-            </h2>
-            <p className="mt-4 text-foreground-secondary text-sm leading-relaxed">
-              Every custom object demands individual engineering—from toolpath
-              orientation to internal load-distribution ribs.
-            </p>
-          </div>
-
-          <div className="lg:col-span-8 space-y-10 pl-0 lg:pl-10 lg:border-l border-border">
-            {/* The Challenge */}
-            <div className="space-y-3">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
-                01 // THE CHALLENGE
-              </h3>
-              <p className="text-foreground-secondary text-base sm:text-lg leading-relaxed">
-                {project.narrative.challenge}
-              </p>
-            </div>
-
-            {/* Execution */}
-            <div className="space-y-3">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
-                02 // FABRICATION PIPELINE
-              </h3>
-              <p className="text-foreground-secondary text-base sm:text-lg leading-relaxed">
-                {project.narrative.execution}
-              </p>
-            </div>
-
-            {/* Result */}
-            <div className="space-y-3">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
-                03 // PHYSICAL VERIFICATION & FINISH
-              </h3>
-              <p className="text-foreground-secondary text-base sm:text-lg leading-relaxed">
-                {project.narrative.result}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Project CTA Bar */}
-      <section className="border-t border-border bg-surface py-16">
-        <div className="max-w-site mx-auto px-6 sm:px-10 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <div className="font-mono text-xs uppercase tracking-widest text-accent mb-1">
-              HAVE A SIMILAR BUILD IN MIND?
-            </div>
-            <div className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground uppercase">
-              Start Your Project Inquiries.
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <Button href="/start-a-project" size="lg" icon>
-              Start a Project
-            </Button>
-            <Button href="/work" variant="outline" size="lg">
-              Next Project
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <FinalCTASection />
     </div>
   );
 }

@@ -1,115 +1,86 @@
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import Link from "next/link";
-import { X, ArrowRight, MessageSquare } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Logo } from "./Logo";
-import { Button } from "@/ui/Button";
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { X } from 'lucide-react';
+import { getWhatsAppUrl } from '@/lib/utils';
+import { useCart } from '@/lib/cart-context';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const NAV_LINKS = [
-  { href: "/work", label: "Work", sub: "01" },
-  { href: "/services", label: "Services", sub: "02" },
-  { href: "/process", label: "Process", sub: "03" },
-  { href: "/about", label: "About", sub: "04" },
+const links = [
+  { name: 'Shop', href: '/shop' },
+  { name: 'Custom', href: '/custom' },
+  { name: 'Collections', href: '/collections' },
+  { name: '3D Studio', href: '/3d-studio' },
+  { name: 'About', href: '/about' },
 ];
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  const whatsappNum = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919876543210";
-  const whatsappUrl = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(
-    "Hello Layerxyz, I'm interested in starting a custom 3D printing project."
-  )}`;
+  const { totalItems } = useCart();
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-10 md:hidden"
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between border-b border-border pb-6">
-            <Logo showTagline />
-            <button
-              onClick={onClose}
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground-secondary hover:text-foreground hover:border-foreground transition-colors cursor-pointer"
-              aria-label="Close menu"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Links */}
-          <nav className="flex flex-col gap-6 my-auto">
-            {NAV_LINKS.map((link, idx) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 12 }}
-                transition={{ duration: 0.4, delay: 0.08 * idx, ease: [0.16, 1, 0.3, 1] as const }}
-              >
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-[#181818]/20 z-40 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-y-0 right-0 w-[300px] bg-[#F5F3EE] z-50 shadow-2xl flex flex-col"
+          >
+            <div className="p-6 flex justify-between items-center border-b border-[#E8E5DE]">
+              <span className="font-semibold tracking-wide text-[#181818]">LAYERXYZ</span>
+              <button onClick={onClose} aria-label="Close menu" className="hover:opacity-70 transition-opacity text-[#181818]">
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="flex flex-col py-8 px-6 space-y-6 flex-grow overflow-y-auto">
+              {links.map((link) => (
                 <Link
+                  key={link.name}
                   href={link.href}
                   onClick={onClose}
-                  className="group flex items-baseline justify-between py-2 border-b border-border/50 text-2xl font-light tracking-tight text-foreground hover:text-accent transition-colors"
+                  className="text-2xl font-medium text-[#181818] hover:text-[#B7FF00] transition-colors"
                 >
-                  <span className="flex items-center gap-4">
-                    <span className="font-mono text-xs text-foreground-muted">
-                      {link.sub}
-                    </span>
-                    <span className="uppercase">{link.label}</span>
-                  </span>
-                  <ArrowRight className="w-5 h-5 text-foreground-muted group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                  {link.name}
                 </Link>
-              </motion.div>
-            ))}
-          </nav>
-
-          {/* Bottom Actions */}
-          <div className="flex flex-col gap-3 pt-6 border-t border-border">
-            <Button
-              href="/start-a-project"
-              size="lg"
-              icon
-              className="w-full"
-              onClick={onClose}
-            >
-              Start a Project
-            </Button>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-[3px] border border-border text-foreground-secondary hover:text-foreground hover:border-foreground font-mono text-xs uppercase tracking-wider transition-colors"
-            >
-              <MessageSquare className="w-4 h-4 text-emerald-400" />
-              Chat on WhatsApp
-            </a>
-            <div className="text-center font-mono text-[10px] text-foreground-muted tracking-widest uppercase pt-2">
-              Tiruppur, Tamil Nadu • Digital → Physical
+              ))}
+              
+              <Link 
+                href="/cart" 
+                onClick={onClose}
+                className="text-2xl font-medium text-[#181818] hover:text-[#B7FF00] transition-colors flex items-center"
+              >
+                Cart ({totalItems})
+              </Link>
             </div>
-          </div>
-        </motion.div>
+            
+            <div className="p-6 border-t border-[#E8E5DE]">
+              <a 
+                href={getWhatsAppUrl("Hi, I'm interested in your products.")} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-[#181818] hover:text-[#B7FF00] transition-colors"
+              >
+                WhatsApp Contact
+              </a>
+            </div>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );

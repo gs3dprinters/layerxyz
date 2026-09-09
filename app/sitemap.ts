@@ -1,29 +1,52 @@
-import { MetadataRoute } from "next";
-import { PROJECTS } from "@/data/projects";
+import { MetadataRoute } from 'next';
+import { PRODUCTS } from '@/data/products';
+import { COLLECTIONS } from '@/data/collections';
+import { PROJECTS } from '@/data/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://layerxyz.com";
+  const baseUrl = 'https://layerxyz.com';
 
   const staticRoutes = [
-    "",
-    "/work",
-    "/services",
-    "/process",
-    "/about",
-    "/start-a-project",
+    '',
+    '/shop',
+    '/custom',
+    '/collections',
+    '/3d-studio',
+    '/about',
+    '/work',
+    '/cart',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString(),
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: route === '' ? 1 : 0.8,
+  }));
+
+  const productRoutes = PRODUCTS.map((product) => ({
+    url: `${baseUrl}/product/${product.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
+  const collectionRoutes = COLLECTIONS.map((collection) => ({
+    url: `${baseUrl}/collections/${collection.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
   }));
 
   const projectRoutes = PROJECTS.map((project) => ({
     url: `${baseUrl}/work/${project.slug}`,
-    lastModified: new Date().toISOString(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  return [
+    ...staticRoutes,
+    ...productRoutes,
+    ...collectionRoutes,
+    ...projectRoutes,
+  ];
 }
