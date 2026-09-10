@@ -13,6 +13,7 @@ const navLinks = [
   { name: 'CUSTOM', href: '/custom' },
   { name: 'COLLECTIONS', href: '/collections' },
   { name: '3D STUDIO', href: '/3d-studio' },
+  { name: 'WORK', href: '/work' },
   { name: 'ABOUT', href: '/about' },
 ];
 
@@ -79,11 +80,18 @@ export function Navbar() {
           
           <div className="flex md:hidden items-center space-x-4">
             <button 
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search" 
+              className="text-[#181818] hover:opacity-70 transition-opacity"
+            >
+              <Search size={22} />
+            </button>
+            <button 
               onClick={() => setIsCartOpen(true)}
               aria-label="Open Cart" 
               className="text-[#181818] hover:opacity-70 transition-opacity relative"
             >
-              <ShoppingBag size={24} />
+              <ShoppingBag size={22} />
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[#181818] text-[#F5F3EE] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {totalItems}

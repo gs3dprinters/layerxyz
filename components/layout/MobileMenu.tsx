@@ -16,6 +16,7 @@ const links = [
   { name: 'Custom', href: '/custom' },
   { name: 'Collections', href: '/collections' },
   { name: '3D Studio', href: '/3d-studio' },
+  { name: 'Work', href: '/work' },
   { name: 'About', href: '/about' },
 ];
 
@@ -54,7 +55,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   key={link.name}
                   href={link.href}
                   onClick={onClose}
-                  className="text-2xl font-medium text-[#181818] hover:text-[#B7FF00] transition-colors"
+                  className="text-2xl font-medium text-[#181818] hover:text-[#777777] transition-colors"
                 >
                   {link.name}
                 </Link>
@@ -63,21 +64,20 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <Link 
                 href="/cart" 
                 onClick={onClose}
-                className="text-2xl font-medium text-[#181818] hover:text-[#B7FF00] transition-colors flex items-center"
+                className="text-2xl font-medium text-[#181818] hover:text-[#777777] transition-colors flex items-center"
               >
                 Cart ({totalItems})
               </Link>
             </div>
             
             <div className="p-6 border-t border-[#E8E5DE]">
-              <a 
-                href={getWhatsAppUrl("Hi, I'm interested in your products.")} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-sm font-medium text-[#181818] hover:text-[#B7FF00] transition-colors"
+              <Link 
+                href="/contact" 
+                onClick={onClose}
+                className="text-sm font-medium text-[#181818] hover:text-[#777777] transition-colors"
               >
-                WhatsApp Contact
-              </a>
+                Contact Studio →
+              </Link>
             </div>
           </motion.div>
         </>

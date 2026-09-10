@@ -1,37 +1,95 @@
-"use client";
-import { motion } from "framer-motion";
-import Link from "next/link";
+'use client';
+
+import { motion, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function CustomCTASection() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const stages = [
+    {
+      num: '01',
+      title: 'Digital Concept',
+      desc: 'Photographs, hand sketches, CAD files, or simply an idea discussed with our studio.',
+    },
+    {
+      num: '02',
+      title: 'Digital Sculpting',
+      desc: 'High-polygon mesh reconstruction, structural joint engineering, and toolpath slicing.',
+    },
+    {
+      num: '03',
+      title: 'Physical Object',
+      desc: 'Precision additive deposition, ultrasonic welding, seam smoothing, and artisan finishing.',
+    },
+  ];
+
   return (
-    <section className="bg-[#181818] text-white py-24 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-        >
-          <h2 className="text-5xl md:text-7xl font-sans font-semibold tracking-tighter leading-[0.9] mb-8">
+    <section className="bg-[#181817] text-[#F4F1EA] py-28 md:py-36 px-6 sm:px-10 lg:px-16 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="max-w-3xl mb-16 md:mb-24">
+          <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-[#A09D95] block mb-4 font-medium">
+            BESPOKE FABRICATION
+          </span>
+          <motion.h2 
+            initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-sans font-semibold tracking-tighter leading-[0.92] mb-6 text-white"
+          >
             MAKE SOMETHING<br />THAT DOESN&apos;T EXIST YET.
-          </h2>
-          <p className="text-lg md:text-xl text-[#A0A0A0] max-w-2xl mx-auto mb-12">
-            Have a model, sketch or idea? We&apos;ll turn it into a physical object.
+          </motion.h2>
+          <p className="text-base sm:text-xl text-[#A09D95] leading-relaxed max-w-2xl">
+            From a photograph, sketch or idea to a physical object made specifically for you.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link 
-              href="/custom"
-              className="inline-flex justify-center items-center px-8 py-4 bg-white text-[#181818] font-medium hover:bg-[#F5F3EE] transition-colors rounded-full"
+        </div>
+
+        {/* Conceptual progression cards (non-technical, editorial) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16 md:mb-20">
+          {stages.map((stage, i) => (
+            <motion.div
+              key={stage.num}
+              initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] as const }}
+              className="p-8 rounded-3xl bg-[#222220] border border-[#2E2E2B] flex flex-col justify-between h-full"
             >
-              START A CUSTOM PROJECT
-            </Link>
-            <Link 
-              href="/about"
-              className="text-[#A0A0A0] hover:text-white transition-colors"
-            >
-              Learn about our process →
-            </Link>
-          </div>
+              <div className="flex justify-between items-center mb-10">
+                <span className="text-xs font-mono text-[#A09D95]">{stage.num}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#A09D95]/40" />
+              </div>
+              <div>
+                <h3 className="text-lg font-medium text-white mb-2">{stage.title}</h3>
+                <p className="text-sm text-[#A09D95] leading-relaxed">{stage.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Action Row */}
+        <motion.div
+          initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-6"
+        >
+          <Link 
+            href="/custom"
+            className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-white text-[#181817] font-medium hover:bg-[#F4F1EA] transition-colors rounded-full text-sm tracking-wide shadow-sm"
+          >
+            CREATE SOMETHING CUSTOM
+            <ArrowRight size={16} />
+          </Link>
+          <Link 
+            href="/about"
+            className="inline-flex justify-center items-center text-sm font-medium text-[#A09D95] hover:text-white transition-colors"
+          >
+            Learn about our studio process →
+          </Link>
         </motion.div>
       </div>
     </section>

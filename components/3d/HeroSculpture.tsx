@@ -4,12 +4,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 
 export function HeroSculpture() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -19,11 +19,13 @@ export function HeroSculpture() {
     const height = container.clientHeight || window.innerHeight;
     const isMobile = window.innerWidth < 768;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const scene = new THREE.Scene();
     
     // Camera setup - responsive framing
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 50);
-    const defaultCamDistance = isMobile ? 4.2 : 3.3;
+    const defaultCamDistance = isMobile ? 4.3 : 3.3;
     camera.position.set(0, 0.35, defaultCamDistance);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
@@ -35,42 +37,42 @@ export function HeroSculpture() {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    // Luxury Studio Lighting for Light Black / Graphite Sculpture
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
+    // Luxury Studio Lighting for Warm Sandstone Sculpture
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    // Soft Key Light (top-right-front)
-    const keyLight = new THREE.DirectionalLight(0xfff8f0, 2.4);
-    keyLight.position.set(2.5, 3.5, 3.0);
+    // Soft Warm Key Light (top-right-front)
+    const keyLight = new THREE.DirectionalLight(0xfff7ed, 2.6);
+    keyLight.position.set(2.8, 3.8, 3.2);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width = 1024;
     keyLight.shadow.mapSize.height = 1024;
-    keyLight.shadow.bias = -0.0006;
+    keyLight.shadow.bias = -0.0005;
     scene.add(keyLight);
 
-    // Gentle Cool Fill Light (left-mid)
-    const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.3);
-    fillLight.position.set(-3.0, 1.5, 2.0);
+    // Gentle Cool Fill Light (left-mid) to balance warm key
+    const fillLight = new THREE.DirectionalLight(0xe8eef5, 1.2);
+    fillLight.position.set(-3.2, 1.8, 2.2);
     scene.add(fillLight);
 
-    // Rim Light (highlights contours of head, hair, shoulders to pop from ivory background)
-    const rimLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    rimLight.position.set(0, 3.2, -2.8);
+    // Rim Light (highlights contours of hair, shoulders from ivory backdrop)
+    const rimLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    rimLight.position.set(0, 3.4, -2.8);
     scene.add(rimLight);
 
-    // Gentle Frontal Eye-Level Fill (reveals eyes, facial contours, beard, shirt folds)
-    const frontLight = new THREE.DirectionalLight(0xffffff, 0.95);
-    frontLight.position.set(0.4, 0.6, 3.2);
+    // Gentle Frontal Eye-Level Fill (reveals eyes, facial contours, beard, fabric folds)
+    const frontLight = new THREE.DirectionalLight(0xfffbf5, 1.1);
+    frontLight.position.set(0.3, 0.7, 3.4);
     scene.add(frontLight);
 
-    // Subtle upward bounce from ground
-    const bounceLight = new THREE.DirectionalLight(0xf5f3ee, 0.5);
+    // Subtle upward ground bounce
+    const bounceLight = new THREE.DirectionalLight(0xf4f1ea, 0.6);
     bounceLight.position.set(0, -2, 1);
     scene.add(bounceLight);
 
     // Soft Contact Shadow Plane beneath the statue
     const groundGeo = new THREE.PlaneGeometry(12, 12);
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.16 });
+    const groundMat = new THREE.ShadowMaterial({ opacity: 0.14 });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -1.15;
@@ -83,14 +85,14 @@ export function HeroSculpture() {
     controls.dampingFactor = 0.05;
     controls.enablePan = false; // Keep statue always centered
     controls.minDistance = isMobile ? 2.8 : 2.2;
-    controls.maxDistance = isMobile ? 6.0 : 4.8;
+    controls.maxDistance = isMobile ? 5.5 : 4.8;
     controls.maxPolarAngle = Math.PI / 2 - 0.04; // Don't look below ground
     controls.minPolarAngle = Math.PI / 6; // Don't flip upside down
     controls.target.set(0, 0.05, 0);
 
-    // Subtle auto-rotation: ~25s per full 360 turn
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.3;
+    // Subtle auto-rotation if motion is not reduced
+    controls.autoRotate = !prefersReducedMotion;
+    controls.autoRotateSpeed = 1.0;
 
     let resumeAutoRotateTimeout: NodeJS.Timeout | null = null;
 
@@ -98,58 +100,33 @@ export function HeroSculpture() {
       setHasInteracted(true);
       controls.autoRotate = false;
       if (resumeAutoRotateTimeout) clearTimeout(resumeAutoRotateTimeout);
-      resumeAutoRotateTimeout = setTimeout(() => {
-        controls.autoRotate = true;
-      }, 3500); // Resume auto-rotate 3.5s after user stops dragging
+      if (!prefersReducedMotion) {
+        resumeAutoRotateTimeout = setTimeout(() => {
+          controls.autoRotate = true;
+        }, 4000); // Resume auto-rotate 4s after user stops dragging
+      }
     };
 
     controls.addEventListener('start', onUserInteraction);
 
-    // Premium Light Black / Graphite Sculpture Material (#323232)
+    // Premium Warm Sandstone Sculpture Material (#C8B89F)
     const statueMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#323232'),
-      roughness: 0.44,
-      metalness: 0.05,
+      color: new THREE.Color('#C8B89F'),
+      roughness: 0.76,
+      metalness: 0.0,
       flatShading: false,
     });
 
     // Deep Dark Charcoal / Black Pedestal Material (#141414)
     const pedestalMaterial = new THREE.MeshStandardMaterial({
       color: new THREE.Color('#141414'),
-      roughness: 0.38,
-      metalness: 0.06,
+      roughness: 0.70,
+      metalness: 0.02,
       flatShading: false,
     });
 
     const statueGroup = new THREE.Group();
     scene.add(statueGroup);
-
-    // Setup and normalize mesh
-    const setupMesh = (geometry: THREE.BufferGeometry) => {
-      geometry.computeVertexNormals();
-      geometry.center();
-      geometry.computeBoundingBox();
-
-      const box = geometry.boundingBox || new THREE.Box3();
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const targetHeight = 2.3;
-      const scale = targetHeight / (maxDim || 1);
-      geometry.scale(scale, scale, scale);
-
-      // Re-center after scale
-      geometry.computeBoundingBox();
-      const scaledBox = geometry.boundingBox!;
-      const yOffset = scaledBox.min.y;
-
-      const mesh = new THREE.Mesh(geometry, statueMaterial);
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      mesh.position.y = -yOffset - 1.15; // Align bottom cleanly with ground plane
-
-      statueGroup.add(mesh);
-      setLoading(false);
-    };
 
     // Load actual GLB model
     const gltfLoader = new GLTFLoader();
@@ -162,7 +139,7 @@ export function HeroSculpture() {
             child.castShadow = true;
             child.receiveShadow = true;
 
-            // Apply Light Black to person bust and Deep Charcoal to pedestal
+            // Apply Warm Sandstone to person bust and Deep Charcoal to pedestal
             const isStatue = 
               child.material?.name === 'LightBlackMaterial' ||
               child.material?.name === 'LightGreyMaterial' ||
@@ -187,28 +164,16 @@ export function HeroSculpture() {
         root.scale.setScalar(scale);
         root.position.x = -center.x * scale;
         root.position.z = -center.z * scale;
-        root.position.y = -box.min.y * scale - 1.15; // Sit on ground plane
+        root.position.y = -box.min.y * scale - 1.15; // Sit cleanly on ground plane
 
         statueGroup.add(root);
         setLoading(false);
       },
       undefined,
       (err) => {
-        console.warn('GLB load failed, attempting STL fallback:', err);
-        const stlLoader = new STLLoader();
-        stlLoader.load(
-          '/models/kala-final-print.stl',
-          (geometry) => {
-            // STL CAD coordinates are Z-up; rotate geometry to Y-up
-            geometry.rotateX(-Math.PI / 2);
-            setupMesh(geometry);
-          },
-          undefined,
-          (stlErr) => {
-            console.error('All loaders failed:', stlErr);
-            setLoading(false);
-          }
-        );
+        console.warn('Hero GLB load failed:', err);
+        setHasError(true);
+        setLoading(false);
       }
     );
 
@@ -231,7 +196,7 @@ export function HeroSculpture() {
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       controls.minDistance = mobile ? 2.8 : 2.2;
-      controls.maxDistance = mobile ? 6.0 : 4.8;
+      controls.maxDistance = mobile ? 5.5 : 4.8;
       renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     };
@@ -265,21 +230,32 @@ export function HeroSculpture() {
       />
 
       {/* Elegant minimal loading indicator */}
-      {loading && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F5F3EE]/80 backdrop-blur-sm z-10 transition-opacity duration-500">
+      {loading && !hasError && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F4F1EA]/70 backdrop-blur-xs z-10 transition-opacity duration-500">
           <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-[#181818] animate-ping" />
-            <span className="text-xs font-sans tracking-[0.2em] uppercase text-[#181818] font-medium">
-              LOADING OBJECT
+            <span className="w-1.5 h-1.5 rounded-full bg-[#181817] animate-ping" />
+            <span className="text-[11px] font-sans tracking-[0.25em] uppercase text-[#181817] font-medium">
+              PREPARING SCULPTURE
             </span>
           </div>
         </div>
       )}
 
+      {/* Fallback image if WebGL fails */}
+      {hasError && (
+        <div className="absolute inset-0 flex items-center justify-center p-8">
+          <img 
+            src="/images/products/kala-statue-optimized.jpg" 
+            alt="Layerxyz Kala Portrait Sculpture" 
+            className="max-h-[80%] max-w-[80%] object-contain drop-shadow-2xl"
+          />
+        </div>
+      )}
+
       {/* Subtle user guidance: fades out after first interaction */}
-      {!loading && !hasInteracted && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none z-10 bg-white/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#E8E5DE] shadow-sm transition-opacity duration-700">
-          <span className="text-[11px] font-medium tracking-widest uppercase text-[#181818]">
+      {!loading && !hasInteracted && !hasError && (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none z-10 bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#E8E5DE] shadow-xs transition-opacity duration-700">
+          <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#181817]">
             DRAG TO ROTATE
           </span>
         </div>
