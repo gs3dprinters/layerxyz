@@ -24,8 +24,8 @@ interface CartState {
 
 type CartAction =
   | { type: "ADD_ITEM"; payload: CartItem }
-  | { type: "REMOVE_ITEM"; payload: { id?: string; productId?: string; size?: string; material?: string; variantId?: string } }
-  | { type: "UPDATE_QUANTITY"; payload: { id?: string; productId?: string; size?: string; material?: string; variantId?: string; quantity: number } }
+  | { type: "REMOVE_ITEM"; payload: { id?: string; productId?: string; size?: string; material?: string; finish?: string; variantId?: string } }
+  | { type: "UPDATE_QUANTITY"; payload: { id?: string; productId?: string; size?: string; material?: string; finish?: string; variantId?: string; quantity: number } }
   | { type: "CLEAR" }
   | { type: "TOGGLE_CART" }
   | { type: "OPEN_CART" }
@@ -35,10 +35,10 @@ type CartAction =
 function getItemKey(item: CartItem): string {
   if (item.id) return item.id;
   if (item.variantId) return `${item.productId}-${item.variantId}`;
-  return `${item.productId}-${item.size || 'std'}-${item.material || 'std'}`;
+  return `${item.productId}-${item.size || 'std'}-${item.material || 'std'}-${item.finish || 'std'}`;
 }
 
-function matchesItem(item: CartItem, payload: { id?: string; productId?: string; size?: string; material?: string; variantId?: string }): boolean {
+function matchesItem(item: CartItem, payload: { id?: string; productId?: string; size?: string; material?: string; finish?: string; variantId?: string }): boolean {
   if (payload.id && (item.id === payload.id || getItemKey(item) === payload.id)) {
     return true;
   }
@@ -46,6 +46,7 @@ function matchesItem(item: CartItem, payload: { id?: string; productId?: string;
     if (payload.variantId && item.variantId === payload.variantId) return true;
     if (payload.size && item.size !== payload.size) return false;
     if (payload.material && item.material !== payload.material) return false;
+    if (payload.finish && item.finish !== payload.finish) return false;
     return true;
   }
   return false;

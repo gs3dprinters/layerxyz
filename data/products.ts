@@ -662,14 +662,49 @@ const BASE_PRODUCTS: Product[] = [
   },
 ];
 
-export const PRODUCTS: Product[] = BASE_PRODUCTS.map((p) => ({
-  ...p,
-  hasModel: p.hasModel !== undefined ? p.hasModel : !!p.model,
-  modelUrl: p.modelUrl || p.model,
-  color: p.color || p.colors[0],
-  isMadeToOrder: p.isMadeToOrder !== undefined ? p.isMadeToOrder : p.madeToOrder,
-  dimensions: p.dimensions || p.sizes[0]?.dimensions,
-}));
+const VERIFIED_MODELS = new Set([
+  '/models/kala-final-print.glb',
+  '/models/nandi-temple-sculpture.glb',
+  '/models/personalized-name-sculpture.glb',
+  '/models/nataraja-statement-sculpture.glb',
+]);
+
+export const PRODUCTS: Product[] = BASE_PRODUCTS.map((p) => {
+  const effectiveModel = p.modelUrl || p.model;
+  const isVerified = Boolean(effectiveModel && VERIFIED_MODELS.has(effectiveModel));
+
+  const normalizedFinishes = (p.finishes || []).map((f: any) => {
+    if (typeof f === 'string') {
+      return {
+        label: f,
+        slug: f.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-'),
+      };
+    }
+    return f;
+  });
+
+  const normalizedMaterials = (p.materials || []).map((m: any) => {
+    if (typeof m === 'string') {
+      return {
+        label: m,
+        slug: m.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-'),
+      };
+    }
+    return m;
+  });
+
+  return {
+    ...p,
+    hasModel: isVerified,
+    modelUrl: isVerified ? effectiveModel : undefined,
+    model: isVerified ? effectiveModel : undefined,
+    finishes: normalizedFinishes,
+    materials: normalizedMaterials,
+    color: p.color || p.colors[0],
+    isMadeToOrder: p.isMadeToOrder !== undefined ? p.isMadeToOrder : p.madeToOrder,
+    dimensions: p.dimensions || p.sizes[0]?.dimensions,
+  };
+});
 
 export function getProduct(slugOrId: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slugOrId || p.id === slugOrId);
