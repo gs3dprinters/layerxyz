@@ -239,7 +239,7 @@ export default function InteractiveShowcase() {
   };
 
   return (
-    <section className="bg-[#EAE5DC] py-24 md:py-32 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section className="bg-[#EAE5DC] py-28 md:py-36 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <motion.div

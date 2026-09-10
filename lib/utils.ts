@@ -30,13 +30,14 @@ export function slugify(text: string): string {
 }
 
 export function getWhatsAppUrl(message?: string): string {
-  const phone = "919876543210";
+  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   const text = message || "Hi, I'm interested in Layerxyz products.";
+  if (!phone) return "/contact";
   return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 }
 
 export function getWhatsAppOrderUrl(items: any[], subtotal?: number): string {
-  const phone = "919876543210";
+  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   let message = "Hi! I'd like to place an order:\n\n";
   items.forEach((item) => {
     const name = item.name || item.product?.name || 'Object';
@@ -48,5 +49,6 @@ export function getWhatsAppOrderUrl(items: any[], subtotal?: number): string {
   });
   const total = subtotal !== undefined ? subtotal : items.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0);
   message += `\nTotal: ${formatPrice(total)}\n\nPlease let me know about availability and payment.`;
+  if (!phone) return "/contact";
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }

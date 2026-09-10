@@ -14,7 +14,7 @@ export default function LargeScaleSection() {
   ];
 
   return (
-    <section className="bg-[#EAE5DC] py-24 md:py-32 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section className="bg-[#EAE5DC] py-28 md:py-36 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
         {/* Left Typography */}
         <motion.div
@@ -24,14 +24,14 @@ export default function LargeScaleSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
           className="flex-1 w-full max-w-xl"
         >
-          <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-[#6F6B63] block mb-3 font-medium">
-            PRODUCTION RANGE
+          <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-[#6F6B63] block mb-4 font-medium">
+            SCALE CAPABILITIES
           </span>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-semibold tracking-tighter leading-[0.92] text-[#171716] mb-6">
             FROM SMALL OBJECTS<br />TO STATEMENT PIECES.
           </h2>
           <p className="text-base sm:text-lg text-[#6F6B63] mb-10 leading-relaxed">
-            Layerxyz can make objects from small collectibles to large statement pieces. From an intricate 50mm desk artifact to a 2500mm+ architectural sculpture, our fabrication capabilities scale to meet your vision.
+            Layerxyz crafts physical objects across a broad dimensional spectrum — from an intimate 50mm desk artifact to commanding 2500mm+ architectural works.
           </p>
           <Link 
             href="/custom"
@@ -56,7 +56,7 @@ export default function LargeScaleSection() {
                   <span className="text-[10px] sm:text-xs text-[#6F6B63] font-mono tracking-wider">
                     {tier.label}
                   </span>
-                  <div className={`w-full ${tier.heightClass} ${tier.bgClass} rounded-2xl transition-transform hover:scale-105 duration-300 shadow-sm`} />
+                  <div className={`w-full ${tier.heightClass} ${tier.bgClass} rounded-2xl transition-transform hover:scale-[1.03] duration-300 shadow-sm`} />
                   <span className="text-[10px] sm:text-[11px] text-[#6F6B63] text-center font-medium leading-tight">
                     {tier.name}
                   </span>

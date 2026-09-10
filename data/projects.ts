@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
       execution:
         "We sliced the CAD geometry into 18 dovetail-indexed nodes, optimized wall thickness gradient to keep upper tiers lightweight, and printed using calibrated 0.2mm layer deposition with internal ribbing.",
       result:
-        "Delivered and assembled on site within 0.4mm cumulative tolerance, presenting a seamless monolithic silhouette under directional gallery spotlights.",
+        "Delivered and assembled on site with seamless joins, presenting a striking monolithic silhouette under directional gallery spotlights.",
     },
     featured: true,
     order: 1,
@@ -66,9 +66,9 @@ export const PROJECTS: Project[] = [
     category: "Prototype",
     categoryLabel: "Industrial Prototype",
     year: "2025",
-    headline: "Functional mechanical housing prototype with snap-fit tolerance.",
+    headline: "Functional mechanical housing prototype with precise snap-fit assembly.",
     description:
-      "Production-intent prototype for an acoustic spatial controller featuring tactile rotary encoders, ultrasonic sensor recesses, and sub-millimeter component clearances.",
+      "Production-intent prototype developed around a detailed physical design featuring tactile rotary encoders, sensor recesses, and calibrated component fit.",
     image: "/images/project-prototype.jpg",
     gallery: [
       "/images/project-prototype.jpg",
@@ -117,7 +117,7 @@ export const PROJECTS: Project[] = [
     },
     narrative: {
       challenge:
-        "Achieving razor-thin structural struts (under 1.2mm diameter) over dramatic cantilevers without sag or surface stringing.",
+        "Achieving slender structural struts over dramatic cantilevers without sag or surface stringing.",
       execution:
         "Implemented custom organic tree supports generated via algorithmic overhang analysis, paired with decelerated outer-wall cooling cycles.",
       result:
@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
     },
     narrative: {
       challenge:
-        "Balancing structural mass with delicate 0.3mm mechanical filigree and garment flow.",
+        "Balancing structural mass with delicate mechanical filigree and garment flow.",
       execution:
         "Fabricated the dense pedestal and core anatomy in high-impact PLA Pro+, while helmet crests, fingers, and intricate emblems were produced in ultra-fine photopolymer resin.",
       result:
@@ -167,7 +167,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     headline: "Print-in-place high-torque transmission mechanism.",
     description:
-      "Functional cycloidal and planetary reduction gear assembly built with 0.15mm running clearances for robotics testing.",
+      "Functional cycloidal and planetary reduction gear assembly built with calibrated running clearances for prototype testing.",
     image: "/images/project-gear.jpg",
     gallery: [
       "/images/project-gear.jpg",

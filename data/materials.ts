@@ -39,7 +39,7 @@ export const MATERIALS: Material[] = [
     tagline: "High rigidity, chemical resistance, and an elegant textured dark sheen.",
     description:
       "Infused with chopped micro-carbon fibers for dimensional stability and zero-warp printing. Yields a rich textured graphite surface that diffuses light cleanly.",
-    finish: "Textured matte graphite, almost completely hides layer lines",
+    finish: "Textured matte graphite with a subtle diffused sheen",
     tensileStrength: "Very High / 58 MPa",
     heatResistance: "Up to 75°C",
     applications: [
@@ -76,8 +76,8 @@ export const MATERIALS: Material[] = [
     category: "UV Photopolymer",
     tagline: "Microscopic fidelity for intricate jewelry, miniature figurines, and molds.",
     description:
-      "Cured via high-resolution optical light engines for sub-50-micron features. Near-isotropic mechanical properties with glass-smooth organic contours.",
-    finish: "Ultra-smooth satin, virtually zero layer visibility",
+      "Cured with high-resolution light engines for refined, high-definition features and glass-smooth organic contours.",
+    finish: "Ultra-smooth surface with a refined studio finish",
     tensileStrength: "High Rigidity / 65 MPa",
     heatResistance: "Up to 80°C (Post-Cured)",
     applications: [

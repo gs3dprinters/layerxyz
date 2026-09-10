@@ -31,7 +31,7 @@ export const SERVICES: Service[] = [
       "High-density structural infill patterns",
     ],
     specs: {
-      tolerances: "±0.15mm standard",
+      tolerances: "Calibrated precision fit",
       layerHeights: "0.08mm – 0.28mm selectable",
       buildEnvelope: "Standard single-build up to 400 × 400 × 450 mm",
       primaryApplications: "Component replacements, custom enclosures, bespoke gifts",
@@ -54,7 +54,7 @@ export const SERVICES: Service[] = [
       "Surface smoothing & satin priming",
     ],
     specs: {
-      tolerances: "Sub-millimeter joint dovetailing",
+      tolerances: "Interlocking modular joint dovetailing",
       layerHeights: "0.08mm detail surfaces",
       buildEnvelope: "Modular assemblies up to 2.5+ meters",
       primaryApplications: "Art installations, studio lobbies, character collectibles, brand mascots",
@@ -77,13 +77,13 @@ export const SERVICES: Service[] = [
       "Iterative revision turnaround",
     ],
     specs: {
-      tolerances: "±0.1mm on critical fits",
+      tolerances: "Carefully calibrated critical fits",
       layerHeights: "0.12mm – 0.20mm functional balance",
       buildEnvelope: "Rapid modular iteration volumes",
       primaryApplications: "Electronics casings, handheld devices, automotive concepts, robotics",
     },
     details:
-      "Speed without sloppy tolerances. We work alongside product designers and engineers to transform CAD revisions into physical check-models within days.",
+      "Careful execution with rapid turnaround. We work alongside product designers and creators to transform revisions into physical check-models within days.",
   },
   {
     id: "custom-fabrication",
@@ -100,7 +100,7 @@ export const SERVICES: Service[] = [
       "Full hands-on post-processing & bonding",
     ],
     specs: {
-      tolerances: "Precision seam matching <0.3mm",
+      tolerances: "Seamless modular joinery",
       layerHeights: "Adaptive variable layer heights",
       buildEnvelope: "Architectural & human scale (multi-meter)",
       primaryApplications: "Stage props, exhibition stands, architectural pavilions, retail features",

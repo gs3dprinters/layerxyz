@@ -10,7 +10,7 @@ export default function FAQSection() {
   const displayFaqs = FAQS.slice(0, 5);
 
   return (
-    <section className="bg-[#F4F1EA] py-24 md:py-32 px-6 sm:px-10 lg:px-16">
+    <section className="bg-[#F4F1EA] py-28 md:py-36 px-6 sm:px-10 lg:px-16">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20">
         {/* Left column */}
         <motion.div
