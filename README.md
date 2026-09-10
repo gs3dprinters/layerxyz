@@ -23,7 +23,7 @@ Layerxyz is a modern web application and digital showroom designed for high-end 
 - **Interactive 3D Configurator**: Drag to rotate, zoom, wireframe toggle, and material preview.
 - **Selected Works Portfolio**: Categorized project gallery with individual dynamic deep-dive pages (`/work/[slug]`).
 - **4-Stage Fabrication Pipeline**: Upload → Prepare → Slicing & Printing → Hand-Finished Surface Conditioning.
-- **Substrates & Materials**: Detailed specifications for PLA Pro+, Matte Carbon PETG, Studio PLA, and High-Detail UV Resin.
+- **Substrates & Materials**: Studio specifications for PLA / PLA Pro+, PETG, and Custom Finishing.
 - **Multi-Step Project Inquiries**: 5-step configurator at `/start-a-project`.
 - **Local & Global SEO**: Dynamic sitemap (`/sitemap.xml`), `robots.txt`, OpenGraph cards, and schema.org `LocalBusiness` structured data for Tiruppur, Tamil Nadu.
 

@@ -11,17 +11,22 @@ export default function CustomCTASection() {
     {
       num: '01',
       title: 'Digital Concept',
-      desc: 'Photographs, hand sketches, CAD files, or simply an idea discussed with our studio.',
+      desc: 'Photographs, sketches, CAD files or an idea become the starting point for the piece.',
     },
     {
       num: '02',
       title: 'Digital Sculpting',
-      desc: 'High-polygon mesh reconstruction, structural joint engineering, and toolpath slicing.',
+      desc: 'The form is developed digitally and prepared for physical production.',
     },
     {
       num: '03',
       title: 'Physical Object',
-      desc: 'Layer-by-layer 3D fabrication, careful assembly, seam smoothing, and studio hand-finishing.',
+      desc: 'The finished form is produced, refined and prepared according to the requirements of the project.',
+    },
+    {
+      num: '04',
+      title: 'Final Finish',
+      desc: 'Where applicable, selected pieces can receive additional surface preparation or finishing.',
     },
   ];
 
@@ -47,7 +52,7 @@ export default function CustomCTASection() {
         </div>
 
         {/* Conceptual progression cards (non-technical, editorial) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16 md:mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16 md:mb-20">
           {stages.map((stage, i) => (
             <motion.div
               key={stage.num}

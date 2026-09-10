@@ -72,9 +72,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Life Scale', dimensions: '500 × 350 × 350 mm', price: 16990 },
     ],
     materials: [
-      { label: 'Studio Matte PLA', slug: 'standard-pla' },
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Warm Sandstone', slug: 'warm-sandstone' },
@@ -84,7 +83,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: true,
     details: {
       description: 'Personalized portrait sculptures created from your photographs and produced to order. Digitally sculpted from your reference images to capture likeness, expression, and form.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Display on a flat, stable surface. Dust with a soft micro-fiber cloth. Avoid prolonged direct high heat.',
       specifications: 'Source: Customer Photographs · Production: 3D printed to order · Finishing: Studio hand-finished',
     },
@@ -112,9 +111,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Heritage Grand', dimensions: '350 × 210 × 180 mm', price: 11990 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'Studio Matte PLA', slug: 'standard-pla' },
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Temple Bronze', slug: 'temple-bronze' },
@@ -125,7 +123,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'NEW',
     details: {
       description: 'Detailed South Indian inspired sculpture. Sculptural details including the neck garland and sacred contours are carefully reproduced.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Clean with a soft dry brush or cloth. Suitable for interior display and executive desks.',
     },
     colors: ['#4A3728', '#2A2D30'],
@@ -152,9 +150,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Studio Statement', dimensions: '300 × 90 × 40 mm', price: 2490 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'Matte Carbon PETG', slug: 'carbon-petg' },
-      { label: 'Studio Matte PLA', slug: 'standard-pla' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Brushed Graphite', slug: 'brushed-graphite' },
@@ -166,7 +163,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'CUSTOM',
     details: {
       description: 'Personalized with your chosen name, word, initials, or brand mark. Custom 3D typography designed for desktop presence.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Wipe with damp cloth. Stable base keeps the piece standing upright.',
     },
     colors: ['#2A2A2A', '#ECEAE4', '#C4B5A0'],
@@ -193,8 +190,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Monument Architectural', dimensions: '850 × 680 × 300 mm', price: 42000 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Chola Antique Bronze', slug: 'chola-bronze' },
@@ -205,7 +202,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'LIMITED',
     details: {
       description: 'Detailed cultural sculpture incorporating the flame circle, expressive posture, and dynamic drapery.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Display as an architectural focal piece. Dust with soft feather or microfiber duster.',
     },
     colors: ['#5C4033', '#1E1E1E'],
@@ -228,9 +225,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'L (Exhibition)', dimensions: '400 × 240 × 240 mm', price: 16990 },
     ],
     materials: [
-      { label: 'Studio Matte PLA', slug: 'standard-pla' },
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Warm Sandstone', slug: 'warm-sandstone' },
@@ -240,7 +236,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: true,
     details: {
       description: 'A figurative portrait sculpture produced in our Tiruppur studio from reference photographs.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Display on a flat, stable surface. Dust with a soft micro-fiber cloth.',
       specifications: 'Source: Reference Photos · Production: 3D printed to order · Finishing: Studio hand-finished',
     },
@@ -264,8 +260,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'L', dimensions: '350 × 220 × 220 mm', price: 9990 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -277,7 +273,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'New',
     details: {
       description: 'Sculptural Form I is part of our ongoing series exploring the boundary between digital design and physical presence. Each piece begins as a parametric model, refined through dozens of iterations before being committed to material.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Display indoors away from direct sunlight. Dust with a soft, dry cloth. Avoid moisture and harsh chemicals.',
       specifications: 'Resolution: Fine layer resolution · Finishing: Hand-finished, primed and sealed',
     },
@@ -289,7 +285,7 @@ const BASE_PRODUCTS: Product[] = [
     slug: 'the-guardian',
     name: 'The Guardian',
     description: 'Detailed character figurine with intricate armor.',
-    longDescription: 'The Guardian stands as a testament to what modern fabrication can achieve. Originally sculpted digitally by our in-house team, every surface detail — from the layered plate armor to the flowing cape texture — is resolved with exceptional definition using high-detail resin.',
+    longDescription: 'The Guardian stands as a testament to what modern physical fabrication can achieve. Originally sculpted digitally by our studio team, every surface detail — from the layered plate armor to the flowing cape texture — is produced with crisp definition and clean form.',
     price: 3490,
     category: 'figurines',
     images: ['/images/products/the-guardian.jpg'],
@@ -300,8 +296,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'L', dimensions: '300 × 170 × 170 mm', price: 7990 },
     ],
     materials: [
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -311,10 +307,10 @@ const BASE_PRODUCTS: Product[] = [
     available: true,
     madeToOrder: true,
     details: {
-      description: 'Part of our character series. The Guardian is digitally sculpted in high polygon detail, then printed with fine definition to preserve surface nuance.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      description: 'Part of our character series. The Guardian is digitally sculpted in detailed form, then printed with fine definition to preserve surface nuance.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Handle with care. Display on included base. Avoid prolonged sun exposure. Clean with soft brush.',
-      specifications: 'Material: High-detail resin or PLA Pro+ · Finishing: Studio cured, cleaned and sealed',
+      specifications: 'Material: Studio PLA Pro+ or PETG · Finishing: Cleaned, inspected and studio prepared',
     },
     colors: ['#3F3D56', '#1E1E1E', '#ECEAE4'],
     relatedSlugs: ['mythic-dragon', 'the-architect', 'sculptural-form-i'],
@@ -334,8 +330,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'L', dimensions: '180 × 180 × 300 mm', price: 4490 },
     ],
     materials: [
-      { label: 'Studio PLA', slug: 'standard-pla' },
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -345,7 +341,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: false,
     details: {
       description: 'Designed in-house as part of our Home Objects collection. Each vessel is printed with a sealed interior for water-tightness, making it fully functional for dried or fresh arrangements.',
-      shipping: 'Produced to order or prepared from studio stock. Delivery timing depends on destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Hand wash only. Do not microwave or dishwasher. Pat dry after contact with water. Display away from direct heat sources.',
     },
     colors: ['#ECEAE4', '#1E1E1E', '#C4B5A0'],
@@ -367,8 +363,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'XL', dimensions: '600 × 480 × 420 mm', price: 29990 },
     ],
     materials: [
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
-      { label: 'PLA Pro+ & Resin', slug: 'pla-pro-plus' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Hand-Painted', slug: 'hand-painted' },
@@ -380,7 +376,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'Popular',
     details: {
       description: 'Our flagship collectible. The Mythic Dragon combines individually printed components, precision-fitted and assembled in our studio.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Display piece only. Handle by the base. Dust with soft brush. Included display stand with nameplate.',
       specifications: 'Assembly: Multi-part fitted assembly · Finishing: Hand-finished and inspected',
     },
@@ -402,8 +398,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Set of 9', dimensions: '300 × 300 × 45 mm each', price: 29990 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'Studio PLA', slug: 'standard-pla' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -413,7 +409,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: true,
     details: {
       description: 'Each Wave Diffuser tile interlocks cleanly with adjacent tiles. Mount individually or create a larger installation for sound diffusion.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Indoor use only. Wipe with damp cloth. Wall mounting template and hardware included in package.',
       specifications: 'Mounting: French cleat system · Weight: 380g per tile',
     },
@@ -436,8 +432,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Monument', dimensions: '200 × 200 × 800 mm', price: 14990 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'Carbon PETG', slug: 'carbon-petg' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Raw Layer', slug: 'raw-layer' },
@@ -448,7 +444,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'Signature',
     details: {
       description: 'Our signature piece. The Monolith Series embraces the visible strata of 3D printing as an aesthetic choice, creating objects that could only exist through this process.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Display on a flat, stable surface. Avoid humid environments for PLA variants. Dust with soft cloth.',
       specifications: 'Layer aesthetic: Defined visible strata · Single-print construction',
     },
@@ -470,8 +466,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Wall Set', dimensions: '330 × 110 × 200 mm', price: 5490 },
     ],
     materials: [
-      { label: 'Studio PLA', slug: 'standard-pla' },
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -481,7 +477,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: false,
     details: {
       description: 'Designed for small succulents, herbs, and air plants. The modular locking system lets you reconfigure your arrangement as your collection grows.',
-      shipping: 'Produced to order or prepared from studio stock. Delivery timing depends on destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Wipe with damp cloth. Do not soak. Use included drainage tray to protect surfaces.',
     },
     colors: ['#ECEAE4', '#C4B5A0', '#1E1E1E'],
@@ -492,7 +488,7 @@ const BASE_PRODUCTS: Product[] = [
     slug: 'the-architect',
     name: 'The Architect',
     description: 'Detailed human figure in contemplative pose.',
-    longDescription: 'The Architect captures a moment of creative contemplation. Printed in high-detail resin with refined studio resolution, every fold of fabric and subtle expression is preserved. A statement piece for any desk or shelf.',
+    longDescription: 'The Architect captures a moment of creative contemplation. Produced with refined studio resolution, every fold of fabric and subtle expression is preserved. A statement piece for any desk or shelf.',
     price: 2990,
     category: 'figurines',
     images: ['/images/products/the-architect.jpg'],
@@ -503,7 +499,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Display', dimensions: '200 × 150 × 350 mm', price: 5990 },
     ],
     materials: [
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -514,7 +511,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: true,
     details: {
       description: 'Part of our Figures collection. The Architect is digitally sculpted with attention to figurative form and expression, then printed in our studio.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Handle by the base. Display indoors. Clean with soft brush. Avoid water exposure for painted finishes.',
     },
     colors: ['#3F3D56', '#8B4513', '#ECEAE4'],
@@ -536,8 +533,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'L', dimensions: '500 × 220 × 330 mm', price: 12990 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -548,7 +545,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: true,
     details: {
       description: 'Created through computational fluid modeling, then refined by hand in digital sculpting software. Each piece captures a unique moment of wave dynamics.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Display on stable surface. Avoid bumping thin sections. Dust with soft brush.',
       specifications: 'Production: Studio 3D printed · Finishing: Studio cleaned and sealed',
     },
@@ -571,8 +568,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'L', dimensions: '250 × 250 × 250 mm', price: 8990 },
     ],
     materials: [
-      { label: 'Studio PLA', slug: 'standard-pla' },
-      { label: 'High-Detail Resin', slug: 'engineering-resin' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -583,7 +580,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'Limited',
     details: {
       description: 'Limited edition piece. Each Celestial Sphere is printed as a continuous structure using clean bridging — no assembly, no seams. The nested shells are born connected.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Delicate geometry. Display on included base. Do not squeeze or apply pressure. LED base requires USB-C power.',
       specifications: 'Shells: 3 concentric layers · LED base: USB-C, warm white',
     },
@@ -605,8 +602,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Wide', dimensions: '300 × 120 × 90 mm', price: 2490 },
     ],
     materials: [
-      { label: 'Studio PLA', slug: 'standard-pla' },
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -616,7 +613,7 @@ const BASE_PRODUCTS: Product[] = [
     madeToOrder: false,
     details: {
       description: 'Part of our Workspace collection. Designed with a balanced weighted base for stability. Internal dividers are optimized for common desk items.',
-      shipping: 'Produced to order or prepared from studio stock. Delivery timing depends on destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Wipe with soft damp cloth. Avoid submerging in water.',
     },
     colors: ['#ECEAE4', '#1E1E1E', '#8B8680'],
@@ -637,8 +634,8 @@ const BASE_PRODUCTS: Product[] = [
       { label: 'Statement', dimensions: '800 × 800 × 1000 mm span', price: 12990 },
     ],
     materials: [
-      { label: 'PLA Pro+', slug: 'pla-pro-plus' },
-      { label: 'Carbon PETG', slug: 'carbon-petg' },
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
     ],
     finishes: [
       { label: 'Smooth Matte', slug: 'smooth-matte' },
@@ -649,7 +646,7 @@ const BASE_PRODUCTS: Product[] = [
     badge: 'Limited',
     details: {
       description: 'Each mobile is individually balanced in our studio after printing. No two are identical.',
-      shipping: 'Made to order. Delivery timing depends on the object, finish and destination.',
+      shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
       care: 'Hang from a secure ceiling point. Avoid outdoor use. The mobile is self-balancing.',
       specifications: 'Connection: Stainless steel wire · Ceiling mount: Included swivel hook',
     },

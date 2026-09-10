@@ -23,7 +23,7 @@ export default function ShippingPage() {
           <div className="bg-white p-8 rounded-3xl border border-[#E8E5DE]">
             <h2 className="text-xl font-medium text-[#181818] mb-3">Production & Dispatch Timelines</h2>
             <p className="text-[#6F6B63] leading-relaxed mb-4">
-              Because our objects are made to order, delivery timing depends on the object, finish and destination. Delivery timing is confirmed directly with your project.
+              Because our objects are made to order, delivery time varies by object, size, finishing requirements and destination. Delivery timing is confirmed directly with your project.
             </p>
             <p className="text-[#6F6B63] leading-relaxed">
               Once studio finishing and inspection are complete, orders dispatch with tracking provided directly to your email or WhatsApp.
@@ -33,7 +33,7 @@ export default function ShippingPage() {
           <div className="bg-white p-8 rounded-3xl border border-[#E8E5DE]">
             <h2 className="text-xl font-medium text-[#181818] mb-3">Protective Packaging Standards</h2>
             <p className="text-[#6F6B63] leading-relaxed">
-              Delicate sculptures, fine facial details, and multi-part assemblies are immobilized using dense shock-absorbing foam inserts and reinforced outer cartons to guarantee transit safety across domestic and international routes.
+              Delicate sculptures, fine facial details, and multi-part assemblies are packed using dense shock-absorbing foam inserts and reinforced outer cartons to help ensure safe transit across domestic and international routes.
             </p>
           </div>
 

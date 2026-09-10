@@ -28,9 +28,9 @@ export default function ReturnsPage() {
           </div>
 
           <div className="bg-white p-8 rounded-3xl border border-[#E8E5DE]">
-            <h2 className="text-xl font-medium text-[#181818] mb-3">Transit Damage Guarantee</h2>
+            <h2 className="text-xl font-medium text-[#181818] mb-3">Transit Damage & Replacement Policy</h2>
             <p className="text-[#6F6B63] leading-relaxed">
-              If an object arrives damaged in transit, photograph the packaging and damaged item within 48 hours of delivery and reach out to our team. We will expedite a complimentary reprint and replacement.
+              If an object arrives damaged in transit, photograph the packaging and damaged item within 48 hours of delivery and reach out to our team. We will review and prepare a replacement piece.
             </p>
           </div>
 

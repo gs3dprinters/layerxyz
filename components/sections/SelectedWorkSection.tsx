@@ -67,7 +67,7 @@ export default function SelectedWorkSection() {
                 <div className="relative w-full aspect-[16/10] my-auto rounded-2xl bg-[#EAE5DC] border border-[#DCD6CC] flex flex-col items-center justify-center p-8 overflow-hidden group-hover:scale-[1.01] transition-transform duration-500">
                   <div className="w-20 h-48 sm:w-28 sm:h-64 rounded-full bg-gradient-to-t from-[#181817] via-[#2E2E2C] to-[#454542] shadow-2xl opacity-90 group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute bottom-4 left-6 right-6 flex justify-between text-[11px] font-mono text-[#6F6B63]">
-                    <span>18-Segment FDM</span>
+                    <span>Modular Sculpture</span>
                     <span>{projects[0].specs.dimensions}</span>
                   </div>
                 </div>

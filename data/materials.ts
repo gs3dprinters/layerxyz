@@ -5,8 +5,6 @@ export interface Material {
   tagline: string;
   description: string;
   finish: string;
-  tensileStrength: string;
-  heatResistance: string;
   applications: string[];
   colors: string[];
   visualColor: string;
@@ -15,78 +13,53 @@ export interface Material {
 export const MATERIALS: Material[] = [
   {
     id: "pla-pro-plus",
-    name: "PLA PRO+",
-    category: "High-Performance Biopolymer",
-    tagline: "Superior layer adhesion, sharp corners, and high impact resistance.",
+    name: "PLA / PLA PRO+",
+    category: "Studio Biopolymer",
+    tagline: "A versatile material for sculptures, figurines, prototypes and everyday objects.",
     description:
-      "Toughened polylactic acid engineered with impact modifiers. Offers crisp geometric definition and durable physical performance.",
-    finish: "Smooth semi-matte with fine layer definition",
-    tensileStrength: "High / 45 MPa",
-    heatResistance: "Up to 55°C",
+      "A versatile material for sculptures, figurines, prototypes and everyday objects.",
+    finish: "Smooth semi-matte with crisp geometric definition",
     applications: [
-      "Statement statues & figurines",
+      "Statement sculptures & figurines",
       "Architectural display models",
-      "Cosmetic product housings",
-      "Concept validation models",
+      "Personalized gifts & desk objects",
+      "Concept validation pieces",
     ],
     colors: ["Obsidian Black", "Bone White", "Basalt Gray", "Raw Terracotta"],
     visualColor: "#1E1E1E",
   },
   {
-    id: "carbon-petg",
-    name: "MATTE CARBON PETG",
-    category: "Composite Co-Polyester",
-    tagline: "High rigidity, chemical resistance, and an elegant textured dark sheen.",
+    id: "petg",
+    name: "PETG",
+    category: "Durable Co-Polyester",
+    tagline: "A durable option for functional objects and selected applications.",
     description:
-      "Infused with chopped micro-carbon fibers for dimensional stability and zero-warp printing. Yields a rich textured graphite surface that diffuses light cleanly.",
-    finish: "Textured matte graphite with a subtle diffused sheen",
-    tensileStrength: "Very High / 58 MPa",
-    heatResistance: "Up to 75°C",
+      "A durable option for functional objects and selected applications.",
+    finish: "Durable satin finish with clean layer bonding and impact resilience",
     applications: [
-      "Functional mechanical enclosures",
-      "Robotic chassis components",
-      "Drone brackets & mounting fixtures",
-      "Tactile consumer device shells",
+      "Functional enclosures & housings",
+      "Tactile desk & handheld objects",
+      "Display fixtures & brackets",
+      "Utility & workshop components",
     ],
-    colors: ["Carbon Matte Gray", "Deep Stealth Black"],
+    colors: ["Matte Charcoal", "Studio White", "Smoke Gray"],
     visualColor: "#2A2D30",
   },
   {
-    id: "standard-pla",
-    name: "STUDIO MATTE PLA",
-    category: "Studio Biopolymer",
-    tagline: "Clean surface clarity for geometric architecture and artistic forms.",
+    id: "custom-finishing",
+    name: "CUSTOM FINISHING",
+    category: "Studio Surface Treatment",
+    tagline: "Selected projects can receive additional surface preparation or finishing depending on the desired result.",
     description:
-      "Pure organic polylactic acid optimized for fine overhangs, clean edge transitions, and uniform monochromatic photography backgrounds.",
-    finish: "Velvety non-reflective matte finish",
-    tensileStrength: "Moderate / 38 MPa",
-    heatResistance: "Up to 52°C",
+      "Selected projects can receive additional surface preparation or finishing depending on the desired result.",
+    finish: "Hand-prepared, primed, or finished according to project requirements",
     applications: [
-      "Scale architectural studies",
-      "Interior sculpture editions",
-      "Packaging volume mockups",
-      "Educational visual aids",
+      "Gallery display pieces",
+      "Commemorative portrait sculptures",
+      "Custom color & tone treatments",
+      "Bespoke physical commissions",
     ],
-    colors: ["Architectural White", "Concrete Gray", "Cast Iron Black"],
-    visualColor: "#ECEAE4",
-  },
-  {
-    id: "engineering-resin",
-    name: "HIGH-DETAIL RESIN",
-    category: "UV Photopolymer",
-    tagline: "Fine fidelity for intricate sculptures, miniature figurines, and display pieces.",
-    description:
-      "Cured with high-resolution light engines for refined features and smooth organic contours.",
-    finish: "Ultra-smooth surface with a refined studio finish",
-    tensileStrength: "High Rigidity / 65 MPa",
-    heatResistance: "Up to 80°C (Post-Cured)",
-    applications: [
-      "Collector figurines & portrait sculpts",
-      "Master patterns for silicone molding",
-      "Micro-mechanical gear trains",
-      "Wearable prototypes",
-    ],
-    colors: ["Onyx Smoke", "Translucent Amber", "Neutral Gray"],
-    visualColor: "#3F3D56",
+    colors: ["Custom Primer", "Metallic Tones", "Bespoke Palette"],
+    visualColor: "#C8B89F",
   },
 ];

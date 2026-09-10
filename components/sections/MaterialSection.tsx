@@ -17,20 +17,15 @@ export default function MaterialSection() {
       border: 'rgba(255,255,255,0.1)',
       accent: '#C8B89F',
     },
-    'carbon-petg': {
-      swatchBg: 'radial-gradient(circle at 30% 30%, #3a3f45 0%, #1a1c1e 100%)',
+    'petg': {
+      swatchBg: 'radial-gradient(circle at 30% 30%, #383B3E 0%, #1F2123 100%)',
       border: 'rgba(255,255,255,0.08)',
       accent: '#A09D95',
     },
-    'standard-pla': {
-      swatchBg: 'linear-gradient(145deg, #FAF8F5 0%, #DDD7CD 100%)',
+    'custom-finishing': {
+      swatchBg: 'linear-gradient(145deg, #D4C5AE 0%, #9E8D75 100%)',
       border: 'rgba(0,0,0,0.08)',
       accent: '#181817',
-    },
-    'engineering-resin': {
-      swatchBg: 'linear-gradient(145deg, #4A4658 0%, #25222E 100%)',
-      border: 'rgba(255,255,255,0.12)',
-      accent: '#D4C5AE',
     },
   };
 
@@ -65,8 +60,8 @@ export default function MaterialSection() {
           </Link>
         </motion.div>
 
-        {/* 4 Luxury Material Selector Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {/* 3 Luxury Material Selector Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {MATERIALS.map((mat, i) => {
             const style = swatchStyles[mat.id] || {
               swatchBg: mat.visualColor,

@@ -32,9 +32,9 @@ export const PROJECTS: Project[] = [
     category: "Sculpture",
     categoryLabel: "Large Sculpture",
     year: "2025",
-    headline: "Multi-section organic monolith engineered for studio exhibition.",
+    headline: "Multi-section organic sculpture developed for exhibition.",
     description:
-      "A 1.4-meter fluid geometric sculpture fabricated in 18 interlocking modular segments with internal structural reinforcement and a smooth matte finish.",
+      "A large-format sculptural study developed as a modular physical object, combining flowing geometry with a strong architectural presence.",
     image: "/images/project-sculpture.jpg",
     gallery: [
       "/images/project-sculpture.jpg",
@@ -43,52 +43,52 @@ export const PROJECTS: Project[] = [
     ],
     specs: {
       scale: "Statement / XL",
-      material: "PLA Pro+ (Obsidian Black)",
-      production: "18-Segment FDM Modular Fabrication",
-      finishing: "Precision Seam Alignment, Structural Modular Joins & Matte Surface Conditioning",
+      material: "Studio PLA Pro+ (Obsidian Black)",
+      production: "Modular Section Fabrication",
+      finishing: "Seam Alignment, Modular Joining & Studio Matte Finish",
       dimensions: "1420 × 520 × 480 mm",
       weight: "14.2 kg",
     },
     narrative: {
       challenge:
-        "The client required an imposing sculptural centrepiece with sweeping organic undulations that exceeded the physical build envelope of standard single-bed industrial printers without showing seam lines.",
+        "The project called for an imposing sculptural piece with sweeping fluid undulations designed to be assembled seamlessly at exhibition scale.",
       execution:
-        "We sliced the CAD geometry into 18 dovetail-indexed nodes, optimized wall thickness gradient to keep upper tiers lightweight, and printed using calibrated 0.2mm layer deposition with internal ribbing.",
+        "Our studio divided the digital geometry into interlocking modular sections, balancing strength and weight across the vertical form.",
       result:
-        "Delivered and assembled on site with seamless joins, presenting a striking monolithic silhouette under directional gallery spotlights.",
+        "Assembled and presented on site with clean joins and a unified matte silhouette under directional lighting.",
     },
     featured: true,
     order: 1,
   },
   {
     slug: "ergonomic-device-chassis",
-    title: "Haptic Input Enclosure",
+    title: "Haptic Controller Study",
     category: "Prototype",
-    categoryLabel: "Industrial Prototype",
+    categoryLabel: "Design Study",
     year: "2025",
-    headline: "Functional mechanical housing prototype with precise snap-fit assembly.",
+    headline: "Tactile ergonomics study developed for physical evaluation.",
     description:
-      "Production-intent prototype developed around a detailed physical design featuring tactile rotary encoders, sensor recesses, and calibrated component fit.",
+      "A physical design study exploring tactile contours, surface ergonomics, and component fit for handheld interaction.",
     image: "/images/project-prototype.jpg",
     gallery: [
       "/images/project-prototype.jpg",
       "/images/project-prototype-internal.jpg",
     ],
     specs: {
-      scale: "Medium / Desktop",
-      material: "Matte Carbon PETG",
-      production: "Multi-Wall Direct Print",
-      finishing: "Satin Surface Conditioning & Brass Threaded Inserts",
+      scale: "Desktop Study",
+      material: "Studio PETG (Matte Charcoal)",
+      production: "Direct Studio Print",
+      finishing: "Satin Surface Finish & Component Fitting",
       dimensions: "260 × 145 × 85 mm",
       weight: "480 g",
     },
     narrative: {
       challenge:
-        "Validating ergonomic hand grip curvature and dynamic snap-fit clasp durability before committing to tooling.",
+        "Evaluating ergonomic hand feel, grip curvature, and tactile balance before finalizing physical production.",
       execution:
-        "Printed using Matte Carbon PETG with layer orientation optimized for durability along the latching axis.",
+        "Produced in Studio PETG with layer orientation aligned for surface feel and structural rigidity.",
       result:
-        "Passed full functional testing, allowing rapid ergonomic review with design stakeholders.",
+        "Provided a tangible, high-quality physical study enabling immediate hands-on review and refinement.",
     },
     featured: true,
     order: 2,
@@ -97,44 +97,44 @@ export const PROJECTS: Project[] = [
     slug: "architectural-pavilion-study",
     title: "Voronoi Pavilion Model",
     category: "Architecture",
-    categoryLabel: "Architectural Model",
+    categoryLabel: "Architectural Study",
     year: "2025",
-    headline: "Intricate architectural study with hollow lattice spans.",
+    headline: "Intricate architectural model with complex lattice spans.",
     description:
-      "A delicate 1:100 scale structural model displaying dual-curvature shell geometry and self-supporting internal columns for an international competition presentation.",
+      "A 1:100 scale structural study displaying dual-curvature shell geometry and self-supporting columns for an architectural design presentation.",
     image: "/images/project-pavilion.jpg",
     gallery: [
       "/images/project-pavilion.jpg",
       "/images/project-pavilion-angle.jpg",
     ],
     specs: {
-      scale: "Large Model",
-      material: "Architectural Bone White PLA",
-      production: "Micro-Layer Deposition (0.12mm)",
-      finishing: "Manual Tree-Support De-bridging & UV-Stable Clean Seal",
+      scale: "Scale Model",
+      material: "Studio Matte PLA (Architectural White)",
+      production: "Fine-Detail Layer Print",
+      finishing: "Support Removal & Clean Studio Finish",
       dimensions: "580 × 580 × 240 mm",
       weight: "1.8 kg",
     },
     narrative: {
       challenge:
-        "Achieving slender structural struts over dramatic cantilevers without sag or surface stringing.",
+        "Realizing slender structural lattice beams over wide cantilevers with clean geometric clarity.",
       execution:
-        "Implemented custom organic tree supports generated via algorithmic overhang analysis, paired with decelerated outer-wall cooling cycles.",
+        "Prepared with specialized support structures and controlled cooling to preserve thin architectural members.",
       result:
-        "Flawless white pavilion study showcasing every beam intersection with pristine crispness for client review.",
+        "Pristine white pavilion study showcasing every beam intersection with clarity for client review.",
     },
     featured: true,
     order: 3,
   },
   {
     slug: "cybernetic-artisan-statue",
-    title: "The Archon — Character Statue",
+    title: "The Archon — Character Sculpture",
     category: "Figurine",
-    categoryLabel: "Custom Statue",
+    categoryLabel: "Sculptural Piece",
     year: "2024",
-    headline: "High-definition display statue with multi-material contrast.",
+    headline: "Detailed figurative sculpture with crisp surface definition.",
     description:
-      "A 450mm collectible artisan sculpture rendered from digital mesh with microscopic surface textiles, mechanical plates, and a cast resin optical core.",
+      "A 450mm collectible sculpture rendered from a digital model with detailed surface contours, mechanical forms, and a studio finish.",
     image: "/images/project-figurine.jpg",
     gallery: [
       "/images/project-figurine.jpg",
@@ -142,83 +142,83 @@ export const PROJECTS: Project[] = [
     ],
     specs: {
       scale: "Medium / Large",
-      material: "High-Detail Resin + PLA Pro+ Base",
-      production: "Hybrid High-Detail Resin & FDM Core",
-      finishing: "Hand-Smoothed, Surface Conditioning & Dark Titanium Satin Buffing",
+      material: "Studio PLA Pro+ & Custom Finishing",
+      production: "Multi-Section Studio Fabrication",
+      finishing: "Hand-Smoothed, Primed & Satin Finished",
       dimensions: "450 × 280 × 220 mm",
       weight: "2.6 kg",
     },
     narrative: {
       challenge:
-        "Balancing structural mass with delicate mechanical filigree and garment flow.",
+        "Balancing structural presence with fine decorative relief and flowing anatomical contours.",
       execution:
-        "Fabricated the dense pedestal and core anatomy in PLA Pro+, while helmet crests, fingers, and intricate emblems were produced in high-detail resin.",
+        "Fabricated in sections to ensure clean feature definition across all angles, followed by hand smoothing and priming.",
       result:
-        "Studio display piece combining clean physical assembly with fine digital fidelity.",
+        "A distinctive display sculpture combining clean assembly with sharp digital detail.",
     },
     featured: true,
     order: 4,
   },
   {
     slug: "multi-stage-planetary-gearset",
-    title: "Planetary Reduction Assembly",
+    title: "Planetary Mechanism Study",
     category: "Custom Parts",
-    categoryLabel: "Custom Mechanical Part",
+    categoryLabel: "Mechanical Study",
     year: "2025",
-    headline: "Print-in-place high-torque transmission mechanism.",
+    headline: "Physical demonstration study of mechanical gear interaction.",
     description:
-      "Functional cycloidal and planetary reduction gear assembly built with calibrated running clearances for prototype testing.",
+      "A functional gear interaction study fabricated to evaluate rotational movement and mechanical geometry.",
     image: "/images/project-gear.jpg",
     gallery: [
       "/images/project-gear.jpg",
     ],
     specs: {
-      scale: "Small / Precision",
-      material: "Self-Lubricating Nylon Alloy / PETG",
-      production: "Precision Calibrated Clearance FDM",
-      finishing: "Deburred Tooth Profiles & Synthetic Fluoropolymer Lubrication",
+      scale: "Desktop Mechanism",
+      material: "Studio PETG",
+      production: "Integrated Mechanism Print",
+      finishing: "Clean Surface Preparation",
       dimensions: "160 × 160 × 90 mm",
       weight: "620 g",
     },
     narrative: {
       challenge:
-        "Zero-backlash gear meshing straight off the build plate without post-print machining.",
+        "Fabricating moving internal components in a single build with smooth initial rotation.",
       execution:
-        "Applied active dimensional compensation in slicer software to counter plastic thermal contraction.",
+        "Optimized part spacing and layer settings to achieve clean separation of moving teeth.",
       result:
-        "Smooth rotational drive with zero tooth binding under 15 Nm test torque loads.",
+        "Smooth hand-operated rotational movement demonstrating mechanical principles physically.",
     },
     featured: false,
     order: 5,
   },
   {
     slug: "biomimetic-acoustic-diffuser",
-    title: "Acoustic Diffusion Array",
+    title: "Acoustic Diffusion Panel",
     category: "Sculpture",
-    categoryLabel: "Acoustic Fabrication",
+    categoryLabel: "Wall Sculpture",
     year: "2024",
-    headline: "Parametrically calculated sound scattering wall monolith.",
+    headline: "Sculptural wall panel designed with mathematical surface patterns.",
     description:
-      "Custom wall-mounted sound diffusion grid based on prime quadratic residue sequences, merging mathematical acoustics with physical aesthetic impact.",
+      "A custom wall-mounted panel based on acoustic diffusion geometry, balancing functional sound scattering with sculptural presence.",
     image: "/images/project-diffuser.jpg",
     gallery: [
       "/images/project-diffuser.jpg",
     ],
     specs: {
       scale: "Statement Wall Panel",
-      material: "Recycled Matte Graphite PLA",
-      production: "9-Tile Interlocking Matrix",
-      finishing: "Flush Interlocking Keyways & Rear Wall Mount Integrations",
+      material: "Studio Matte PLA",
+      production: "Modular Multi-Tile Fabrication",
+      finishing: "Flush Interlocking Keyways & Wall Mount Integration",
       dimensions: "1200 × 1200 × 180 mm",
       weight: "18.5 kg",
     },
     narrative: {
       challenge:
-        "Producing a rigid, non-resonant acoustic surface across 1.44 square meters with repeatable well depths.",
+        "Producing a cohesive modular relief pattern across a large surface area for interior installation.",
       execution:
-        "Engineered internal gyroid infill at 28% density to eliminate acoustic cavity resonance while keeping shipping modularity intact.",
+        "Divided the geometric array into interlocking tiles engineered for secure wall mounting.",
       result:
-        "Installed in a private recording studio with measured sound dispersion matching predictive mathematical models.",
+        "Installed as a sculptural acoustic backdrop with seamless tile transitions.",
     },
     featured: false,
     order: 6,

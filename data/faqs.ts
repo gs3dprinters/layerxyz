@@ -10,7 +10,7 @@ export const FAQS: FAQItem[] = [
     id: "pricing",
     question: "How much does 3D printing cost?",
     answer:
-      "Our 3D printing services start from ₹5/g for standard materials. Please note that this is a baseline starting price. Final project quotes depend on material selection (e.g. PLA Pro+, PETG, or photopolymer resins), overall geometry, print duration, internal density, required post-processing/finishing, and quantity. Share your file or dimensions through our project form for an exact, itemized quote.",
+      "Our 3D printing services start from ₹5/g for standard materials. Please note that this is a baseline starting price. Final project quotes depend on material selection (e.g. PLA / PLA PRO+, PETG, or custom finishing), overall geometry, print duration, internal density, required finishing, and quantity. Share your file or dimensions through our project form for an exact, itemized quote.",
   },
   {
     id: "print-from-image",
@@ -22,7 +22,7 @@ export const FAQS: FAQItem[] = [
     id: "large-statues",
     question: "Can you print large-scale statues or sculptures?",
     answer:
-      "Yes. Size does not limit what we can create. Large projects that exceed individual print chambers are intelligently divided into interlocking modular sections using precision dovetail joints, dowel sockets, or internal structural armatures. They are printed in batches and meticulously assembled and seam-finished in our studio.",
+      "Yes. Size does not limit what we can create. Large projects that exceed individual print chambers are divided into modular sections, printed and carefully assembled in our studio.",
   },
   {
     id: "file-formats",
@@ -34,13 +34,13 @@ export const FAQS: FAQItem[] = [
     id: "finishing-services",
     question: "Do you provide post-processing and finishing?",
     answer:
-      "Yes. Finishing and assembly can be custom-tailored to your exact project specifications. Our finishing capabilities include manual support removal, seam smoothing, priming, satin/matte conditioning, and threaded insert installations.",
+      "Yes. Finishing and assembly can be custom-tailored to your exact project specifications. Our finishing options include support removal, surface smoothing, priming, and custom surface preparation depending on the piece.",
   },
   {
     id: "single-piece-orders",
     question: "Can I order just a single one-off piece?",
     answer:
-      "Absolutely. One-off custom projects are welcome. Whether you need a singular bespoke prototype, a personalized collectible statue, or a single replacement component, we engineer each build with the exact same precision as multi-piece commissions.",
+      "Absolutely. One-off custom projects are welcome. Whether you need a singular bespoke prototype, a personalized collectible statue, or a single replacement component, we produce each piece with the same attention to detail as larger commissions.",
   },
   {
     id: "turnaround-process",

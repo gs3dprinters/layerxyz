@@ -22,17 +22,17 @@ export const SERVICES: Service[] = [
     title: "CUSTOM 3D PRINTING",
     subtitle: "Precision Digital Fabrication",
     description:
-      "Precision printing for custom designs, components, models and one-off creations. Calibrated for dimensional fidelity and pristine layer consistency.",
+      "Carefully produced printing for custom designs, components, models and one-off creations. Prepared for clean form and consistent layer quality.",
     image: "/images/service-printing.jpg",
     capabilities: [
       "One-off custom models & geometry",
       "Low-volume bespoke production",
-      "Fine surface resolution (down to 0.08mm)",
+      "Fine surface resolution",
       "High-density structural infill patterns",
     ],
     specs: {
-      tolerances: "Calibrated precision fit",
-      layerHeights: "0.08mm – 0.28mm selectable",
+      tolerances: "Careful component fit",
+      layerHeights: "Selectable resolution",
       buildEnvelope: "Standard single-build up to 400 × 400 × 450 mm",
       primaryApplications: "Component replacements, custom enclosures, bespoke gifts",
     },
@@ -43,7 +43,7 @@ export const SERVICES: Service[] = [
     id: "statues-sculptures",
     number: "02",
     title: "STATUES & SCULPTURES",
-    subtitle: "Artisan Scale & Figurative Craft",
+    subtitle: "Sculptural Scale & Figurative Craft",
     description:
       "Detailed figurines, character models and statement-scale sculptures built from digital designs. From delicate tabletop miniatures to commanding life-size centrepieces.",
     image: "/images/service-sculptures.jpg",
@@ -55,12 +55,12 @@ export const SERVICES: Service[] = [
     ],
     specs: {
       tolerances: "Interlocking modular joint dovetailing",
-      layerHeights: "0.08mm detail surfaces",
+      layerHeights: "Fine detail surfaces",
       buildEnvelope: "Modular assemblies up to 2.5+ meters",
       primaryApplications: "Art installations, studio lobbies, character collectibles, brand mascots",
     },
     details:
-      "We convert complex digital sculpts into physical reality. For sculptures that surpass ordinary build plates, our multi-stage indexing ensures invisible joining and rock-solid balance.",
+      "We convert complex digital sculpts into physical reality. For sculptures that surpass ordinary build plates, our multi-stage indexing ensures clean joining and solid balance.",
   },
   {
     id: "prototyping",
@@ -77,7 +77,7 @@ export const SERVICES: Service[] = [
       "Iterative revision turnaround",
     ],
     specs: {
-      tolerances: "Carefully calibrated critical fits",
+      tolerances: "Carefully checked component fits",
       layerHeights: "0.12mm – 0.20mm functional balance",
       buildEnvelope: "Rapid modular iteration volumes",
       primaryApplications: "Electronics casings, handheld devices, automotive concepts, robotics",
