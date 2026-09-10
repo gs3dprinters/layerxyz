@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { PROJECTS, getProject } from '@/data/projects';
 import Accordion from '@/ui/Accordion';
 
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return { title: 'Project Not Found | Layerxyz' };
   
   return {
-    title: `${project.name} | Layerxyz`,
+    title: `${project.name} | Layerxyz Case Study`,
     description: project.description,
   };
 }
@@ -29,68 +30,94 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F3EE] pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <nav className="text-sm text-[#777777] mb-8 flex gap-2">
-          <Link href="/work" className="hover:text-[#181818] transition-colors">Selected Work</Link>
+    <div className="min-h-screen bg-[#F4F1EA] text-[#171716] pt-28 sm:pt-36 pb-24 px-6 sm:px-10 lg:px-16">
+      <div className="max-w-5xl mx-auto">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="text-xs font-mono tracking-wider uppercase text-[#6F6B63] mb-8 flex items-center gap-2">
+          <Link href="/" className="hover:text-[#171716] transition-colors">Home</Link>
           <span>/</span>
-          <span className="text-[#181818]">{project.name}</span>
+          <Link href="/work" className="hover:text-[#171716] transition-colors">Selected Work</Link>
+          <span>/</span>
+          <span className="text-[#171716] font-medium">{project.name}</span>
         </nav>
 
         <header className="mb-12">
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-[#181818] mb-4">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-xs font-mono uppercase tracking-wider px-3 py-1 bg-white border border-[#E8E5DE] rounded-full text-[#6F6B63]">
+              {project.category}
+            </span>
+            <span className="text-xs font-mono uppercase tracking-wider px-3 py-1 bg-white border border-[#E8E5DE] rounded-full text-[#6F6B63]">
+              {project.year}
+            </span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-semibold tracking-tight text-[#171716]">
             {project.name}
           </h1>
-          <div className="flex flex-wrap gap-4 text-sm font-medium text-[#777777]">
-            <span className="px-3 py-1 bg-white border border-[#E8E5DE] rounded-full">{project.category}</span>
-            <span className="px-3 py-1 bg-white border border-[#E8E5DE] rounded-full">{project.year}</span>
-          </div>
         </header>
 
         <div 
-          className="w-full aspect-video md:aspect-[21/9] rounded-3xl mb-16 overflow-hidden border border-[#E8E5DE]"
-          style={{ background: project.color || 'linear-gradient(135deg, #E8E5DE, #D4D0C8)' }}
+          className="w-full aspect-video md:aspect-[21/9] rounded-3xl mb-16 overflow-hidden border border-[#E8E5DE] shadow-xs"
+          style={{ background: project.color || 'linear-gradient(135deg, #FAFAF8, #ECEAE4)' }}
         />
 
         <div className="max-w-3xl mx-auto">
-          <div className="prose prose-lg text-[#2A2A2A] mb-16">
-            <h2 className="text-2xl font-semibold text-[#181818] mb-4">The Challenge</h2>
-            <p className="mb-8">{project.challenge || 'To create a physical manifestation of a complex digital design while maintaining precise tolerances and structural integrity.'}</p>
+          <div className="space-y-12 mb-16 text-base sm:text-lg text-[#55524B] leading-relaxed">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#8E8B83] block mb-2 font-medium">
+                OBJECTIVE
+              </span>
+              <h2 className="text-2xl font-sans font-semibold text-[#171716] mb-3">The Brief</h2>
+              <p>{project.challenge || 'To bring a distinctive digital design into a durable physical form with balanced proportions and clean surfaces.'}</p>
+            </div>
             
-            <h2 className="text-2xl font-semibold text-[#181818] mb-4">Execution</h2>
-            <p className="mb-8">{project.execution || 'Utilizing advanced additive manufacturing techniques paired with meticulous hand-finishing to achieve a seamless, premium surface.'}</p>
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#8E8B83] block mb-2 font-medium">
+                PROCESS
+              </span>
+              <h2 className="text-2xl font-sans font-semibold text-[#171716] mb-3">Fabrication & Refinement</h2>
+              <p>{project.execution || 'Carefully produced via studio additive fabrication and finished by hand to achieve an intentional, tactile surface.'}</p>
+            </div>
             
-            <h2 className="text-2xl font-semibold text-[#181818] mb-4">Result</h2>
-            <p className="mb-8">{project.result || 'An object that sits comfortably in the real world, bridging the gap between digital ideation and physical reality.'}</p>
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#8E8B83] block mb-2 font-medium">
+                OUTCOME
+              </span>
+              <h2 className="text-2xl font-sans font-semibold text-[#171716] mb-3">Physical Presence</h2>
+              <p>{project.result || 'An object that sits comfortably in physical space, bridging computational form with tangible studio craftsmanship.'}</p>
+            </div>
           </div>
 
           <div className="border-t border-[#E8E5DE] mb-16 pt-8">
-            <Accordion title="Technical Specifications">
-              <div className="py-4 space-y-3 font-mono text-sm text-[#777777]">
+            <Accordion title="Studio Specifications">
+              <div className="py-4 space-y-3 font-mono text-xs text-[#6F6B63]">
                 <div className="flex justify-between border-b border-[#E8E5DE] pb-2">
                   <span>Material</span>
-                  <span className="text-[#181818]">{project.material || 'Various'}</span>
+                  <span className="text-[#171716] font-medium">{project.material || 'Studio Material'}</span>
                 </div>
                 <div className="flex justify-between border-b border-[#E8E5DE] pb-2">
                   <span>Dimensions</span>
-                  <span className="text-[#181818]">{project.dimensions || 'Custom'}</span>
+                  <span className="text-[#171716] font-medium">{project.dimensions || 'Bespoke Sizing'}</span>
                 </div>
                 <div className="flex justify-between pb-2">
-                  <span>Weight</span>
-                  <span className="text-[#181818]">{project.weight || 'Custom'}</span>
+                  <span>Finishing</span>
+                  <span className="text-[#171716] font-medium">{project.weight || 'Studio Hand-Finished'}</span>
                 </div>
               </div>
             </Accordion>
           </div>
 
-          <div className="bg-white p-12 rounded-3xl border border-[#E8E5DE] text-center">
-            <h2 className="text-2xl font-semibold text-[#181818] mb-4">Start a similar project</h2>
-            <p className="text-[#777777] mb-8">Have a vision in mind? Let's bring it to life.</p>
+          <div className="bg-[#FAFAF8] p-10 sm:p-14 rounded-3xl border border-[#E8E5DE] text-center">
+            <span className="text-[11px] font-mono tracking-widest uppercase text-[#8E8B83] block mb-2">
+              BESPOKE INQUIRY
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-sans font-semibold text-[#171716] mb-3">Start a similar project</h2>
+            <p className="text-sm text-[#6F6B63] mb-8 max-w-md mx-auto">Have a concept or model in mind? Work directly with our studio team.</p>
             <Link 
               href="/custom"
-              className="inline-block bg-[#181818] text-white px-8 py-4 rounded-full font-medium hover:bg-[#2A2A2A] transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-[#181817] text-[#F4F1EA] px-8 py-4 rounded-full text-xs font-mono uppercase tracking-wider hover:bg-[#2A2A28] transition-colors shadow-xs"
             >
-              Request a quote
+              Request a Custom Quote
+              <ArrowRight size={14} />
             </Link>
           </div>
         </div>

@@ -327,31 +327,31 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               })()}
             </div>
 
-            {/* Subtle Product Trust Row */}
-            <div className="pt-6 border-t border-[#E8E5DE] grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-              <div>
+            {/* Subtle Product Trust Row - 3 Pillars */}
+            <div className="pt-6 border-t border-[#E8E5DE] grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+              <div className="p-3.5 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE]/80">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E8B83] block mb-1">
-                  CRAFT
+                  MADE TO ORDER
                 </span>
-                <span className="text-xs font-medium text-[#171716]">Made to Order</span>
+                <span className="text-xs font-medium text-[#171716] leading-tight block">
+                  Produced individually for your order.
+                </span>
               </div>
-              <div>
+              <div className="p-3.5 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE]/80">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E8B83] block mb-1">
-                  FINISH
+                  STUDIO MADE
                 </span>
-                <span className="text-xs font-medium text-[#171716]">Studio Finished</span>
+                <span className="text-xs font-medium text-[#171716] leading-tight block">
+                  Created through the Layerxyz studio.
+                </span>
               </div>
-              <div>
+              <div className="p-3.5 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE]/80">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E8B83] block mb-1">
-                  ORIGIN
+                  NATIONWIDE DELIVERY
                 </span>
-                <span className="text-xs font-medium text-[#171716]">Tiruppur Studio</span>
-              </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E8B83] block mb-1">
-                  TRANSIT
+                <span className="text-xs font-medium text-[#171716] leading-tight block">
+                  Available across India.
                 </span>
-                <span className="text-xs font-medium text-[#171716]">Ships Nationwide</span>
               </div>
             </div>
           </div>
@@ -597,16 +597,16 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               BESPOKE EDITIONS
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-semibold tracking-tight text-[#171716] mb-6 leading-tight">
-              DON&apos;T SEE EXACTLY WHAT YOU WANT?<br />MAKE IT YOUR OWN.
+              CREATE SOMETHING THAT DOESN&apos;T EXIST YET.
             </h2>
             <p className="text-base sm:text-lg text-[#6F6B63] leading-relaxed mb-10">
-              Have a different size, subject, form or idea? Work directly with the Layerxyz studio to create something specifically for you.
+              Have a photograph, sketch, CAD file or idea that isn&apos;t in the collection? Work directly with the Layerxyz studio to create a bespoke physical object.
             </p>
             <Link
               href="/custom"
               className="inline-flex justify-center items-center gap-2 px-9 py-4 bg-[#181817] text-[#F4F1EA] font-medium hover:bg-[#2A2A28] transition-colors rounded-full text-sm tracking-wide shadow-sm"
             >
-              CREATE SOMETHING CUSTOM
+              START A CUSTOM PROJECT
               <ArrowRight size={15} />
             </Link>
           </div>
