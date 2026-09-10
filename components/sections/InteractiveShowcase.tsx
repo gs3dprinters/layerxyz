@@ -33,7 +33,7 @@ const SHOWROOM_OBJECTS: ShowroomObject[] = [
     id: 'heritage-nandi',
     name: 'Heritage Nandi Temple Sculpture',
     subtitle: 'Intricate Indian cultural icon with ornate ceremonial trappings',
-    price: formatPrice(2499),
+    price: 'From ' + formatPrice(2490),
     modelUrl: '/models/nandi-temple-sculpture.glb',
     slug: 'heritage-nandi-sculpture',
     material: 'Dark Basalt Finish',
@@ -42,10 +42,10 @@ const SHOWROOM_OBJECTS: ShowroomObject[] = [
     id: 'nataraja-statement',
     name: 'Nataraja Statement Sculpture',
     subtitle: 'Cosmic dancer sculpture with ring of sacred flames',
-    price: formatPrice(4999),
+    price: 'From ' + formatPrice(6990),
     modelUrl: '/models/nataraja-statement-sculpture.glb',
     slug: 'nataraja-statement-sculpture',
-    material: 'Museum Bronze Patina',
+    material: 'Antique Bronze Finish',
   },
 ];
 

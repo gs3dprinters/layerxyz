@@ -21,7 +21,7 @@ export default function CustomCTASection() {
     {
       num: '03',
       title: 'Physical Object',
-      desc: 'Precision additive deposition, ultrasonic welding, seam smoothing, and artisan finishing.',
+      desc: 'Layer-by-layer 3D fabrication, careful assembly, seam smoothing, and studio hand-finishing.',
     },
   ];
 

@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     headline: "Multi-section organic monolith engineered for studio exhibition.",
     description:
-      "A 1.4-meter fluid geometric sculpture fabricated in 18 interlocking modular segments with internal carbon fiber structural bracing and micro-blasted matte finish.",
+      "A 1.4-meter fluid geometric sculpture fabricated in 18 interlocking modular segments with internal structural reinforcement and a smooth matte finish.",
     image: "/images/project-sculpture.jpg",
     gallery: [
       "/images/project-sculpture.jpg",
@@ -43,9 +43,9 @@ export const PROJECTS: Project[] = [
     ],
     specs: {
       scale: "Statement / XL",
-      material: "High-Temp PLA Pro+ (Obsidian Black)",
+      material: "PLA Pro+ (Obsidian Black)",
       production: "18-Segment FDM Modular Fabrication",
-      finishing: "Precision Seam Alignment, Ultrasonic Joint Welding & Matte Conditioning",
+      finishing: "Precision Seam Alignment, Structural Modular Joins & Matte Surface Conditioning",
       dimensions: "1420 × 520 × 480 mm",
       weight: "14.2 kg",
     },
@@ -76,19 +76,19 @@ export const PROJECTS: Project[] = [
     ],
     specs: {
       scale: "Medium / Desktop",
-      material: "Matte Carbon-Reinforced PETG",
-      production: "High-Speed Sliced Multi-Wall Direct Print",
-      finishing: "Vapor-Conditioned Satin Texture & M3 Brass Threaded Heat-Set Inserts",
+      material: "Matte Carbon PETG",
+      production: "Multi-Wall Direct Print",
+      finishing: "Satin Surface Conditioning & Brass Threaded Inserts",
       dimensions: "260 × 145 × 85 mm",
       weight: "480 g",
     },
     narrative: {
       challenge:
-        "Validating ergonomic hand grip curvature and dynamic snap-fit clasp durability before committing to injection tooling.",
+        "Validating ergonomic hand grip curvature and dynamic snap-fit clasp durability before committing to tooling.",
       execution:
-        "Printed using carbon-fiber composite filament with tuned anisotropic orientation for maximum flexural strength along the latching axis.",
+        "Printed using Matte Carbon PETG with layer orientation optimized for durability along the latching axis.",
       result:
-        "Passed full drop and thermal cycle validation, allowing rapid ergonomic testing with design stakeholders.",
+        "Passed full functional testing, allowing rapid ergonomic review with design stakeholders.",
     },
     featured: true,
     order: 2,
@@ -142,9 +142,9 @@ export const PROJECTS: Project[] = [
     ],
     specs: {
       scale: "Medium / Large",
-      material: "Tough Engineering Resin + PLA Pro+ Base",
-      production: "Hybrid 8K Photopolymerization & FDM Core",
-      finishing: "Hand-Smoothed, Primer Micro-Coat & Dark Titanium Satin Buffing",
+      material: "High-Detail Resin + PLA Pro+ Base",
+      production: "Hybrid High-Detail Resin & FDM Core",
+      finishing: "Hand-Smoothed, Surface Conditioning & Dark Titanium Satin Buffing",
       dimensions: "450 × 280 × 220 mm",
       weight: "2.6 kg",
     },
@@ -152,9 +152,9 @@ export const PROJECTS: Project[] = [
       challenge:
         "Balancing structural mass with delicate mechanical filigree and garment flow.",
       execution:
-        "Fabricated the dense pedestal and core anatomy in high-impact PLA Pro+, while helmet crests, fingers, and intricate emblems were produced in ultra-fine photopolymer resin.",
+        "Fabricated the dense pedestal and core anatomy in PLA Pro+, while helmet crests, fingers, and intricate emblems were produced in high-detail resin.",
       result:
-        "Museum-quality display piece combining industrial resilience with microscopic digital fidelity.",
+        "Studio display piece combining clean physical assembly with fine digital fidelity.",
     },
     featured: true,
     order: 4,

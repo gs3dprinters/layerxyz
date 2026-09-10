@@ -13,7 +13,7 @@ import FinalCTASection from '@/components/sections/FinalCTASection';
 
 export const metadata: Metadata = {
   title: 'Layerxyz — Premium 3D Printed Objects & Custom Sculptures',
-  description: 'Layerxyz creates bespoke custom sculptures, physical editions, and architectural works made to order using precision additive fabrication.',
+  description: 'Layerxyz creates custom sculptures, physical editions, and architectural works made to order in our studio.',
   keywords: [
     'Layerxyz',
     'custom 3D printing',

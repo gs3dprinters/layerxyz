@@ -17,7 +17,7 @@ export interface FinishPreset {
 export const FINISH_PRESETS: Record<string, FinishPreset> = {
   'warm-sandstone': { color: '#C8B89F', roughness: 0.76, metalness: 0.0 },
   'light-black-graphite': { color: '#242424', roughness: 0.65, metalness: 0.06 },
-  'museum-patina': { color: '#4A3E31', roughness: 0.55, metalness: 0.18 },
+  'studio-patina': { color: '#4A3E31', roughness: 0.55, metalness: 0.18 },
   'temple-bronze': { color: '#5A4532', roughness: 0.45, metalness: 0.35 },
   'granite-matte': { color: '#2E3033', roughness: 0.82, metalness: 0.0 },
   'polished-patina': { color: '#3B352E', roughness: 0.50, metalness: 0.25 },

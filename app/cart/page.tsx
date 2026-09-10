@@ -102,15 +102,21 @@ export default function CartPage() {
               <span className="text-[#777777]">Subtotal</span>
               <span className="font-semibold text-[#181818]">{formatPrice(subtotal)}</span>
             </div>
-            <p className="text-sm text-[#777777] mb-2">Shipping and taxes calculated via WhatsApp.</p>
-            <a 
-              href={getWhatsAppOrderUrl(items, subtotal)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#181818] text-white px-8 py-4 rounded-full font-medium text-center hover:bg-[#2A2A2A] transition-colors w-full"
-            >
-              Complete order via WhatsApp
-            </a>
+            <p className="text-sm text-[#777777] mb-2">Delivery and payment details confirmed directly with studio.</p>
+            {(() => {
+              const orderUrl = getWhatsAppOrderUrl(items, subtotal);
+              const isExternal = orderUrl.startsWith('http');
+              return (
+                <a 
+                  href={orderUrl}
+                  target={isExternal ? '_blank' : undefined}
+                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                  className="bg-[#181818] text-white px-8 py-4 rounded-full font-medium text-center hover:bg-[#2A2A2A] transition-colors w-full"
+                >
+                  {isExternal ? 'Complete order via WhatsApp' : 'Inquire & Complete Order'}
+                </a>
+              );
+            })()}
           </div>
         </div>
       </div>

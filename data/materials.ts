@@ -19,7 +19,7 @@ export const MATERIALS: Material[] = [
     category: "High-Performance Biopolymer",
     tagline: "Superior layer adhesion, sharp corners, and high impact resistance.",
     description:
-      "Toughened polylactic acid engineered with impact modifiers. Offers crisp geometric definition with 4× the impact resistance of standard hobbyist PLA.",
+      "Toughened polylactic acid engineered with impact modifiers. Offers crisp geometric definition and durable physical performance.",
     finish: "Smooth semi-matte with fine layer definition",
     tensileStrength: "High / 45 MPa",
     heatResistance: "Up to 55°C",
@@ -54,10 +54,10 @@ export const MATERIALS: Material[] = [
   {
     id: "standard-pla",
     name: "STUDIO MATTE PLA",
-    category: "Precision Display Resin",
-    tagline: "Ultra-clean surface clarity for geometric architecture and artistic forms.",
+    category: "Studio Biopolymer",
+    tagline: "Clean surface clarity for geometric architecture and artistic forms.",
     description:
-      "Pure organic polylactic acid optimized for fine overhangs, razor-sharp edge transitions, and uniform monochromatic photography backgrounds.",
+      "Pure organic polylactic acid optimized for fine overhangs, clean edge transitions, and uniform monochromatic photography backgrounds.",
     finish: "Velvety non-reflective matte finish",
     tensileStrength: "Moderate / 38 MPa",
     heatResistance: "Up to 52°C",
@@ -74,9 +74,9 @@ export const MATERIALS: Material[] = [
     id: "engineering-resin",
     name: "HIGH-DETAIL RESIN",
     category: "UV Photopolymer",
-    tagline: "Microscopic fidelity for intricate jewelry, miniature figurines, and molds.",
+    tagline: "Fine fidelity for intricate sculptures, miniature figurines, and display pieces.",
     description:
-      "Cured with high-resolution light engines for refined, high-definition features and glass-smooth organic contours.",
+      "Cured with high-resolution light engines for refined features and smooth organic contours.",
     finish: "Ultra-smooth surface with a refined studio finish",
     tensileStrength: "High Rigidity / 65 MPa",
     heatResistance: "Up to 80°C (Post-Cured)",

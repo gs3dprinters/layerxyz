@@ -23,10 +23,10 @@ export default function ShippingPage() {
           <div className="bg-white p-8 rounded-3xl border border-[#E8E5DE]">
             <h2 className="text-xl font-medium text-[#181818] mb-3">Production & Dispatch Timelines</h2>
             <p className="text-[#6F6B63] leading-relaxed mb-4">
-              Because our editions and custom objects are made to order, standard production ranges from 3 to 7 business days depending on geometric complexity and hand-finishing tier.
+              Because our objects are made to order, delivery timing depends on the object, finish and destination. Delivery timing is confirmed directly with your project.
             </p>
             <p className="text-[#6F6B63] leading-relaxed">
-              Once quality inspection is signed off, orders dispatch via express courier with real-time tracking provided directly to your email.
+              Once studio finishing and inspection are complete, orders dispatch with tracking provided directly to your email or WhatsApp.
             </p>
           </div>
 

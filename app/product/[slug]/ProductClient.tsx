@@ -310,15 +310,21 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                 REQUEST BESPOKE CUSTOMIZATION
               </Link>
 
-              {/* WhatsApp Action */}
-              <a
-                href={getWhatsAppUrl(`Hi, I'm inquiring about ordering the ${product.name} in ${selectedFinish?.label || 'standard finish'} (${selectedSize?.label || 'standard size'}).`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-6 rounded-full bg-white text-[#6F6B63] hover:text-[#171716] border border-[#E8E5DE] text-xs font-medium hover:border-[#D4D0C8] transition-colors text-center"
-              >
-                Inquire directly on WhatsApp →
-              </a>
+              {/* Direct Studio Inquiry Action */}
+              {(() => {
+                const inquiryUrl = getWhatsAppUrl(`Hi, I'm inquiring about ordering the ${product.name} in ${selectedFinish?.label || 'standard finish'} (${selectedSize?.label || 'standard size'}).`);
+                const isExternal = inquiryUrl.startsWith('http');
+                return (
+                  <a
+                    href={inquiryUrl}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    className="w-full py-3 px-6 rounded-full bg-white text-[#6F6B63] hover:text-[#171716] border border-[#E8E5DE] text-xs font-medium hover:border-[#D4D0C8] transition-colors text-center"
+                  >
+                    {isExternal ? 'Inquire directly on WhatsApp →' : 'Inquire with our studio →'}
+                  </a>
+                );
+              })()}
             </div>
 
             {/* Subtle Product Trust Row */}
@@ -424,10 +430,10 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                   MATERIAL & FINISH
                 </span>
                 <p className="font-medium text-[#171716] mb-1">
-                  {selectedFinish?.label || 'Tactile Matte'} ({selectedMaterial?.label || 'Studio Biopolymer / Resin'})
+                  {selectedFinish?.label || 'Studio Finish'} ({selectedMaterial?.label || 'Studio Material'})
                 </p>
                 <p className="text-xs text-[#6F6B63]">
-                  Non-reflective surface conditioned with museum-grade sealants.
+                  Finished and prepared for display.
                 </p>
               </div>
 
@@ -436,10 +442,10 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                   SHIPPING & TRANSIT
                 </span>
                 <p className="font-medium text-[#171716] mb-1">
-                  {product.details?.shipping || 'Ships across India in 5–8 business days.'}
+                  {product.details?.shipping || 'Made to order. Delivery timing depends on the object, finish and destination.'}
                 </p>
                 <p className="text-xs text-[#6F6B63]">
-                  Enclosed in custom-fitted shock-absorbing foam.
+                  Carefully secured in protective packaging.
                 </p>
               </div>
 
@@ -474,9 +480,9 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               <div className="p-8 rounded-3xl bg-[#FAFAF8] border border-[#E8E5DE] flex flex-col justify-between h-full">
                 <span className="text-xs font-mono text-[#6F6B63] mb-8 block">01 / DIGITAL SCULPT</span>
                 <div>
-                  <h3 className="text-base font-medium text-[#171716] mb-2">Digital Geometry</h3>
+                  <h3 className="text-base font-medium text-[#171716] mb-2">Digital Preparation</h3>
                   <p className="text-xs text-[#6F6B63] leading-relaxed">
-                    Customer reference photos or digital meshes are refined in high-polygon density to establish clean contours.
+                    Your reference photographs or digital files are prepared into a printable 3D form.
                   </p>
                 </div>
               </div>
@@ -486,7 +492,7 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                 <div>
                   <h3 className="text-base font-medium text-[#171716] mb-2">Toolpath & Slicing</h3>
                   <p className="text-xs text-[#6F6B63] leading-relaxed">
-                    Orientation, layer trajectories, and density gradients are tuned specifically for sculptural balance.
+                    The model is oriented and prepared for the printing process.
                   </p>
                 </div>
               </div>
@@ -494,9 +500,9 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               <div className="p-8 rounded-3xl bg-[#FAFAF8] border border-[#E8E5DE] flex flex-col justify-between h-full">
                 <span className="text-xs font-mono text-[#6F6B63] mb-8 block">03 / FABRICATION</span>
                 <div>
-                  <h3 className="text-base font-medium text-[#171716] mb-2">Additive Build</h3>
+                  <h3 className="text-base font-medium text-[#171716] mb-2">Additive Fabrication</h3>
                   <p className="text-xs text-[#6F6B63] leading-relaxed">
-                    Produced on calibrated studio machines with fine deposition biopolymers and engineering photopolymers.
+                    The object is produced layer by layer using the selected printing material.
                   </p>
                 </div>
               </div>
@@ -504,9 +510,9 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               <div className="p-8 rounded-3xl bg-[#FAFAF8] border border-[#E8E5DE] flex flex-col justify-between h-full">
                 <span className="text-xs font-mono text-[#6F6B63] mb-8 block">04 / FINISHING</span>
                 <div>
-                  <h3 className="text-base font-medium text-[#171716] mb-2">Artisan Finishing</h3>
+                  <h3 className="text-base font-medium text-[#171716] mb-2">Studio Finishing</h3>
                   <p className="text-xs text-[#6F6B63] leading-relaxed">
-                    Each piece is hand-smoothed, conditioned with tactile primers, and inspected before dispatched from our studio.
+                    The printed piece is cleaned, finished where required, and prepared for delivery.
                   </p>
                 </div>
               </div>

@@ -34,7 +34,7 @@ export const FAQS: FAQItem[] = [
     id: "finishing-services",
     question: "Do you provide post-processing and finishing?",
     answer:
-      "Yes. Finishing and assembly can be custom-tailored to your exact project specifications. Our finishing capabilities include manual support de-bridging, ultrasonic joint welding, seam smoothing, priming, satin/matte conditioning, and threaded insert installations.",
+      "Yes. Finishing and assembly can be custom-tailored to your exact project specifications. Our finishing capabilities include manual support removal, seam smoothing, priming, satin/matte conditioning, and threaded insert installations.",
   },
   {
     id: "single-piece-orders",
