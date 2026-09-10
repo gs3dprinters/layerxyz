@@ -31,7 +31,7 @@ export default function LargeScaleSection() {
             FROM SMALL OBJECTS<br />TO STATEMENT PIECES.
           </h2>
           <p className="text-base sm:text-lg text-[#6F6B63] mb-10 leading-relaxed">
-            Whether it&apos;s an intricate 50mm collectible figurine or a 2500mm+ sculptural installation, our fabrication capabilities scale effortlessly. We handle complex multi-part assemblies and massive monolithic works with seamless jointing.
+            Layerxyz can make objects from small collectibles to large statement pieces. From an intricate 50mm desk artifact to a 2500mm+ architectural sculpture, our fabrication capabilities scale to meet your vision.
           </p>
           <Link 
             href="/custom"

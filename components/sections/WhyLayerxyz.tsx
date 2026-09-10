@@ -9,8 +9,8 @@ export default function WhyLayerxyz() {
   const principles = [
     {
       icon: <Target className="w-6 h-6 text-[#171716] mb-6" strokeWidth={1.5} />,
-      title: 'Precision Made',
-      description: 'Calculated layer deposition and geometric alignment ensure every curve and contour matches digital intent.',
+      title: 'Carefully Produced',
+      description: 'Detailed, carefully produced objects designed around the original form, preserving sculptural proportions.',
     },
     {
       icon: <Package className="w-6 h-6 text-[#171716] mb-6" strokeWidth={1.5} />,
@@ -20,7 +20,7 @@ export default function WhyLayerxyz() {
     {
       icon: <Sparkles className="w-6 h-6 text-[#171716] mb-6" strokeWidth={1.5} />,
       title: 'Expert Finishing',
-      description: 'Hand-conditioned by our studio artisans. Seams are smoothed, surfaces primed, and textures sealed to perfection.',
+      description: 'Selected pieces can be post-processed and hand-finished for a refined, tactile final appearance.',
     },
   ];
 
