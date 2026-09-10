@@ -18,9 +18,11 @@ export interface Product {
   id: string;
   slug: string;
   name: string;
+  categoryLabel?: string;
   description: string;
   longDescription: string;
   price: number;
+  pricePrefix?: string;
   comparePrice?: number;
   category: 'sculptures' | 'figurines' | 'home' | 'collectibles' | 'limited';
   images: string[];
@@ -48,6 +50,172 @@ export interface Product {
 }
 
 const BASE_PRODUCTS: Product[] = [
+  {
+    id: 'prod_portrait',
+    slug: 'custom-portrait-sculpture',
+    name: 'Custom Portrait Sculpture',
+    categoryLabel: 'CUSTOM PORTRAIT SCULPTURE',
+    description: 'Personalized portrait sculptures made from customer photographs.',
+    longDescription: 'A bespoke portrait sculpture celebrating personal legacy, craft, and precision additive manufacturing. Digitally sculpted from customer reference photographs, fabricated with high-density structural resin or carbon-reinforced composite, and hand-conditioned with a museum-grade graphite or warm sandstone finish.',
+    price: 1499,
+    pricePrefix: 'From ',
+    comparePrice: 2490,
+    category: 'sculptures',
+    images: ['/images/products/custom-portrait-sculpture.jpg'],
+    model: '/models/kala-final-print.glb',
+    modelUrl: '/models/kala-final-print.glb',
+    hasModel: true,
+    sizes: [
+      { label: 'Desk Miniature', dimensions: '100 × 70 × 70 mm', price: 1499 },
+      { label: 'Studio Portrait', dimensions: '180 × 120 × 120 mm', price: 3490 },
+      { label: 'Grand Bust', dimensions: '280 × 180 × 180 mm', price: 7990 },
+      { label: 'Life Scale', dimensions: '500 × 350 × 350 mm', price: 16990 },
+    ],
+    materials: [
+      { label: 'Studio Resin Pro', slug: 'studio-resin-pro' },
+      { label: 'Carbon Composite', slug: 'carbon-composite' },
+      { label: 'Cast Bronze Effect', slug: 'cast-bronze' },
+    ],
+    finishes: [
+      { label: 'Light Black Graphite', slug: 'light-black-graphite' },
+      { label: 'Warm Sandstone', slug: 'warm-sandstone' },
+      { label: 'Museum Patina', slug: 'museum-patina' },
+    ],
+    available: true,
+    madeToOrder: true,
+    badge: 'BESTSELLER',
+    details: {
+      description: 'An authentic bespoke artisan statue commissioned and crafted in our Tiruppur studio. Features sub-50-micron surface resolution capturing authentic portrait expressions, clothing details, and posture from your photos.',
+      shipping: 'Made to order. Carefully packed in custom shock-absorbing foam. Ships across India in 5–8 business days.',
+      care: 'Display on a flat, stable surface. Dust with a soft micro-fiber cloth. Avoid prolonged direct UV sunlight.',
+      specifications: 'Source: Customer Photos · Resolution: 0.05mm layer pitch · Finishing: Multi-stage primer and tactile conditioning',
+    },
+    colors: ['#323232', '#C8B89F', '#141414'],
+    relatedSlugs: ['heritage-nandi-sculpture', 'personalized-name-sculpture', 'nataraja-statement-sculpture'],
+  },
+  {
+    id: 'prod_heritage_nandi',
+    slug: 'heritage-nandi-sculpture',
+    name: 'Nandi Sacred Temple Sculpture',
+    categoryLabel: 'HERITAGE COLLECTION',
+    description: 'Detailed Indian-inspired sculptures and collectible statues.',
+    longDescription: 'An archival recreation of the sacred temple Nandi bull. Intricately sculpted with classical South Indian temple iconography, featuring ceremonial bell garlands, ornate embroidered saddle cloth, and consecrated plinth. Cast in antique temple bronze composite or carved stone finish.',
+    price: 2490,
+    pricePrefix: 'From ',
+    comparePrice: 3490,
+    category: 'collectibles',
+    images: ['/images/products/heritage-nandi-sculpture.jpg'],
+    model: '/models/nandi-temple-sculpture.glb',
+    modelUrl: '/models/nandi-temple-sculpture.glb',
+    hasModel: true,
+    sizes: [
+      { label: 'Altar Small', dimensions: '120 × 70 × 60 mm', price: 2490 },
+      { label: 'Temple Classic', dimensions: '200 × 120 × 100 mm', price: 4990 },
+      { label: 'Heritage Grand', dimensions: '350 × 210 × 180 mm', price: 11990 },
+    ],
+    materials: [
+      { label: 'Antique Bronze Composite', slug: 'antique-bronze' },
+      { label: 'High-Detail Resin', slug: 'high-detail-resin' },
+      { label: 'Temple Stone', slug: 'temple-stone' },
+    ],
+    finishes: [
+      { label: 'Temple Bronze', slug: 'temple-bronze' },
+      { label: 'Carved Granite Matte', slug: 'granite-matte' },
+      { label: 'Hand-Polished Patina', slug: 'polished-patina' },
+    ],
+    available: true,
+    madeToOrder: true,
+    badge: 'NEW',
+    details: {
+      description: 'Preserving ancient South Indian sculptors\' heritage with modern additive fidelity. Every bell in the neck garland and sacred contour is resolved with breathtaking precision.',
+      shipping: 'Ships in reinforced protective box. Domestic shipping: 3–6 business days.',
+      care: 'Clean with dry brush or soft cloth. Suitable for puja rooms, living displays, and executive desks.',
+    },
+    colors: ['#4A3728', '#2A2D30', '#C4B5A0'],
+    relatedSlugs: ['nataraja-statement-sculpture', 'custom-portrait-sculpture', 'personalized-name-sculpture'],
+  },
+  {
+    id: 'prod_personalized_name',
+    slug: 'personalized-name-sculpture',
+    name: 'Personalized Name & Desk Sculpture',
+    categoryLabel: 'PERSONALIZED OBJECTS',
+    description: 'Custom names, desk objects, decorative pieces and personalized gifts.',
+    longDescription: 'Custom 3D typography nameplates, monogram desk sculptures, and bespoke identity pieces. Precision printed in premium matte obsidian, brushed graphite, or satin metallic finishes with balanced weighted architecture for executive workspaces and memorable gifting.',
+    price: 499,
+    pricePrefix: 'From ',
+    comparePrice: 990,
+    category: 'home',
+    images: ['/images/products/personalized-name-sculpture.jpg'],
+    model: '/models/personalized-name-sculpture.glb',
+    modelUrl: '/models/personalized-name-sculpture.glb',
+    hasModel: true,
+    sizes: [
+      { label: 'Compact / Pocket', dimensions: '90 × 30 × 15 mm', price: 499 },
+      { label: 'Executive Desk', dimensions: '180 × 55 × 25 mm', price: 1190 },
+      { label: 'Studio Statement', dimensions: '300 × 90 × 40 mm', price: 2490 },
+    ],
+    materials: [
+      { label: 'Studio PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Carbon Matte', slug: 'carbon-matte' },
+      { label: 'Anodized Metallic Blend', slug: 'metallic-blend' },
+    ],
+    finishes: [
+      { label: 'Brushed Graphite', slug: 'brushed-graphite' },
+      { label: 'Obsidian Matte', slug: 'obsidian-matte' },
+      { label: 'Chalk White', slug: 'chalk-white' },
+    ],
+    available: true,
+    madeToOrder: true,
+    badge: 'CUSTOM',
+    details: {
+      description: 'Personalized with your chosen name, word, initials, or corporate brand mark. Custom 3D typography designed for elegant desktop presence.',
+      shipping: 'Custom produced in 3–5 business days. Ships nationwide across India.',
+      care: 'Wipe with damp cloth. Weighted base keeps the piece standing upright with stability.',
+    },
+    colors: ['#2A2A2A', '#ECEAE4', '#C4B5A0'],
+    relatedSlugs: ['custom-portrait-sculpture', 'heritage-nandi-sculpture', 'nataraja-statement-sculpture'],
+  },
+  {
+    id: 'prod_statement_nataraja',
+    slug: 'nataraja-statement-sculpture',
+    name: 'Nataraja Cosmic Statement Sculpture',
+    categoryLabel: 'STATEMENT SCULPTURES',
+    description: 'Large-format and premium sculptural pieces.',
+    longDescription: 'A commanding museum-scale representation of Lord Shiva as Nataraja in the cosmic dance of creation and dissolution. Features the intricately detailed arch of flames (Prabhamandala), flying locks of hair, damaru drum, and lotus pedestal. Engineered for grand residential and architectural spaces.',
+    price: 6990,
+    pricePrefix: 'From ',
+    comparePrice: 9990,
+    category: 'sculptures',
+    images: ['/images/products/nataraja-statement-sculpture.jpg'],
+    model: '/models/nataraja-statement-sculpture.glb',
+    modelUrl: '/models/nataraja-statement-sculpture.glb',
+    hasModel: true,
+    sizes: [
+      { label: 'Studio Edition', dimensions: '250 × 200 × 90 mm', price: 6990 },
+      { label: 'Gallery Large', dimensions: '450 × 360 × 160 mm', price: 16990 },
+      { label: 'Monument Architectural', dimensions: '850 × 680 × 300 mm', price: 42000 },
+    ],
+    materials: [
+      { label: 'Cast Bronze Core', slug: 'cast-bronze-core' },
+      { label: 'Archival Resin', slug: 'archival-resin' },
+      { label: 'Sandstone Composite', slug: 'sandstone-composite' },
+    ],
+    finishes: [
+      { label: 'Chola Antique Bronze', slug: 'chola-bronze' },
+      { label: 'Ebony Matte', slug: 'ebony-matte' },
+      { label: 'Temple Gilded Accent', slug: 'gilded-accent' },
+    ],
+    available: true,
+    madeToOrder: true,
+    badge: 'LIMITED',
+    details: {
+      description: 'The pinnacle of cultural additive art. Incorporates over 30 individual symbolic details including the flame circle, dwarf of ignorance (Apasmara), and dynamic drapery.',
+      shipping: 'Ships in custom wooden crate with shock-isolated inner cushioning. Insured transit across India and worldwide.',
+      care: 'Display as an architectural focal piece. Dust with soft feather or microfiber duster.',
+    },
+    colors: ['#5C4033', '#1E1E1E', '#D4AF37'],
+    relatedSlugs: ['heritage-nandi-sculpture', 'custom-portrait-sculpture', 'personalized-name-sculpture'],
+  },
   {
     id: 'prod_kala',
     slug: 'kala-portrait-statue',
@@ -514,7 +682,15 @@ export function getProductsByCategory(category: Product['category']): Product[] 
 }
 
 export function getFeaturedProducts(): Product[] {
-  return PRODUCTS.filter((p) => p.badge).slice(0, 4);
+  const featuredSlugs = [
+    'custom-portrait-sculpture',
+    'heritage-nandi-sculpture',
+    'personalized-name-sculpture',
+    'nataraja-statement-sculpture',
+  ];
+  return featuredSlugs
+    .map((slug) => getProduct(slug))
+    .filter((p): p is Product => p !== undefined);
 }
 
 export function getRelatedProducts(slugOrId: string): Product[] {

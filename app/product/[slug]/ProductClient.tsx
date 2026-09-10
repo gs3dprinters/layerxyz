@@ -73,7 +73,9 @@ export default function ProductClient({ product, relatedProducts }: { product: a
             <p className="text-xl text-[#777777] mb-6">{product.description}</p>
             
             <div className="flex items-center gap-4 mb-8">
-              <span className="text-2xl font-medium text-[#181818]">{formatPrice(displayPrice)}</span>
+              <span className="text-2xl font-medium text-[#181818]">
+                {product.pricePrefix || ''}{formatPrice(displayPrice)}
+              </span>
               <span className="px-3 py-1 rounded-full text-xs font-medium border border-[#E8E5DE] bg-white text-[#181818]">
                 {product.isMadeToOrder ? 'Made to Order' : 'In Stock'}
               </span>
@@ -172,18 +174,28 @@ export default function ProductClient({ product, relatedProducts }: { product: a
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <button 
                 onClick={handleAddToCart}
                 className="w-full bg-[#181818] text-white py-4 rounded-full font-medium hover:bg-[#2A2A2A] transition-colors"
               >
                 ADD TO CART
               </button>
+
+              {product.isMadeToOrder && (
+                <Link
+                  href="/custom"
+                  className="w-full bg-white text-[#181818] border border-[#181818] py-3.5 rounded-full font-medium hover:bg-[#F5F3EE] transition-colors text-center"
+                >
+                  REQUEST BESPOKE CUSTOMIZATION
+                </Link>
+              )}
+
               <a 
-                href={getWhatsAppUrl(`Hi, I'm interested in the ${product.name}.`)}
+                href={getWhatsAppUrl(`Hi, I'm interested in ordering/customizing the ${product.name}.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-white text-[#181818] border border-[#E8E5DE] py-4 rounded-full font-medium hover:border-[#D4D0C8] transition-colors text-center"
+                className="w-full bg-white text-[#181818] border border-[#E8E5DE] py-3.5 rounded-full text-sm font-medium hover:border-[#D4D0C8] transition-colors text-center"
               >
                 CHAT ON WHATSAPP
               </a>

@@ -183,7 +183,9 @@ export function ProductViewer({
             const scale = 2 / maxDim;
             
             gltf.scene.scale.setScalar(scale);
-            gltf.scene.position.sub(center.multiplyScalar(scale));
+            gltf.scene.position.x = -center.x * scale;
+            gltf.scene.position.z = -center.z * scale;
+            gltf.scene.position.y = -box.min.y * scale - 0.8;
             
             scene.add(gltf.scene);
             modelRef.current = gltf.scene;

@@ -14,10 +14,10 @@ export interface ProductGridProps {
 export function ProductGrid({ products, columns = 4, className = '' }: ProductGridProps) {
   const getGridCols = () => {
     switch (columns) {
-      case 2: return 'md:grid-cols-2';
-      case 3: return 'md:grid-cols-2 lg:grid-cols-3';
-      case 4: return 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
-      default: return 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+      case 2: return 'grid-cols-1 md:grid-cols-2';
+      case 3: return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+      case 4: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4';
+      default: return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4';
     }
   };
 
@@ -36,7 +36,7 @@ export function ProductGrid({ products, columns = 4, className = '' }: ProductGr
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className={`grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:gap-y-12 lg:gap-x-8 ${getGridCols()} ${className}`}
+      className={`grid gap-x-6 gap-y-12 lg:gap-x-8 ${getGridCols()} ${className}`}
     >
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
