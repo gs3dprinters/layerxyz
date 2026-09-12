@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { PRODUCTS } from '@/data/products';
 import { COLLECTIONS } from '@/data/collections';
+import { CATEGORIES } from '@/data/categories';
 import { PROJECTS } from '@/data/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     '',
     '/shop',
+    '/categories',
     '/custom',
     '/collections',
     '/3d-studio',
@@ -40,6 +42,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const categoryRoutes = CATEGORIES.map((category) => ({
+    url: `${baseUrl}/categories/${category.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }));
+
   const projectRoutes = PROJECTS.map((project) => ({
     url: `${baseUrl}/work/${project.slug}`,
     lastModified: new Date(),
@@ -50,6 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...productRoutes,
+    ...categoryRoutes,
     ...collectionRoutes,
     ...projectRoutes,
   ];

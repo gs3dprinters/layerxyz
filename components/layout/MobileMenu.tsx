@@ -13,6 +13,7 @@ interface MobileMenuProps {
 
 const links = [
   { name: 'Shop', href: '/shop' },
+  { name: 'Categories', href: '/categories' },
   { name: 'Custom', href: '/custom' },
   { name: 'Collections', href: '/collections' },
   { name: '3D Studio', href: '/3d-studio' },

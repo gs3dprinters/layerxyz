@@ -10,6 +10,7 @@ import { SearchOverlay } from './SearchOverlay';
 
 const navLinks = [
   { name: 'SHOP', href: '/shop' },
+  { name: 'CATEGORIES', href: '/categories' },
   { name: 'CUSTOM', href: '/custom' },
   { name: 'COLLECTIONS', href: '/collections' },
   { name: '3D STUDIO', href: '/3d-studio' },

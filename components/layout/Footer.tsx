@@ -9,13 +9,18 @@ export function Footer() {
     <footer className="bg-[#F5F3EE] border-t border-[#E8E5DE] pt-16 pb-8 text-[#181818]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
-          <div className="flex flex-col space-y-4">
-            <h3 className="font-semibold text-xs tracking-wider uppercase text-[#777777]">Shop</h3>
-            <Link href="/shop?category=sculptures" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Sculptures</Link>
-            <Link href="/shop?category=figurines" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Figurines</Link>
-            <Link href="/shop?category=home-objects" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Home Objects</Link>
-            <Link href="/shop?category=collectibles" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Collectibles</Link>
-            <Link href="/shop?category=limited" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Limited Editions</Link>
+          <div className="flex flex-col space-y-2.5">
+            <h3 className="font-semibold text-xs tracking-wider uppercase text-[#777777] mb-1">
+              <Link href="/categories" className="hover:text-[#181818] transition-colors">Categories</Link>
+            </h3>
+            <Link href="/categories/gifts" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Gifts</Link>
+            <Link href="/categories/god-idols" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">God Idols</Link>
+            <Link href="/categories/leaders-icons" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Leaders & Icons</Link>
+            <Link href="/categories/costume-idols" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Costume Idols</Link>
+            <Link href="/categories/home-decor" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Home Décor</Link>
+            <Link href="/categories/toys-figurines" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Toys & Figurines</Link>
+            <Link href="/categories/awards-trophies" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Awards & Trophies</Link>
+            <Link href="/categories/custom-creations" className="hover:text-[#181818] text-[#555555] transition-colors text-sm">Custom Creations</Link>
           </div>
           
           <div className="flex flex-col space-y-4">

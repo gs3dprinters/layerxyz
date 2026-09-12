@@ -10,6 +10,7 @@ import ProductGrid from '@/ui/ProductGrid';
 
 const FILTER_TABS = [
   { id: 'ALL', label: 'ALL' },
+  { id: 'CATEGORIES', label: '8 CATEGORIES', isLink: true, href: '/categories' },
   { id: 'SCULPTURES', label: 'SCULPTURES' },
   { id: 'FIGURINES', label: 'FIGURINES' },
   { id: 'HOME', label: 'HOME OBJECTS' },
