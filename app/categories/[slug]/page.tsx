@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CATEGORIES, getCategoryBySlug } from '@/data/categories';
+import { getProductsByCategory } from '@/data/products';
 import { CategoryDetailClient } from '@/components/sections/CategoryDetailClient';
 
 export async function generateStaticParams() {
@@ -25,11 +27,11 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${category.name} — 3D Printed Products & Custom Fabrication | Layerxyz`,
-    description: `${category.tagline} ${category.description}`,
+    title: `${category.name} — 3D Printed Objects & Custom Fabrication | Layerxyz`,
+    description: category.description,
     keywords: [
       category.name,
-      ...category.subcategories,
+      ...category.subcategories.map((s) => s.name),
       '3D printing',
       'custom 3D models',
       'Layerxyz',
@@ -49,6 +51,8 @@ export default async function CategoryPage({
   if (!category) {
     notFound();
   }
+
+  const initialProducts = getProductsByCategory(category.slug);
 
   const allCategories = CATEGORIES.map((c) => ({
     slug: c.slug,
@@ -75,10 +79,13 @@ export default async function CategoryPage({
         </nav>
 
         {/* Client Interactive Category Experience */}
-        <CategoryDetailClient
-          category={category}
-          allCategories={allCategories}
-        />
+        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center text-xs font-mono uppercase text-[#8E8B83]">Loading Category...</div>}>
+          <CategoryDetailClient
+            category={category}
+            initialProducts={initialProducts}
+            allCategories={allCategories}
+          />
+        </Suspense>
       </div>
     </div>
   );

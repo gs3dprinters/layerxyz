@@ -22,12 +22,15 @@ export function ProductCard({ product }: ProductCardProps) {
   const posterImage = product.images?.[0] || '';
   const modelUrl = product.modelUrl || product.model;
 
+  const effectiveBadge = product.badge || (product.isCustomizable ? 'CUSTOMIZABLE' : undefined);
+
   // Meaningful Ecommerce Badge formatting
   const getBadgeStyle = (badge?: string) => {
     switch (badge?.toUpperCase()) {
       case 'BESTSELLER':
         return 'bg-[#181818] text-white border-black';
       case 'CUSTOM':
+      case 'CUSTOMIZABLE':
         return 'bg-white/95 text-[#181818] border-[#E8E5DE] shadow-xs';
       case 'NEW':
         return 'bg-[#EAE7E0] text-[#242424] border-[#DDD8CF]';
@@ -39,6 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   const formattedPrice = `${product.pricePrefix || ''}${formatPrice(product.price)}`;
+  const viewActionLabel = modelUrl ? 'VIEW IN 3D' : 'VIEW OBJECT';
 
   return (
     <div
@@ -53,10 +57,10 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Visual 3D Showcase Container */}
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE] transition-all duration-500 ease-out group-hover:border-[#D4D0C8] group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.05)]">
           {/* Meaningful Ecommerce Status Badge */}
-          {product.badge && ['BESTSELLER', 'NEW', 'CUSTOM', 'LIMITED'].includes(product.badge.toUpperCase()) && (
+          {effectiveBadge && ['BESTSELLER', 'NEW', 'CUSTOM', 'CUSTOMIZABLE', 'LIMITED'].includes(effectiveBadge.toUpperCase()) && (
             <div className="absolute top-3.5 left-3.5 z-20 pointer-events-none">
-              <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase border font-medium ${getBadgeStyle(product.badge)}`}>
-                {product.badge}
+              <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase border font-medium ${getBadgeStyle(effectiveBadge)}`}>
+                {effectiveBadge}
               </span>
             </div>
           )}
@@ -90,10 +94,10 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
 
-          {/* Hover Floating Action: "VIEW IN 3D →" */}
+          {/* Hover Floating Action */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
             <span className="inline-flex items-center gap-1.5 bg-[#181818] text-white px-4 py-2 rounded-full text-xs font-medium tracking-wide shadow-md whitespace-nowrap">
-              VIEW IN 3D
+              {viewActionLabel}
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </div>
@@ -115,7 +119,7 @@ export function ProductCard({ product }: ProductCardProps) {
               {formattedPrice}
             </span>
             <span className="inline-flex items-center gap-1 text-xs font-medium text-[#777777] group-hover:text-[#181818] transition-colors">
-              VIEW IN 3D
+              {viewActionLabel}
               <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </div>

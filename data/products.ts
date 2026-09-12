@@ -25,6 +25,10 @@ export interface Product {
   pricePrefix?: string;
   comparePrice?: number;
   category: 'sculptures' | 'figurines' | 'home' | 'collectibles' | 'limited';
+  categorySlug?: string;
+  categorySlugs?: string[];
+  subcategorySlugs?: string[];
+  isCustomizable?: boolean;
   images: string[];
   model?: string;
   hasModel?: boolean;
@@ -61,6 +65,10 @@ const BASE_PRODUCTS: Product[] = [
     pricePrefix: 'From ',
     comparePrice: 2490,
     category: 'sculptures',
+    categorySlug: 'gifts',
+    categorySlugs: ['gifts', 'custom-creations'],
+    subcategorySlugs: ['personalized-gifts', 'name-photo-gifts', 'customer-provided-ideas', 'made-to-order-products'],
+    isCustomizable: true,
     images: ['/images/products/custom-portrait-sculpture.jpg'],
     model: '/models/kala-final-print.glb',
     modelUrl: '/models/kala-final-print.glb',
@@ -81,6 +89,7 @@ const BASE_PRODUCTS: Product[] = [
     ],
     available: true,
     madeToOrder: true,
+    badge: 'CUSTOM',
     details: {
       description: 'Personalized portrait sculptures created from your photographs and produced to order. Digitally sculpted from your reference images to capture likeness, expression, and form.',
       shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
@@ -101,6 +110,10 @@ const BASE_PRODUCTS: Product[] = [
     pricePrefix: 'From ',
     comparePrice: 3490,
     category: 'collectibles',
+    categorySlug: 'god-idols',
+    categorySlugs: ['god-idols', 'home-decor'],
+    subcategorySlugs: ['shiva', 'other-deity-idols', 'showpieces', 'decorative-sculptures'],
+    isCustomizable: false,
     images: ['/images/products/heritage-nandi-sculpture.jpg'],
     model: '/models/nandi-temple-sculpture.glb',
     modelUrl: '/models/nandi-temple-sculpture.glb',
@@ -140,6 +153,10 @@ const BASE_PRODUCTS: Product[] = [
     pricePrefix: 'From ',
     comparePrice: 990,
     category: 'home',
+    categorySlug: 'gifts',
+    categorySlugs: ['gifts', 'home-decor', 'custom-creations'],
+    subcategorySlugs: ['name-photo-gifts', 'personalized-gifts', 'table-decor', 'personalized-designs'],
+    isCustomizable: true,
     images: ['/images/products/personalized-name-sculpture.jpg'],
     model: '/models/personalized-name-sculpture.glb',
     modelUrl: '/models/personalized-name-sculpture.glb',
@@ -180,6 +197,10 @@ const BASE_PRODUCTS: Product[] = [
     pricePrefix: 'From ',
     comparePrice: 9990,
     category: 'sculptures',
+    categorySlug: 'god-idols',
+    categorySlugs: ['god-idols', 'home-decor'],
+    subcategorySlugs: ['shiva', 'decorative-sculptures', 'showpieces'],
+    isCustomizable: false,
     images: ['/images/products/nataraja-statement-sculpture.jpg'],
     model: '/models/nataraja-statement-sculpture.glb',
     modelUrl: '/models/nataraja-statement-sculpture.glb',
@@ -217,6 +238,10 @@ const BASE_PRODUCTS: Product[] = [
     price: 8490,
     comparePrice: 10990,
     category: 'figurines',
+    categorySlug: 'leaders-icons',
+    categorySlugs: ['leaders-icons', 'custom-creations'],
+    subcategorySlugs: ['tamil-icons', 'famous-personalities', 'political-leaders', 'made-to-order-products'],
+    isCustomizable: true,
     images: ['/images/products/kala-statue-optimized.jpg'],
     model: '/models/kala-final-print.glb',
     sizes: [
@@ -234,6 +259,7 @@ const BASE_PRODUCTS: Product[] = [
     ],
     available: true,
     madeToOrder: true,
+    badge: 'CUSTOM',
     details: {
       description: 'A figurative portrait sculpture produced in our Tiruppur studio from reference photographs.',
       shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
@@ -252,6 +278,10 @@ const BASE_PRODUCTS: Product[] = [
     price: 4990,
     comparePrice: 5990,
     category: 'sculptures',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor'],
+    subcategorySlugs: ['decorative-sculptures', 'showpieces', 'table-decor'],
+    isCustomizable: false,
     images: ['/images/products/sculptural-form-1.jpg'],
     model: '/models/sculpture-01.glb',
     sizes: [
@@ -270,7 +300,7 @@ const BASE_PRODUCTS: Product[] = [
     ],
     available: true,
     madeToOrder: true,
-    badge: 'New',
+    badge: 'NEW',
     details: {
       description: 'Sculptural Form I is part of our ongoing series exploring the boundary between digital design and physical presence. Each piece begins as a parametric model, refined through dozens of iterations before being committed to material.',
       shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
@@ -288,6 +318,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'The Guardian stands as a testament to what modern physical fabrication can achieve. Originally sculpted digitally by our studio team, every surface detail — from the layered plate armor to the flowing cape texture — is produced with crisp definition and clean form.',
     price: 3490,
     category: 'figurines',
+    categorySlug: 'toys-figurines',
+    categorySlugs: ['toys-figurines', 'costume-idols'],
+    subcategorySlugs: ['collectible-figures', 'action-figures', 'character-miniatures'],
+    isCustomizable: false,
     images: ['/images/products/the-guardian.jpg'],
     model: '/models/guardian.glb',
     sizes: [
@@ -323,6 +357,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'A functional object that challenges the distinction between art and utility. The Geometric Vessel features precisely calculated facets that catch and scatter light, creating ever-changing surface patterns throughout the day. Watertight interior with a matte exterior finish.',
     price: 2490,
     category: 'home',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor', 'gifts'],
+    subcategorySlugs: ['table-decor', 'decorative-sculptures', 'custom-gift-items'],
+    isCustomizable: false,
     images: ['/images/products/geometric-vessel.jpg'],
     sizes: [
       { label: 'S', dimensions: '100 × 100 × 150 mm', price: 1490 },
@@ -355,6 +393,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'The Mythic Dragon is our most intricate collectible to date. Spanning multiple individually printed and assembled components, this piece showcases high-resolution 3D printing combined with careful studio assembly and finishing.',
     price: 6990,
     category: 'collectibles',
+    categorySlug: 'toys-figurines',
+    categorySlugs: ['toys-figurines', 'costume-idols'],
+    subcategorySlugs: ['collectible-figures', 'miniatures', 'character-miniatures'],
+    isCustomizable: false,
     images: ['/images/products/mythic-dragon.jpg'],
     model: '/models/dragon.glb',
     sizes: [
@@ -391,6 +433,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'Inspired by natural wave patterns, this acoustic diffuser transforms any wall into both a visual statement and a functional sound treatment. The mathematically optimized surface geometry scatters sound waves across a wide frequency range.',
     price: 3990,
     category: 'home',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor'],
+    subcategorySlugs: ['wall-decor', 'showpieces'],
+    isCustomizable: false,
     images: ['/images/products/wave-diffuser.jpg'],
     sizes: [
       { label: 'Single', dimensions: '300 × 300 × 45 mm', price: 3990 },
@@ -424,6 +470,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'The Monolith Series celebrates the inherent beauty of additive manufacturing. Rather than hiding the layer lines, each piece amplifies them — creating towering forms where every stratum is a deliberate design element. Available in three heights.',
     price: 7990,
     category: 'sculptures',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor'],
+    subcategorySlugs: ['showpieces', 'decorative-sculptures'],
+    isCustomizable: false,
     images: ['/images/products/monolith-series.jpg'],
     model: '/models/monolith.glb',
     sizes: [
@@ -459,6 +509,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'A planter system designed for modern spaces. Each module connects via a hidden locking mechanism, allowing vertical or horizontal expansion. Integrated drainage channels ensure healthy root systems while keeping surfaces clean.',
     price: 1990,
     category: 'home',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor'],
+    subcategorySlugs: ['table-decor', 'decorative-sculptures'],
+    isCustomizable: false,
     images: ['/images/products/modular-planter.jpg'],
     sizes: [
       { label: 'Single', dimensions: '110 × 110 × 100 mm', price: 1490 },
@@ -491,6 +545,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'The Architect captures a moment of creative contemplation. Produced with refined studio resolution, every fold of fabric and subtle expression is preserved. A statement piece for any desk or shelf.',
     price: 2990,
     category: 'figurines',
+    categorySlug: 'leaders-icons',
+    categorySlugs: ['leaders-icons', 'toys-figurines'],
+    subcategorySlugs: ['historical-personalities', 'collectible-figures'],
+    isCustomizable: false,
     images: ['/images/products/the-architect.jpg'],
     model: '/models/architect.glb',
     sizes: [
@@ -525,6 +583,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'Abstract Wave freezes a moment of fluid dynamics into permanent form. Generated through simulation models, the piece captures the precise instant where a wave crests and begins to break — a form that exists for milliseconds in nature, made physical through studio fabrication.',
     price: 5490,
     category: 'sculptures',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor'],
+    subcategorySlugs: ['decorative-sculptures', 'showpieces'],
+    isCustomizable: false,
     images: ['/images/products/abstract-wave.jpg'],
     model: '/models/wave.glb',
     sizes: [
@@ -560,6 +622,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'A study in nested complexity. The Celestial Sphere consists of three concentric geometric shells, each printed as a single continuous structure. When backlit, the overlapping patterns create mesmerizing shadow projections. Available with optional LED base.',
     price: 4490,
     category: 'limited',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor', 'awards-trophies'],
+    subcategorySlugs: ['decorative-sculptures', 'showpieces', 'mementos'],
+    isCustomizable: false,
     images: ['/images/products/celestial-sphere.jpg'],
     model: '/models/sphere.glb',
     sizes: [
@@ -577,7 +643,7 @@ const BASE_PRODUCTS: Product[] = [
     ],
     available: true,
     madeToOrder: true,
-    badge: 'Limited',
+    badge: 'LIMITED',
     details: {
       description: 'Limited edition piece. Each Celestial Sphere is printed as a continuous structure using clean bridging — no assembly, no seams. The nested shells are born connected.',
       shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
@@ -595,6 +661,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'Designed for the modern workspace. Clean exterior lines conceal thoughtful internal divisions for pens, cards, cables, and small accessories. The weighted base keeps everything stable.',
     price: 1790,
     category: 'home',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor', 'gifts'],
+    subcategorySlugs: ['table-decor', 'custom-gift-items'],
+    isCustomizable: false,
     images: ['/images/products/desk-organizer.jpg'],
     sizes: [
       { label: 'Compact', dimensions: '120 × 80 × 80 mm', price: 1290 },
@@ -627,6 +697,10 @@ const BASE_PRODUCTS: Product[] = [
     longDescription: 'A meditation on balance and motion. Each element is weighted to achieve equilibrium, creating an evolving sculptural composition driven by air currents.',
     price: 5990,
     category: 'limited',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor', 'awards-trophies'],
+    subcategorySlugs: ['decorative-sculptures', 'showpieces', 'mementos'],
+    isCustomizable: false,
     images: ['/images/products/kinetic-mobile.jpg'],
     sizes: [
       { label: 'Petite', dimensions: '300 × 300 × 400 mm span', price: 3990 },
@@ -643,7 +717,7 @@ const BASE_PRODUCTS: Product[] = [
     ],
     available: true,
     madeToOrder: true,
-    badge: 'Limited',
+    badge: 'LIMITED',
     details: {
       description: 'Each mobile is individually balanced in our studio after printing. No two are identical.',
       shipping: 'Made to order. Delivery time varies by object, size, finishing requirements and destination.',
@@ -703,8 +777,29 @@ export function getProduct(slugOrId: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slugOrId || p.id === slugOrId);
 }
 
-export function getProductsByCategory(category: Product['category']): Product[] {
-  return PRODUCTS.filter((p) => p.category === category);
+export function getProductsByCategory(categorySlug: string, subcategorySlug?: string): Product[] {
+  return PRODUCTS.filter((p) => {
+    const matchesCategory =
+      p.categorySlug === categorySlug ||
+      (p.categorySlugs && p.categorySlugs.includes(categorySlug)) ||
+      p.category === categorySlug;
+
+    if (!matchesCategory) return false;
+
+    if (subcategorySlug && subcategorySlug !== 'ALL') {
+      return Boolean(p.subcategorySlugs && p.subcategorySlugs.includes(subcategorySlug));
+    }
+
+    return true;
+  });
+}
+
+export function getCategoryProductCount(categorySlug: string): number {
+  return getProductsByCategory(categorySlug).length;
+}
+
+export function getCategorySubcategoryProductCount(categorySlug: string, subcategorySlug: string): number {
+  return getProductsByCategory(categorySlug, subcategorySlug).length;
 }
 
 export function getFeaturedProducts(): Product[] {
@@ -728,11 +823,15 @@ export function getRelatedProducts(slugOrId: string): Product[] {
 }
 
 export function searchProducts(query: string): Product[] {
-  const q = query.toLowerCase();
+  const q = query.toLowerCase().trim();
+  if (!q) return [];
   return PRODUCTS.filter(
     (p) =>
       p.name.toLowerCase().includes(q) ||
       p.description.toLowerCase().includes(q) ||
+      (p.categoryLabel && p.categoryLabel.toLowerCase().includes(q)) ||
+      (p.categorySlug && p.categorySlug.toLowerCase().includes(q)) ||
+      (p.subcategorySlugs && p.subcategorySlugs.some((s) => s.toLowerCase().includes(q))) ||
       p.category.toLowerCase().includes(q)
   );
 }
