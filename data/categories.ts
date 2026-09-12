@@ -10,7 +10,11 @@ export type Category = {
   shortName?: string;
   description: string;
   subcategories: Subcategory[];
-  image?: string;
+  image: string;
+  secondaryImage?: string;
+  imageAlt: string;
+  sourceType: 'category-reference' | 'approved-product-image' | 'fallback';
+  sourceUrl: string;
   featured?: boolean;
 };
 
@@ -20,7 +24,11 @@ export const CATEGORIES: Category[] = [
     name: 'Gifts',
     shortName: 'Gifts',
     description: 'Thoughtful objects made personal — from names and photographs to meaningful gifts created for someone special.',
-    image: '/images/products/personalized-name-sculpture.jpg',
+    image: '/images/makerworld/gifts/gifts-01.webp',
+    secondaryImage: '/images/makerworld/gifts/gifts-02.webp',
+    imageAlt: 'Decorative personalized gift object and monogram desk keepsake',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/collections/76000',
     featured: true,
     subcategories: [
       { slug: 'personalized-gifts', name: 'Personalized Gifts', description: 'Custom-crafted personal gifts tailored with names, moments, and thoughtful details.' },
@@ -35,7 +43,11 @@ export const CATEGORIES: Category[] = [
     name: 'God Idols',
     shortName: 'God Idols',
     description: 'Devotional sculptures and carefully crafted deity idols made for homes, prayer spaces and meaningful occasions.',
-    image: '/images/products/heritage-nandi-sculpture.jpg',
+    image: '/images/makerworld/god-idols/god-idols-01.webp',
+    secondaryImage: '/images/makerworld/god-idols/god-idols-02.webp',
+    imageAlt: 'Devotional temple Nandi sculpture and sacred deity idol',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/3d-models?keyword=statue',
     featured: true,
     subcategories: [
       { slug: 'ganesha', name: 'Ganesha', description: 'Auspicious Ganesha statues in classical and contemporary sculptural styles.' },
@@ -51,7 +63,11 @@ export const CATEGORIES: Category[] = [
     name: 'Leaders & Icons',
     shortName: 'Leaders & Icons',
     description: 'Portrait sculptures celebrating influential leaders, cultural icons, historical personalities and people who shaped our world.',
-    image: '/images/products/kala-statue-optimized.jpg',
+    image: '/images/makerworld/leaders-icons/leaders-icons-01.webp',
+    secondaryImage: '/images/makerworld/leaders-icons/leaders-icons-02.webp',
+    imageAlt: 'Portrait sculpture commemorating historic cultural leader',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/3d-models?keyword=bust',
     featured: true,
     subcategories: [
       { slug: 'political-leaders', name: 'Political Leaders', description: 'Statues and portrait busts of prominent political figures and nation builders.' },
@@ -66,6 +82,11 @@ export const CATEGORIES: Category[] = [
     name: 'Costume Idols',
     shortName: 'Costume Idols',
     description: 'Character-inspired figures, collectible sculptures and custom miniatures made for fans, collectors and creators.',
+    image: '/images/makerworld/costume-idols/costume-idols-01.webp',
+    secondaryImage: '/images/makerworld/costume-idols/costume-idols-02.webp',
+    imageAlt: 'Stylized superhero character sculpture and display miniature',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/3d-models?keyword=character',
     featured: false,
     subcategories: [
       { slug: 'movie-characters', name: 'Movie Characters', description: 'Cinematic character figures and film-inspired sculptural display pieces.' },
@@ -80,7 +101,11 @@ export const CATEGORIES: Category[] = [
     name: 'Home Décor',
     shortName: 'Home Décor',
     description: 'Sculptural objects and personalized décor designed to bring character, texture and individuality into your space.',
-    image: '/images/products/nataraja-statement-sculpture.jpg',
+    image: '/images/makerworld/home-decor/home-decor-01.webp',
+    secondaryImage: '/images/makerworld/home-decor/home-decor-02.webp',
+    imageAlt: 'Contemporary sculptural architectural vessel and interior accent',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/collections/2257814-home-decor',
     featured: true,
     subcategories: [
       { slug: 'showpieces', name: 'Showpieces', description: 'Distinctive focal sculptures and architectural statement centerpieces.' },
@@ -95,6 +120,11 @@ export const CATEGORIES: Category[] = [
     name: 'Toys & Figurines',
     shortName: 'Toys & Figurines',
     description: 'Miniatures, collectible figures and custom figurines designed for display, gifting and personal collections.',
+    image: '/images/makerworld/toys-figurines/toys-figurines-01.webp',
+    secondaryImage: '/images/makerworld/toys-figurines/toys-figurines-02.webp',
+    imageAlt: 'Collectible designer art toy miniature and display figurine',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/collections/1011481-toys',
     featured: false,
     subcategories: [
       { slug: 'miniatures', name: 'Miniatures', description: 'Precision scale miniatures and desktop display figures.' },
@@ -108,6 +138,11 @@ export const CATEGORIES: Category[] = [
     name: 'Awards & Trophies',
     shortName: 'Awards & Trophies',
     description: 'Custom-made awards, trophies and mementos created for achievements, celebrations, businesses and special events.',
+    image: '/images/makerworld/awards-trophies/awards-trophies-01.webp',
+    secondaryImage: '/images/makerworld/awards-trophies/awards-trophies-02.webp',
+    imageAlt: 'Geometric faceted achievement trophy and recognition award',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/more-models/prize-3d-print-model-download?orderBy=likeCount',
     featured: false,
     subcategories: [
       { slug: 'custom-trophies', name: 'Custom Trophies', description: 'Distinctive custom-designed trophies built around institutional logos and milestones.' },
@@ -121,7 +156,11 @@ export const CATEGORIES: Category[] = [
     name: 'Custom Creations',
     shortName: 'Custom Creations',
     description: 'Have an idea that does not exist yet? Turn your reference, sketch, photograph or concept into a custom physical object.',
-    image: '/images/products/custom-portrait-sculpture.jpg',
+    image: '/images/makerworld/custom-creations/custom-creations-01.webp',
+    secondaryImage: '/images/makerworld/custom-creations/custom-creations-02.webp',
+    imageAlt: 'Bespoke custom portrait sculpture and personalized fabrication',
+    sourceType: 'category-reference',
+    sourceUrl: 'https://makerworld.com/en/3d-models?keyword=customizable',
     featured: true,
     subcategories: [
       { slug: 'custom-3d-models', name: 'Custom 3D Models', description: '3D printing from client CAD files, STL, OBJ, and 3MF datasets.' },

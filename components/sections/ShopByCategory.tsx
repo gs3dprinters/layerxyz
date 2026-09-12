@@ -7,6 +7,7 @@ import { ArrowRight, Sparkles, ArrowUpRight } from 'lucide-react';
 import { CATEGORIES, Category } from '@/data/categories';
 import { getProductsByCategory, getCategoryProductCount } from '@/data/products';
 import { formatPrice } from '@/lib/utils';
+import { CategoryImage } from '@/components/ui/CategoryImage';
 
 export default function ShopByCategory() {
   const shouldReduceMotion = useReducedMotion();
@@ -219,14 +220,22 @@ export default function ShopByCategory() {
                     ))}
                   </div>
                 ) : (
-                  <div className="rounded-2xl bg-white border border-[#E8E5DE] p-8 sm:p-10 text-center">
-                    <div className="w-12 h-12 rounded-full bg-[#FAFAF8] border border-[#E8E5DE] flex items-center justify-center mx-auto mb-4 text-[#8E8B83]">
-                      <Sparkles size={18} />
+                  <div className="rounded-2xl bg-white border border-[#E8E5DE] p-6 sm:p-8 text-center flex flex-col items-center">
+                    <div className="w-full max-w-[260px] mb-4">
+                      <CategoryImage
+                        src={activeCategory.image}
+                        fallbackSrc={activeCategory.secondaryImage}
+                        alt={activeCategory.imageAlt}
+                        aspectRatio="16/9"
+                      />
                     </div>
-                    <h4 className="text-lg font-semibold text-[#171716] mb-2">
+                    <div className="w-10 h-10 rounded-full bg-[#FAFAF8] border border-[#E8E5DE] flex items-center justify-center mx-auto mb-3 text-[#8E8B83]">
+                      <Sparkles size={16} />
+                    </div>
+                    <h4 className="text-base sm:text-lg font-semibold text-[#171716] mb-1.5">
                       THIS COLLECTION IS TAKING SHAPE
                     </h4>
-                    <p className="text-xs text-[#6F6B63] max-w-sm mx-auto mb-6 leading-relaxed">
+                    <p className="text-xs text-[#6F6B63] max-w-sm mx-auto mb-5 leading-relaxed">
                       We are developing more objects for this category. If you already have an idea, we can create something specifically for you.
                     </p>
                     <Link
@@ -265,10 +274,10 @@ export default function ShopByCategory() {
                 <Link
                   key={cat.slug}
                   href={`/categories/${cat.slug}`}
-                  className="group relative flex flex-col justify-between p-6 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE] hover:border-[#171716]/40 hover:bg-white hover:shadow-md transition-all duration-300"
+                  className="group relative flex flex-col justify-between p-5 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE] hover:border-[#171716]/40 hover:bg-white hover:shadow-md transition-all duration-300"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-3">
                       <span className="text-[10px] font-mono tracking-widest text-[#8E8B83]">
                         0{idx + 1}
                       </span>
@@ -277,11 +286,20 @@ export default function ShopByCategory() {
                       </span>
                     </div>
 
-                    <h4 className="text-lg font-sans font-semibold text-[#171716] mb-1.5 group-hover:translate-x-0.5 transition-transform">
+                    <div className="mb-3">
+                      <CategoryImage
+                        src={cat.image}
+                        fallbackSrc={cat.secondaryImage}
+                        alt={cat.imageAlt}
+                        aspectRatio="16/9"
+                      />
+                    </div>
+
+                    <h4 className="text-base font-sans font-semibold text-[#171716] mb-1 group-hover:translate-x-0.5 transition-transform">
                       {cat.name}
                     </h4>
 
-                    <p className="text-xs text-[#6F6B63] line-clamp-2 mb-4 leading-relaxed">
+                    <p className="text-xs text-[#6F6B63] line-clamp-2 mb-3 leading-relaxed">
                       {cat.description}
                     </p>
 

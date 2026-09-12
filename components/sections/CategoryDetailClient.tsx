@@ -8,6 +8,7 @@ import { ArrowRight, Sparkles, SlidersHorizontal } from 'lucide-react';
 import { Category } from '@/data/categories';
 import { Product } from '@/data/products';
 import { ProductCard } from '@/components/ui/ProductCard';
+import { CategoryImage } from '@/components/ui/CategoryImage';
 
 export interface CategoryDetailClientProps {
   category: Category;
@@ -86,59 +87,72 @@ export function CategoryDetailClient({
 
   return (
     <div>
-      {/* Category Hero Banner */}
-      <header className="mb-12 rounded-3xl p-8 sm:p-12 lg:p-14 border border-[#E8E5DE] bg-[#FAFAF8] relative overflow-hidden shadow-xs">
-        <div className="max-w-3xl relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E8E5DE] text-[11px] font-mono uppercase tracking-widest text-[#6F6B63] mb-5">
-            <span>CATEGORY 0{currentIndex + 1}</span>
-            <span>•</span>
-            <span>{category.subcategories.length} SUB-COLLECTIONS</span>
+      {/* Category Hero Banner with Split Visual Layout */}
+      <header className="mb-12 rounded-3xl p-6 sm:p-10 lg:p-12 border border-[#E8E5DE] bg-[#FAFAF8] relative overflow-hidden shadow-xs">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E8E5DE] text-[11px] font-mono uppercase tracking-widest text-[#6F6B63] mb-5">
+              <span>CATEGORY 0{currentIndex + 1}</span>
+              <span>•</span>
+              <span>{category.subcategories.length} SUB-COLLECTIONS</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-semibold tracking-tight text-[#171716] mb-4 leading-tight">
+              {category.name}
+            </h1>
+
+            <p className="text-base sm:text-lg text-[#5A5750] leading-relaxed max-w-xl mb-8">
+              {category.description}
+            </p>
+
+            {/* Subcategory Pills Quick Bar inside Hero */}
+            <div className="pt-6 border-t border-[#E8E5DE]/80">
+              <span className="text-[10px] font-mono tracking-widest uppercase text-[#8E8B83] block mb-3 font-semibold">
+                EXPLORE SUB-CATEGORIES
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {category.subcategories.map((sub) => {
+                  const count = initialProducts.filter(
+                    (p) => p.subcategorySlugs && p.subcategorySlugs.includes(sub.slug)
+                  ).length;
+                  const isSelected = activeSubcategory === sub.slug;
+
+                  return (
+                    <button
+                      key={sub.slug}
+                      onClick={() => handleSubcategoryChange(sub.slug)}
+                      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                        isSelected
+                          ? 'bg-[#171716] text-[#F4F1EA] shadow-xs'
+                          : 'bg-white text-[#4A4740] border border-[#E8E5DE] hover:border-[#171716]/40 hover:text-[#171716]'
+                      }`}
+                    >
+                      <span>{sub.name}</span>
+                      {count > 0 && (
+                        <span
+                          className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                            isSelected ? 'bg-white/20 text-white' : 'bg-[#EFECE5] text-[#6F6B63]'
+                          }`}
+                        >
+                          {count}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-semibold tracking-tight text-[#171716] mb-4 leading-tight">
-            {category.name}
-          </h1>
-
-          <p className="text-base sm:text-lg text-[#5A5750] leading-relaxed max-w-2xl mb-8">
-            {category.description}
-          </p>
-
-          {/* Subcategory Pills Quick Bar inside Hero */}
-          <div className="pt-6 border-t border-[#E8E5DE]/80">
-            <span className="text-[10px] font-mono tracking-widest uppercase text-[#8E8B83] block mb-3 font-semibold">
-              EXPLORE SUB-CATEGORIES
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {category.subcategories.map((sub) => {
-                const count = initialProducts.filter(
-                  (p) => p.subcategorySlugs && p.subcategorySlugs.includes(sub.slug)
-                ).length;
-                const isSelected = activeSubcategory === sub.slug;
-
-                return (
-                  <button
-                    key={sub.slug}
-                    onClick={() => handleSubcategoryChange(sub.slug)}
-                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      isSelected
-                        ? 'bg-[#171716] text-[#F4F1EA] shadow-xs'
-                        : 'bg-white text-[#4A4740] border border-[#E8E5DE] hover:border-[#171716]/40 hover:text-[#171716]'
-                    }`}
-                  >
-                    <span>{sub.name}</span>
-                    {count > 0 && (
-                      <span
-                        className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
-                          isSelected ? 'bg-white/20 text-white' : 'bg-[#EFECE5] text-[#6F6B63]'
-                        }`}
-                      >
-                        {count}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="lg:col-span-5">
+            <CategoryImage
+              src={category.image}
+              fallbackSrc={category.secondaryImage}
+              alt={category.imageAlt}
+              aspectRatio="4/3"
+              priority={true}
+              className="shadow-xs"
+            />
           </div>
         </div>
       </header>
