@@ -49,6 +49,7 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
   if (!product) return notFound();
 
   // State
+  const [activeMediaMode, setActiveMediaMode] = useState<'3d' | number>(product.hasModel && product.modelUrl ? '3d' : 0);
   const [selectedSize, setSelectedSize] = useState<any>(product.sizes?.[0] || null);
   const [selectedFinish, setSelectedFinish] = useState<any>(product.finishes?.[0] || null);
   const [selectedMaterial, setSelectedMaterial] = useState<any>(product.materials?.[0] || null);
@@ -112,7 +113,7 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-28 md:mb-36">
           {/* LEFT (7 cols ~58%): Large Interactive 3D Viewer or Editorial Image */}
           <div className="lg:col-span-7 w-full sticky top-28">
-            {product.hasModel && product.modelUrl ? (
+            {activeMediaMode === '3d' && product.hasModel && product.modelUrl ? (
               <ProductViewer
                 modelUrl={product.modelUrl}
                 productName={product.name}
@@ -122,11 +123,11 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               />
             ) : (
               <div className="w-full min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] rounded-3xl overflow-hidden bg-[#FAFAF8] border border-[#E8E5DE] relative flex items-center justify-center p-8 shadow-xs">
-                {product.images?.[0] ? (
+                {product.images?.[typeof activeMediaMode === 'number' ? activeMediaMode : 0] ? (
                   <img
-                    src={product.images[0]}
-                    alt={product.name}
-                    className="max-h-[85%] max-w-[85%] object-contain drop-shadow-2xl transition-transform hover:scale-105 duration-700"
+                    src={product.images[typeof activeMediaMode === 'number' ? activeMediaMode : 0]}
+                    alt={`${product.name} Studio Photograph`}
+                    className="max-h-[88%] max-w-[88%] object-contain drop-shadow-2xl transition-transform hover:scale-105 duration-700"
                   />
                 ) : (
                   <div
@@ -136,6 +137,45 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                     STUDIO OBJECT
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* Media Mode Selector / Photo Thumbnails */}
+            {product.images && product.images.length > 0 && (
+              <div className="mt-4 flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none">
+                {product.hasModel && product.modelUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setActiveMediaMode('3d')}
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-medium border transition-all flex-shrink-0 ${
+                      activeMediaMode === '3d'
+                        ? 'bg-[#171716] text-[#F4F1EA] border-[#171716] shadow-xs'
+                        : 'bg-white text-[#6F6B63] border-[#E8E5DE] hover:border-[#D4D0C8] hover:text-[#171716]'
+                    }`}
+                  >
+                    <Box className="w-3.5 h-3.5" />
+                    <span>3D Model</span>
+                  </button>
+                )}
+                {product.images.map((imgUrl, idx) => (
+                  <button
+                    type="button"
+                    key={imgUrl}
+                    onClick={() => setActiveMediaMode(idx)}
+                    className={`relative w-12 h-12 rounded-xl overflow-hidden border transition-all flex-shrink-0 bg-[#FAFAF8] ${
+                      activeMediaMode === idx
+                        ? 'border-[#171716] ring-2 ring-[#171716]/20'
+                        : 'border-[#E8E5DE] hover:border-[#D4D0C8] opacity-75 hover:opacity-100'
+                    }`}
+                    title={`Angle ${idx + 1}`}
+                  >
+                    <img
+                      src={imgUrl}
+                      alt={`${product.name} angle ${idx + 1}`}
+                      className="w-full h-full object-contain p-1"
+                    />
+                  </button>
+                ))}
               </div>
             )}
           </div>
@@ -382,9 +422,57 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
         </section>
 
         {/* ========================================================================= */}
-        {/* STEP 13: FULL-WIDTH PRODUCT VISUAL                                       */}
+        {/* STEP 13: STUDIO PHOTOGRAPHY & MULTI-ANGLE GALLERY                         */}
         {/* ========================================================================= */}
-        {product.images && product.images[0] && (
+        {product.images && product.images.length > 1 ? (
+          <section className="my-20 py-16 border-t border-[#E8E5DE]">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+                <div>
+                  <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-[#6F6B63] block mb-2 font-medium">
+                    AUTHENTIC STUDIO PHOTOGRAPHY
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-semibold tracking-tight text-[#171716]">
+                    STUDIO GALLERY & PHYSICAL ANGLES
+                  </h2>
+                </div>
+                <span className="text-xs font-mono text-[#6F6B63]">
+                  {product.images.length} Verified Physical Photos
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {product.images.map((imgUrl, idx) => (
+                  <div
+                    key={imgUrl}
+                    onClick={() => {
+                      setActiveMediaMode(idx);
+                      window.scrollTo({ top: 120, behavior: 'smooth' });
+                    }}
+                    className="group cursor-pointer rounded-3xl overflow-hidden bg-[#FAFAF8] border border-[#E8E5DE] hover:border-[#D4D0C8] hover:shadow-[0_12px_32px_rgba(0,0,0,0.04)] transition-all p-6 flex flex-col items-center justify-between"
+                  >
+                    <div className="w-full aspect-[4/5] flex items-center justify-center overflow-hidden mb-4">
+                      <img
+                        src={imgUrl}
+                        alt={`${product.name} studio photograph ${idx + 1}`}
+                        className="max-h-[92%] max-w-[92%] object-contain group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="w-full flex justify-between items-center text-xs text-[#6F6B63] pt-3 border-t border-[#E8E5DE]/80">
+                      <span className="uppercase tracking-wider font-mono text-[11px] font-medium text-[#171716]">
+                        {idx === 0 ? 'Primary Perspective' : `Studio Angle 0${idx}`}
+                      </span>
+                      <span className="group-hover:text-[#171716] group-hover:translate-x-0.5 transition-all inline-flex items-center gap-1 font-sans text-xs">
+                        View in Hero →
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : product.images && product.images[0] ? (
           <section className="my-16">
             <div className="w-full aspect-[16/9] sm:aspect-[21/9] rounded-3xl overflow-hidden bg-[#FAFAF8] border border-[#E8E5DE] relative flex items-center justify-center p-8 shadow-xs">
               <img
@@ -398,7 +486,7 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               </div>
             </div>
           </section>
-        )}
+        ) : null}
 
         {/* ========================================================================= */}
         {/* STEP 14: DETAILS & SPECIFICATIONS                                        */}
