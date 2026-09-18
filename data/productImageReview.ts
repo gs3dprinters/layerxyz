@@ -232,4 +232,28 @@ export const PRODUCT_IMAGE_REVIEWS: ProductImageReview[] = [
     reason: "Physical 3D printed full-color/painted custom portrait sculpture of two children on gold plinth. Exact physical fabrication of customer reference photo kala-statue-optimized.jpg. Published as primary.webp for kala-portrait-statue and gallery-01.webp for custom-portrait-sculpture.",
     requiresManualReview: false,
   },
+  {
+    originalFilename: "WhatsApp Image 2026-09-18 at 9.49.17 AM.jpeg",
+    proposedProductSlug: "toothbrush-slider-holder",
+    proposedCategory: "Home Décor",
+    confidence: "high",
+    reason: "3D printed Toothbrush Slider Holder in matte black finish on world-map desk mat with sliding cover partially open. Published as primary.webp.",
+    requiresManualReview: false,
+  },
+  {
+    originalFilename: "WhatsApp Image 2026-09-18 at 9.49.16 AM.jpeg",
+    proposedProductSlug: "toothbrush-slider-holder",
+    proposedCategory: "Home Décor",
+    confidence: "high",
+    reason: "3D printed Toothbrush Slider Holder in matte black finish on silver laptop showing side profile and slide mechanism. Published as gallery-01.webp.",
+    requiresManualReview: false,
+  },
+  {
+    originalFilename: "WhatsApp Image 2026-09-18 at 9.49.16 AM (1).jpeg",
+    proposedProductSlug: "toothbrush-slider-holder",
+    proposedCategory: "Home Décor",
+    confidence: "high",
+    reason: "Binary identical duplicate of 'WhatsApp Image 2026-09-18 at 9.49.16 AM.jpeg' (MD5: 593a6296579927ce1811691854f5cd5a). Flagged as duplicate and excluded from upload.",
+    requiresManualReview: false,
+  },
 ];

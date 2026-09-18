@@ -704,7 +704,47 @@ const BASE_PRODUCTS: Product[] = [
       care: 'Wipe with soft damp cloth. Avoid submerging in water.',
     },
     colors: ['#ECEAE4', '#1E1E1E', '#8B8680'],
-    relatedSlugs: ['modular-planter', 'geometric-vessel', 'wave-diffuser'],
+    relatedSlugs: ['modular-planter', 'geometric-vessel', 'toothbrush-slider-holder'],
+  },
+  {
+    id: 'prod_toothbrush_slider',
+    slug: 'toothbrush-slider-holder',
+    name: 'Toothbrush Slider Holder',
+    categoryLabel: 'BATHROOM & UTILITY',
+    description: 'Keep your toothbrush neatly organized with our minimalist Toothbrush Slider Holder. Its slim sliding design provides convenient storage while keeping your bathroom counter clean and clutter-free. A practical, modern accessory for everyday use.',
+    longDescription: 'Keep your toothbrush neatly organized with our minimalist Toothbrush Slider Holder. Its slim sliding design provides convenient storage while keeping your bathroom counter clean and clutter-free. A practical, modern accessory for everyday use.',
+    price: 499, // PLACEHOLDER PRICE: Set as nominal placeholder required by Product schema. Please edit manually to desired retail price.
+    pricePrefix: '',
+    category: 'home',
+    categorySlug: 'home-decor',
+    categorySlugs: ['home-decor'],
+    subcategorySlugs: ['bathroom-utility', 'table-decor'],
+    isCustomizable: false,
+    images: [
+      '/images/products/toothbrush-slider-holder/primary.webp',
+      '/images/products/toothbrush-slider-holder/gallery-01.webp',
+    ],
+    sizes: [
+      { label: 'Standard', dimensions: 'Countertop Scale', price: 499 },
+    ],
+    materials: [
+      { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },
+      { label: 'Studio PETG', slug: 'petg' },
+    ],
+    finishes: [
+      { label: 'Modern Black', slug: 'obsidian-matte' },
+    ],
+    available: true,
+    madeToOrder: false,
+    badge: 'NEW',
+    details: {
+      description: 'Features a minimalist sliding design with a slim, space-saving profile. Easy to place on a bathroom counter for simple access and storage. Produced with modern black finish via 3D printing.',
+      shipping: 'Standard studio packaging. Delivery timing depends on destination.',
+      care: 'Rinse with clean water or wipe with a soft damp cloth. Avoid harsh chemicals and high heat.',
+      specifications: 'Product Type: Bathroom organizer · Mechanism: Sliding cover · Production: 3D printed product · Finish: Modern black',
+    },
+    colors: ['#181818'],
+    relatedSlugs: ['desk-organizer', 'geometric-vessel', 'modular-planter'],
   },
   {
     id: 'prod_012',

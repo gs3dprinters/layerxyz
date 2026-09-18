@@ -64,7 +64,7 @@ export function CartDrawer() {
                       <div className="flex flex-col flex-grow text-[#181818]">
                         <div className="flex justify-between items-start">
                           <div>
-                            <Link href={`/product/${item.productId}`} onClick={() => setIsCartOpen(false)} className="font-medium hover:text-[#B7FF00] transition-colors">
+                            <Link href={`/product/${item.slug || item.productId}`} onClick={() => setIsCartOpen(false)} className="font-medium hover:text-[#B7FF00] transition-colors">
                               {item.name}
                             </Link>
                             <div className="text-xs text-[#777777] mt-1 space-y-0.5">

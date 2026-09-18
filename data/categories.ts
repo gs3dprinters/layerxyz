@@ -111,6 +111,7 @@ export const CATEGORIES: Category[] = [
       { slug: 'showpieces', name: 'Showpieces', description: 'Distinctive focal sculptures and architectural statement centerpieces.' },
       { slug: 'decorative-sculptures', name: 'Decorative Sculptures', description: 'Contemporary geometric, abstract, and figurative art pieces.' },
       { slug: 'table-decor', name: 'Table Décor', description: 'Tactile desk objects, sculptural vessels, trays, and organizers.' },
+      { slug: 'bathroom-utility', name: 'Bathroom & Utility', description: 'Practical, minimalist bathroom organizers and functional utility accessories.' },
       { slug: 'wall-decor', name: 'Wall Décor', description: 'Textured wall reliefs, acoustic diffusion panels, and hanging sculptural forms.' },
       { slug: 'customized-decor', name: 'Customized Décor', description: 'Bespoke home accents tailored to interior dimensions and color palettes.' },
     ],
