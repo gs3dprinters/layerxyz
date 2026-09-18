@@ -199,10 +199,17 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
 
             {/* Price & Stock Row */}
             <div className="flex items-baseline gap-4 mb-8 pb-8 border-b border-[#E8E5DE]">
-              <span className="text-3xl sm:text-4xl font-semibold text-[#171716] tracking-tight">
-                {product.pricePrefix && !selectedSize ? product.pricePrefix : ''}
-                {formatPrice(currentPrice)}
-              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl sm:text-4xl font-semibold text-[#171716] tracking-tight">
+                  {product.pricePrefix && !selectedSize ? product.pricePrefix : ''}
+                  {formatPrice(currentPrice)}
+                </span>
+                {product.unitLabel && (
+                  <span className="text-sm font-mono text-[#6F6B63]">
+                    {selectedSize ? `(${selectedSize.label})` : product.unitLabel}
+                  </span>
+                )}
+              </div>
 
               {product.comparePrice && (
                 <span className="text-base font-mono text-[#8E8B83] line-through">
@@ -215,12 +222,12 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               </span>
             </div>
 
-            {/* SIZE SELECTOR */}
+            {/* SIZE / PIECES SELECTOR */}
             {product.sizes && product.sizes.length > 0 ? (
               <div className="mb-8">
                 <div className="flex justify-between items-baseline mb-3">
                   <span className="text-xs font-mono tracking-widest uppercase text-[#171716] font-medium">
-                    SIZE
+                    {product.sizeSelectorLabel || 'SIZE'}
                   </span>
                   {selectedSize?.dimensions && (
                     <span className="text-xs font-mono text-[#6F6B63]">
@@ -229,7 +236,7 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                   )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {product.sizes.map((size) => {
                     const isSelected = selectedSize?.label === size.label;
                     return (
@@ -506,7 +513,7 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                   DIMENSIONS & SCALE
                 </span>
                 <p className="font-medium text-[#171716] mb-1">
-                  {selectedSize?.dimensions || product.dimensions || 'Bespoke Sizing'}
+                  {product.dimensions || selectedSize?.dimensions || 'Bespoke Sizing'}
                 </p>
                 <p className="text-xs text-[#6F6B63]">
                   Individually verified prior to final studio packaging.

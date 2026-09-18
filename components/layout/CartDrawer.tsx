@@ -68,7 +68,7 @@ export function CartDrawer() {
                               {item.name}
                             </Link>
                             <div className="text-xs text-[#777777] mt-1 space-y-0.5">
-                              {item.size && <p>Size: {item.size}</p>}
+                              {item.size && <p>{item.size.toLowerCase().includes('piece') ? 'Option' : 'Size'}: {item.size}</p>}
                               {item.material && <p>Material: {item.material}</p>}
                             </div>
                           </div>

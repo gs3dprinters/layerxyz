@@ -23,6 +23,8 @@ export interface Product {
   longDescription: string;
   price: number;
   pricePrefix?: string;
+  unitLabel?: string;
+  sizeSelectorLabel?: string;
   comparePrice?: number;
   category: 'sculptures' | 'figurines' | 'home' | 'collectibles' | 'limited';
   categorySlug?: string;
@@ -713,19 +715,25 @@ const BASE_PRODUCTS: Product[] = [
     categoryLabel: 'BATHROOM & UTILITY',
     description: 'Keep your toothbrush neatly organized with our minimalist Toothbrush Slider Holder. Its slim sliding design provides convenient storage while keeping your bathroom counter clean and clutter-free. A practical, modern accessory for everyday use.',
     longDescription: 'Keep your toothbrush neatly organized with our minimalist Toothbrush Slider Holder. Its slim sliding design provides convenient storage while keeping your bathroom counter clean and clutter-free. A practical, modern accessory for everyday use.',
-    price: 499, // PLACEHOLDER PRICE: Set as nominal placeholder required by Product schema. Please edit manually to desired retail price.
+    price: 250,
     pricePrefix: '',
+    unitLabel: 'per piece',
+    sizeSelectorLabel: 'NUMBER OF PIECES',
     category: 'home',
     categorySlug: 'home-decor',
     categorySlugs: ['home-decor'],
     subcategorySlugs: ['bathroom-utility', 'table-decor'],
     isCustomizable: false,
+    dimensions: 'Countertop Scale',
     images: [
       '/images/products/toothbrush-slider-holder/primary.webp',
       '/images/products/toothbrush-slider-holder/gallery-01.webp',
     ],
     sizes: [
-      { label: 'Standard', dimensions: 'Countertop Scale', price: 499 },
+      { label: '1 Piece', dimensions: '₹250 / piece', price: 250 },
+      { label: '2 Pieces', dimensions: '₹250 / piece · Pack of 2', price: 500 },
+      { label: '3 Pieces', dimensions: '₹250 / piece · Pack of 3', price: 750 },
+      { label: '4 Pieces', dimensions: '₹250 / piece · Pack of 4', price: 1000 },
     ],
     materials: [
       { label: 'PLA / PLA Pro+', slug: 'pla-pro-plus' },

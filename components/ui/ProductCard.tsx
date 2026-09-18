@@ -115,9 +115,16 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <div className="mt-3 pt-2 flex items-center justify-between border-t border-[#E8E5DE]/60">
-            <span className="text-sm font-semibold text-[#181818]">
-              {formattedPrice}
-            </span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-sm font-semibold text-[#181818]">
+                {formattedPrice}
+              </span>
+              {product.unitLabel && (
+                <span className="text-[11px] font-mono text-[#777777]">
+                  {product.unitLabel}
+                </span>
+              )}
+            </div>
             <span className="inline-flex items-center gap-1 text-xs font-medium text-[#777777] group-hover:text-[#181818] transition-colors">
               {viewActionLabel}
               <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />

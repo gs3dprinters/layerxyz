@@ -65,7 +65,7 @@ export default function CartPage() {
                         {displayName}
                       </h3>
                       <p className="text-xs text-[#6F6B63] space-x-2">
-                        {item.size && <span>Size: <strong className="text-[#171716]">{item.size}</strong></span>}
+                        {item.size && <span>{item.size.toLowerCase().includes('piece') ? 'Option' : 'Size'}: <strong className="text-[#171716]">{item.size}</strong></span>}
                         {item.finish && <span>• Finish: <strong className="text-[#171716]">{item.finish}</strong></span>}
                         {item.material && <span>• Material: <strong className="text-[#171716]">{item.material}</strong></span>}
                       </p>
