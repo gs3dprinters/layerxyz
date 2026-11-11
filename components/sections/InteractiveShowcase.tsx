@@ -24,7 +24,7 @@ const SHOWROOM_OBJECTS: ShowroomObject[] = [
     id: 'kala-portrait',
     name: 'Custom Portrait Sculpture',
     subtitle: 'Personalized sculptural bust created from photographs',
-    price: 'From ₹1,499',
+    price: 'From ' + formatPrice(8499),
     modelUrl: '/models/kala-final-print.glb',
     slug: 'custom-portrait-sculpture',
     material: 'Warm Sandstone & Charcoal Base',
