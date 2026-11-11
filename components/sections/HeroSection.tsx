@@ -1,17 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { ArrowRight, Sparkles, ShieldCheck, Box, Eye, CheckCircle2 } from 'lucide-react';
 
 const HeroSculpture = dynamic(() => import('@/3d/HeroSculpture'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
       <div className="flex items-center gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#181817] animate-ping" />
-        <span className="text-[11px] font-sans tracking-[0.25em] uppercase text-[#181817] font-medium">
-          LOADING SCULPTURE
+        <span className="w-1.5 h-1.5 rounded-full bg-[#242321] animate-ping" />
+        <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-[#242321] font-medium">
+          PREPARING 3D VIEW
         </span>
       </div>
     </div>
@@ -20,30 +23,34 @@ const HeroSculpture = dynamic(() => import('@/3d/HeroSculpture'), {
 
 export default function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
+  const [viewMode, setViewMode] = useState<'photo' | '3d'>('photo');
 
   const containerVariants = {
     hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.12,
+        staggerChildren: shouldReduceMotion ? 0 : 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 18 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
   return (
-    <section className="min-h-[92vh] lg:min-h-[96vh] bg-[#F4F1EA] w-full flex flex-col md:flex-row items-center justify-between px-6 sm:px-10 lg:px-16 pt-24 md:pt-0 overflow-hidden relative">
-      {/* LEFT 46%: Eyebrow, Display Headline, Copy, CTAs */}
-      <div className="w-full md:w-[46%] lg:w-[44%] flex flex-col justify-center z-10 pt-4 sm:pt-8 md:pt-0 pb-6 md:pb-0">
+    <section className="min-h-[92vh] lg:min-h-[96vh] bg-[#F5F0E8] w-full flex flex-col lg:flex-row items-center justify-between px-6 sm:px-10 lg:px-16 pt-28 sm:pt-32 lg:pt-24 pb-12 overflow-hidden relative border-b border-[#E8DCCB]">
+      {/* Background Subtle Sandstone Glow */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E8DCCB]/40 rounded-full blur-3xl pointer-events-none -z-0" />
+
+      {/* LEFT 50%: Eyebrow, Main Headline, Supporting Text, Two Prominent CTAs, Studio Proof */}
+      <div className="w-full lg:w-[48%] flex flex-col justify-center z-10 pt-4 pb-8 lg:pb-0">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -51,55 +58,135 @@ export default function HeroSection() {
           className="max-w-xl"
         >
           {/* Eyebrow */}
-          <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-            <span className="text-[11px] sm:text-xs font-mono tracking-[0.25em] uppercase text-[#6F6B63] font-medium">
-              LAYERXYZ / OBJECTS
+          <motion.div variants={itemVariants} className="mb-4">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8DCCB]/60 border border-[#D4C5B0] text-[11px] font-mono tracking-[0.2em] uppercase text-[#49392E] font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#A58B70]" />
+              Layer XYZ · Tiruppur, Tamil Nadu
             </span>
           </motion.div>
 
-          {/* Headline */}
-          <motion.h1 
+          {/* Main Headline */}
+          <motion.h1
             variants={itemVariants}
-            className="text-6xl sm:text-7xl lg:text-[5.75rem] font-sans font-semibold tracking-tighter text-[#171716] leading-[0.9] mb-6"
+            className="text-5xl sm:text-6xl lg:text-[4.75rem] font-sans font-semibold tracking-tight text-[#242321] leading-[0.98] mb-6 uppercase"
           >
-            OBJECTS<br />MADE REAL.
+            YOUR IMAGINATION.<br />
+            <span className="text-[#49392E]">MADE REAL.</span>
           </motion.h1>
-          
-          {/* Supporting Copy */}
-          <motion.p 
+
+          {/* Supporting Text */}
+          <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-[#6F6B63] mb-10 max-w-md leading-relaxed"
+            className="text-base sm:text-lg text-[#6F6B63] mb-8 leading-relaxed font-normal"
           >
-            Custom 3D printed objects, sculptures and products — made to order.
+            Custom 3D printed statues, personalised gifts and precision-made products. Designed, crafted and brought to life by Layer XYZ.
           </motion.p>
-          
-          {/* CTAs */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            <Link 
+
+          {/* Two Prominent CTAs */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10"
+          >
+            <Link
               href="/shop"
-              className="inline-flex justify-center items-center px-8 py-4 bg-[#181817] text-[#F4F1EA] font-medium hover:bg-[#2A2A28] transition-colors rounded-full text-sm tracking-wide shadow-xs"
+              className="inline-flex justify-center items-center px-8 py-4 bg-[#242321] text-[#F5F0E8] font-medium hover:bg-[#49392E] transition-all rounded-full text-xs font-mono uppercase tracking-wider shadow-sm hover:shadow-md"
             >
-              SHOP COLLECTION
+              <span>Explore Collections</span>
+              <ArrowRight size={15} className="ml-2" />
             </Link>
-            <Link 
-              href="/custom"
-              className="inline-flex justify-center items-center px-8 py-4 bg-transparent text-[#171716] border border-[#D4D0C8] hover:border-[#171716] transition-colors rounded-full font-medium text-sm tracking-wide"
+
+            <Link
+              href="/custom-statues"
+              className="inline-flex justify-center items-center px-8 py-4 bg-transparent text-[#242321] border border-[#242321] hover:bg-[#242321] hover:text-[#F5F0E8] transition-all rounded-full font-medium text-xs font-mono uppercase tracking-wider"
             >
-              CREATE SOMETHING CUSTOM
+              <span>Create Your Custom Statue</span>
             </Link>
+          </motion.div>
+
+          {/* Studio Trust Badges */}
+          <motion.div
+            variants={itemVariants}
+            className="pt-6 border-t border-[#E8DCCB] grid grid-cols-3 gap-3 text-left"
+          >
+            <div>
+              <span className="block text-xs font-semibold text-[#242321]">In-House Craft</span>
+              <span className="text-[11px] text-[#6F6B63] block">Bambu Lab 3D fleet</span>
+            </div>
+            <div>
+              <span className="block text-xs font-semibold text-[#242321]">Pan-India Safe</span>
+              <span className="text-[11px] text-[#6F6B63] block">Shockproof transit</span>
+            </div>
+            <div>
+              <span className="block text-xs font-semibold text-[#242321]">50% Advance</span>
+              <span className="text-[11px] text-[#6F6B63] block">50% upon shipping</span>
+            </div>
           </motion.div>
         </motion.div>
       </div>
-      
-      {/* RIGHT 54%: Large Real Kala Statue 3D Model */}
-      <div className="w-full md:w-[54%] lg:w-[56%] h-[50vh] sm:h-[62vh] md:h-[88vh] lg:h-[92vh] relative flex flex-col items-center justify-center mt-4 md:mt-0">
-        <div className="w-full h-full relative">
-          <HeroSculpture />
+
+      {/* RIGHT 50%: Large High-Quality Photograph of Actual Completed Statue with 3D Toggle */}
+      <div className="w-full lg:w-[50%] flex flex-col items-center justify-center relative mt-6 lg:mt-0">
+        <div className="relative w-full max-w-lg aspect-square sm:aspect-[4/4.5] bg-[#E8DCCB]/30 rounded-3xl overflow-hidden border border-[#D4C5B0] shadow-sm flex items-center justify-center p-4 sm:p-6">
+          
+          {/* View Mode Toggle: Photograph vs 3D */}
+          <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-[#F5F0E8]/90 backdrop-blur-md p-1 rounded-full border border-[#D4C5B0] text-[10px] font-mono uppercase tracking-wider">
+            <button
+              onClick={() => setViewMode('photo')}
+              className={`px-3 py-1 rounded-full transition-all flex items-center gap-1.5 ${
+                viewMode === 'photo'
+                  ? 'bg-[#242321] text-[#F5F0E8] font-semibold'
+                  : 'text-[#6F6B63] hover:text-[#242321]'
+              }`}
+            >
+              <Eye size={12} />
+              <span>Photograph</span>
+            </button>
+            <button
+              onClick={() => setViewMode('3d')}
+              className={`px-3 py-1 rounded-full transition-all flex items-center gap-1.5 ${
+                viewMode === '3d'
+                  ? 'bg-[#242321] text-[#F5F0E8] font-semibold'
+                  : 'text-[#6F6B63] hover:text-[#242321]'
+              }`}
+            >
+              <Box size={12} />
+              <span>3D Model</span>
+            </button>
+          </div>
+
+          {/* Primary View: Real Product Photograph */}
+          {viewMode === 'photo' ? (
+            <div className="relative w-full h-full flex items-center justify-center">
+              <Image
+                src="/images/products/kala-portrait-statue/primary.webp"
+                alt="Actual completed custom statue fabricated at Layer XYZ studio"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+              />
+              <div className="absolute bottom-3 left-3 bg-[#F5F0E8]/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#D4C5B0] text-[10px] font-mono text-[#242321]">
+                <span className="font-semibold uppercase">Actual Studio Print:</span> Kala Custom Statue · 12" Ebony Finish
+              </div>
+            </div>
+          ) : (
+            /* Interactive 3D Model View */
+            <div className="w-full h-full relative">
+              <HeroSculpture />
+            </div>
+          )}
         </div>
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center pointer-events-none z-10">
-          <span className="text-[10px] text-[#6F6B63] tracking-[0.25em] uppercase font-mono">
-            EXPLORE IN 3D
-          </span>
+
+        {/* Caption below visual */}
+        <div className="mt-4 flex items-center justify-between w-full max-w-lg text-[11px] font-mono text-[#6F6B63] px-2">
+          <span>Tiruppur Fabrication Studio</span>
+          <Link
+            href="/custom-statues"
+            className="text-[#242321] font-semibold hover:text-[#A58B70] transition-colors flex items-center gap-1"
+          >
+            <span>Custom Statue Pricing Guide</span>
+            <ArrowRight size={12} />
+          </Link>
         </div>
       </div>
     </section>

@@ -3,14 +3,17 @@ import { PRODUCTS } from '@/data/products';
 import { COLLECTIONS } from '@/data/collections';
 import { CATEGORIES } from '@/data/categories';
 import { PROJECTS } from '@/data/projects';
+import { STUDIO_INFO } from '@/lib/config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://layerxyz.com';
+  const baseUrl = STUDIO_INFO.siteUrl;
 
   const staticRoutes = [
     '',
     '/shop',
     '/categories',
+    '/custom-statues',
+    '/3d-printing',
     '/custom',
     '/collections',
     '/3d-studio',
@@ -25,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
+    priority: route === '' ? 1 : route === '/custom-statues' || route === '/3d-printing' ? 0.95 : 0.8,
   }));
 
   const productRoutes = PRODUCTS.map((product) => ({

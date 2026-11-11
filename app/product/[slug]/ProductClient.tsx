@@ -349,33 +349,44 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                 )}
               </button>
 
-              {/* Secondary CTA: Custom Version */}
+              {/* Secondary CTA: Custom Version / Commission */}
               <Link
-                href="/custom"
-                className="w-full py-3.5 px-8 rounded-full bg-white text-[#171716] border border-[#171716] font-medium text-xs tracking-wide hover:bg-[#F4F1EA] transition-colors text-center"
+                href="/custom-statues"
+                className="w-full py-3.5 px-8 rounded-full bg-white text-[#171716] border border-[#171716] font-medium text-xs font-mono uppercase tracking-wider hover:bg-[#F4F1EA] transition-colors text-center"
               >
-                REQUEST BESPOKE CUSTOMIZATION
+                REQUEST BESPOKE STATUE / CUSTOM VARIANT
               </Link>
 
-              {/* Direct Studio Inquiry Action */}
+              {/* Direct Studio WhatsApp Inquiry Action */}
               {(() => {
-                const inquiryUrl = getWhatsAppUrl(`Hi, I'm inquiring about ordering the ${product.name} in ${selectedFinish?.label || 'standard finish'} (${selectedSize?.label || 'standard size'}).`);
-                const isExternal = inquiryUrl.startsWith('http');
+                const inquiryUrl = getWhatsAppUrl(
+                  `Hi Layer XYZ, I'm inquiring about ordering the "${product.name}" in ${selectedFinish?.label || 'standard finish'} (${selectedSize?.label || 'standard size'}) priced at ${formatPrice(currentPrice)}.\nLink: https://layerxyz.vercel.app/product/${product.slug}`
+                );
                 return (
                   <a
                     href={inquiryUrl}
-                    target={isExternal ? '_blank' : undefined}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="w-full py-3 px-6 rounded-full bg-white text-[#6F6B63] hover:text-[#171716] border border-[#E8E5DE] text-xs font-medium hover:border-[#D4D0C8] transition-colors text-center"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-6 rounded-full bg-[#25D366] text-white hover:bg-[#20ba59] text-xs font-mono uppercase tracking-wider transition-colors text-center flex items-center justify-center gap-2 shadow-xs"
                   >
-                    {isExternal ? 'Inquire directly on WhatsApp →' : 'Inquire with our studio →'}
+                    <span>Inquire on WhatsApp</span>
+                    <ArrowRight size={14} />
                   </a>
                 );
               })()}
             </div>
 
+            {/* Clear Payment Terms Note */}
+            <div className="mt-4 p-4 rounded-2xl bg-[#E8DCCB]/40 border border-[#D4C5B0] text-xs text-[#49392E] flex items-start gap-2.5">
+              <ShieldCheck size={16} className="mt-0.5 flex-shrink-0 text-[#242321]" />
+              <div>
+                <span className="font-semibold block text-[#242321]">Studio Payment Terms</span>
+                <span>50% advance before fabrication begins · 50% balance during shipping process. Delivery charges calculated separately based on destination.</span>
+              </div>
+            </div>
+
             {/* Subtle Product Trust Row - 3 Pillars */}
-            <div className="pt-6 border-t border-[#E8E5DE] grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+            <div className="pt-6 border-t border-[#E8E5DE] grid grid-cols-1 sm:grid-cols-3 gap-3 text-center mt-6">
               <div className="p-3.5 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE]/80">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E8B83] block mb-1">
                   MADE TO ORDER
@@ -386,10 +397,10 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
               </div>
               <div className="p-3.5 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE]/80">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E8B83] block mb-1">
-                  STUDIO MADE
+                  TIRUPPUR STUDIO
                 </span>
                 <span className="text-xs font-medium text-[#171716] leading-tight block">
-                  Created through the Layerxyz studio.
+                  Bambu Lab precision fleet in Tamil Nadu.
                 </span>
               </div>
               <div className="p-3.5 rounded-2xl bg-[#FAFAF8] border border-[#E8E5DE]/80">
@@ -397,7 +408,7 @@ export default function ProductClient({ product, relatedProducts }: ProductClien
                   NATIONWIDE DELIVERY
                 </span>
                 <span className="text-xs font-medium text-[#171716] leading-tight block">
-                  Available across India.
+                  Shockproof packaging across India.
                 </span>
               </div>
             </div>

@@ -1,72 +1,68 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
-import FeaturedCollection from '@/components/sections/FeaturedCollection';
-import InteractiveShowcase from '@/components/sections/InteractiveShowcase';
-import ShopByCategory from '@/components/sections/ShopByCategory';
-import CustomCTASection from '@/components/sections/CustomCTASection';
-import SelectedWorkSection from '@/components/sections/SelectedWorkSection';
-import LargeScaleSection from '@/components/sections/LargeScaleSection';
-import WhyLayerxyz from '@/components/sections/WhyLayerxyz';
-import MaterialSection from '@/components/sections/MaterialSection';
-import FAQSection from '@/components/sections/FAQSection';
+import WhatWeDoSection from '@/components/sections/WhatWeDoSection';
+import FeaturedCollectionsSection from '@/components/sections/FeaturedCollectionsSection';
+import MadeAtLayerxyzSection from '@/components/sections/MadeAtLayerxyzSection';
+import OurProcessSection from '@/components/sections/OurProcessSection';
+import WhyLayerxyzSection from '@/components/sections/WhyLayerxyzSection';
+import ReviewsSection from '@/components/sections/ReviewsSection';
+import CommercialFAQSection from '@/components/sections/CommercialFAQSection';
 import FinalCTASection from '@/components/sections/FinalCTASection';
 
 export const metadata: Metadata = {
-  title: 'Layerxyz — Premium 3D Printed Objects & Custom Sculptures',
-  description: 'Layerxyz creates custom sculptures, physical editions, and architectural works made to order in our studio.',
+  title: 'Layer XYZ — Custom 3D Printed Statues & 3D Printing Services | Tiruppur, India',
+  description:
+    'Layer XYZ creates bespoke 3D printed statues, personalised portrait sculptures, deity idols, and precision 3D printing manufacturing services in Tiruppur, Tamil Nadu. Fast Pan-India delivery.',
   keywords: [
-    'Layerxyz',
-    'custom 3D printing',
-    'custom sculptures',
-    '3D printed objects',
-    'custom statues',
-    'bespoke fabrication',
-    'contemporary sculpture store',
+    'Custom 3D printed statues India',
+    '3D printing services Tiruppur',
+    'Custom 3D printing India',
+    '3D printed Hindu idols',
+    'Personalised 3D printed gifts',
+    'Bulk 3D printing services India',
+    'Custom 3D printed figurines',
+    'Layer XYZ',
+    '3D statue maker India',
   ],
   openGraph: {
-    title: 'Layerxyz — Objects Made Real',
-    description: 'Custom 3D printed objects, sculptures and products — made to order.',
+    title: 'Layer XYZ — Your Imagination. Made Real.',
+    description:
+      'Custom 3D printed statues, personalised gifts and precision-made products. Designed, crafted and brought to life by Layer XYZ in Tiruppur, India.',
     url: 'https://layerxyz.vercel.app',
-    siteName: 'Layerxyz',
-    locale: 'en_US',
+    siteName: 'Layer XYZ',
+    locale: 'en_IN',
     type: 'website',
   },
 };
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F4F1EA] flex flex-col w-full overflow-hidden">
-      {/* 1. Hero: Kala Statue & Objects Made Real */}
+    <div className="min-h-screen bg-[#F5F0E8] flex flex-col w-full overflow-hidden">
+      {/* 1. Hero: YOUR IMAGINATION. MADE REAL. */}
       <HeroSection />
 
-      {/* 2. Featured Objects: Asymmetric Editorial Grid */}
-      <FeaturedCollection />
+      {/* 2. What We Do: Dual Service Categories Split */}
+      <WhatWeDoSection />
 
-      {/* 3. Experience in 3D: Dedicated Interactive Showroom */}
-      <InteractiveShowcase />
+      {/* 3. Featured Collections: 7 Curated Product Disciplines */}
+      <FeaturedCollectionsSection />
 
-      {/* 4. Shop by Category: Editorial Category Panels */}
-      <ShopByCategory />
+      {/* 4. Made at Layer XYZ: Editorial Craft Gallery with Actual Prints */}
+      <MadeAtLayerxyzSection />
 
-      {/* 5. Custom Fabrication: Make Something That Doesn't Exist Yet */}
-      <CustomCTASection />
+      {/* 5. Our Process: Four-Step Visual Methodology */}
+      <OurProcessSection />
 
-      {/* 6. Selected Work: Monolith 01 & Studio Projects */}
-      <SelectedWorkSection />
+      {/* 6. Why Layer XYZ: Bambu Lab Fleet, In-House Craft & Pan-India Safe Delivery */}
+      <WhyLayerxyzSection />
 
-      {/* 7. Scale: From Small Objects to Statement Pieces */}
-      <LargeScaleSection />
+      {/* 7. Customer Reviews & Studio Trust */}
+      <ReviewsSection />
 
-      {/* 8. The Layerxyz Difference: Core Principles */}
-      <WhyLayerxyz />
+      {/* 8. Commercial FAQ: 9 Specific Commercial Questions Answered */}
+      <CommercialFAQSection />
 
-      {/* 9. Materials & Finish: Matter, Finish, Form */}
-      <MaterialSection />
-
-      {/* 10. FAQ: Clarifications & Baseline Pricing */}
-      <FAQSection />
-
-      {/* 11. Final CTA: Have an Idea? Let's Make It Real */}
+      {/* 9. Final CTA: HAVE AN IDEA? LET'S MAKE IT REAL. */}
       <FinalCTASection />
     </div>
   );

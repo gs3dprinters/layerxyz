@@ -243,13 +243,20 @@ export function ProductViewer({
     modelGroupRef.current = modelGroup;
     scene.add(modelGroup);
 
-    // Load Model
+    // Load Model with 7s Graceful Fallback
+    let loadTimeout: NodeJS.Timeout | null = null;
     if (effectiveModelPath) {
       setLoading(true);
+      loadTimeout = setTimeout(() => {
+        setLoading(false);
+        setHasError(true);
+      }, 7000);
+
       const loader = new GLTFLoader();
       loader.load(
         effectiveModelPath,
         (gltf) => {
+          if (loadTimeout) clearTimeout(loadTimeout);
           const root = gltf.scene;
 
           // Compute bounding box & auto-scale to fit studio stage
@@ -273,6 +280,7 @@ export function ProductViewer({
         },
         undefined,
         (err) => {
+          if (loadTimeout) clearTimeout(loadTimeout);
           console.warn('ProductViewer GLB load failed:', err);
           setHasError(true);
           setLoading(false);
@@ -401,13 +409,22 @@ export function ProductViewer({
       )}
 
       {/* Fallback image if model fails or does not exist */}
-      {hasError && posterImage && (
-        <div className="absolute inset-0 flex items-center justify-center p-8 z-0">
-          <img
-            src={posterImage}
-            alt={productName}
-            className="max-h-[85%] max-w-[85%] object-contain drop-shadow-xl"
-          />
+      {hasError && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 z-0 bg-[#FAFAF8]">
+          {posterImage ? (
+            <img
+              src={posterImage}
+              alt={productName}
+              className="max-h-[85%] max-w-[85%] object-contain drop-shadow-xl"
+            />
+          ) : (
+            <span className="text-xs font-mono uppercase tracking-widest text-[#8C8275]">
+              Studio Photograph View
+            </span>
+          )}
+          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-mono tracking-widest uppercase text-[#8C8275] bg-white/85 px-3 py-1 rounded-full border border-[#E8DCCB]">
+            Studio Photograph View
+          </span>
         </div>
       )}
 

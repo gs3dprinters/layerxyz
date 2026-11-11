@@ -3,12 +3,13 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ShoppingBag, Menu, ChevronDown, ArrowRight } from 'lucide-react';
+import { Search, ShoppingBag, Menu, ChevronDown, ArrowRight, MessageCircle } from 'lucide-react';
 import { Logo } from './Logo';
 import { useCart } from '@/lib/cart-context';
 import { MobileMenu } from './MobileMenu';
 import { SearchOverlay } from './SearchOverlay';
 import { CATEGORIES } from '@/data/categories';
+import { getWhatsAppUrl } from '@/lib/utils';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -56,44 +57,49 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
           isScrolled || isCategoriesMenuOpen
-            ? 'bg-[#F5F3EE]/95 backdrop-blur-xl py-3 border-b border-[#E8E5DE]'
-            : 'bg-transparent py-5'
+            ? 'bg-[#F5F0E8]/95 backdrop-blur-xl py-3 border-b border-[#E8DCCB]'
+            : 'bg-transparent py-4 sm:py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
-          <div className="flex-shrink-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          {/* Logo & Studio Identifier */}
+          <div className="flex items-center gap-3 flex-shrink-0">
             <Logo />
+            <span className="hidden xl:inline-block text-[10px] font-mono tracking-widest uppercase text-[#6F6B63] pl-2 border-l border-[#D4D0C8]">
+              Tiruppur Studio
+            </span>
           </div>
 
-          <nav className="hidden md:flex items-center space-x-7">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-7">
             <Link
-              href="/shop"
-              className="text-sm font-medium tracking-wider text-[#181818] hover:text-[#777777] transition-colors relative group py-2"
+              href="/"
+              className="text-xs xl:text-sm font-medium tracking-wider text-[#242321] hover:text-[#49392E] transition-colors relative group py-2"
             >
-              SHOP
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#181818] transition-all group-hover:w-full duration-300"></span>
+              HOME
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242321] transition-all group-hover:w-full duration-300"></span>
             </Link>
 
-            {/* CATEGORIES with Mega Menu */}
+            {/* SHOP with Categories Mega Menu */}
             <div
               className="relative"
               onMouseEnter={handleMouseEnterCategories}
               onMouseLeave={handleMouseLeaveCategories}
             >
               <Link
-                href="/categories"
+                href="/shop"
                 onClick={() => setIsCategoriesMenuOpen(false)}
-                className={`inline-flex items-center gap-1 text-sm font-medium tracking-wider transition-colors relative group py-2 ${
-                  isCategoriesMenuOpen ? 'text-[#181818]' : 'text-[#181818] hover:text-[#777777]'
+                className={`inline-flex items-center gap-1 text-xs xl:text-sm font-medium tracking-wider transition-colors relative group py-2 ${
+                  isCategoriesMenuOpen ? 'text-[#242321]' : 'text-[#242321] hover:text-[#49392E]'
                 }`}
               >
-                CATEGORIES
+                SHOP
                 <ChevronDown
-                  size={14}
+                  size={13}
                   className={`transition-transform duration-200 ${isCategoriesMenuOpen ? 'rotate-180' : ''}`}
                 />
                 <span
-                  className={`absolute bottom-0 left-0 h-0.5 bg-[#181818] transition-all duration-300 ${
+                  className={`absolute bottom-0 left-0 h-0.5 bg-[#242321] transition-all duration-300 ${
                     isCategoriesMenuOpen ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}
                 ></span>
@@ -101,84 +107,101 @@ export function Navbar() {
             </div>
 
             <Link
-              href="/custom"
-              className="text-sm font-medium tracking-wider text-[#181818] hover:text-[#777777] transition-colors relative group py-2"
+              href="/custom-statues"
+              className="text-xs xl:text-sm font-medium tracking-wider text-[#242321] hover:text-[#49392E] transition-colors relative group py-2"
             >
-              CUSTOM
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#181818] transition-all group-hover:w-full duration-300"></span>
+              CUSTOM STATUES
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242321] transition-all group-hover:w-full duration-300"></span>
             </Link>
 
             <Link
-              href="/collections"
-              className="text-sm font-medium tracking-wider text-[#181818] hover:text-[#777777] transition-colors relative group py-2"
+              href="/3d-printing"
+              className="text-xs xl:text-sm font-medium tracking-wider text-[#242321] hover:text-[#49392E] transition-colors relative group py-2"
             >
-              COLLECTIONS
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#181818] transition-all group-hover:w-full duration-300"></span>
-            </Link>
-
-            <Link
-              href="/3d-studio"
-              className="text-sm font-medium tracking-wider text-[#181818] hover:text-[#777777] transition-colors relative group py-2"
-            >
-              3D STUDIO
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#181818] transition-all group-hover:w-full duration-300"></span>
+              3D PRINTING SERVICES
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242321] transition-all group-hover:w-full duration-300"></span>
             </Link>
 
             <Link
               href="/work"
-              className="text-sm font-medium tracking-wider text-[#181818] hover:text-[#777777] transition-colors relative group py-2"
+              className="text-xs xl:text-sm font-medium tracking-wider text-[#242321] hover:text-[#49392E] transition-colors relative group py-2"
             >
-              WORK
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#181818] transition-all group-hover:w-full duration-300"></span>
+              OUR WORK
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242321] transition-all group-hover:w-full duration-300"></span>
             </Link>
 
             <Link
               href="/about"
-              className="text-sm font-medium tracking-wider text-[#181818] hover:text-[#777777] transition-colors relative group py-2"
+              className="text-xs xl:text-sm font-medium tracking-wider text-[#242321] hover:text-[#49392E] transition-colors relative group py-2"
             >
-              ABOUT
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#181818] transition-all group-hover:w-full duration-300"></span>
+              ABOUT US
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242321] transition-all group-hover:w-full duration-300"></span>
+            </Link>
+
+            <Link
+              href="/contact"
+              className="text-xs xl:text-sm font-medium tracking-wider text-[#242321] hover:text-[#49392E] transition-colors relative group py-2"
+            >
+              CONTACT
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#242321] transition-all group-hover:w-full duration-300"></span>
             </Link>
           </nav>
 
-          <div className="hidden md:flex items-center space-x-6">
+          {/* Desktop Right Actions: Search, Cart, Get a Quote Button */}
+          <div className="hidden md:flex items-center space-x-5">
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search objects"
+              className="text-[#242321] hover:opacity-70 transition-opacity p-1.5"
+            >
+              <Search size={19} />
+            </button>
+            <button
+              onClick={() => setIsCartOpen(true)}
+              aria-label="Open Cart"
+              className="text-[#242321] hover:opacity-70 transition-opacity relative p-1.5"
+            >
+              <ShoppingBag size={19} />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#242321] text-[#F5F0E8] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+
+            {/* Prominent GET A QUOTE CTA */}
+            <Link
+              href="/3d-printing"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#242321] text-[#F5F0E8] text-xs font-mono uppercase tracking-wider hover:bg-[#49392E] transition-colors shadow-xs"
+            >
+              <span>GET A QUOTE</span>
+              <ArrowRight size={13} />
+            </Link>
+          </div>
+
+          {/* Mobile Right Actions */}
+          <div className="flex md:hidden items-center space-x-3">
+            <Link
+              href="/3d-printing"
+              className="px-3 py-1.5 rounded-full bg-[#242321] text-[#F5F0E8] text-[11px] font-mono uppercase tracking-wider"
+            >
+              Quote
+            </Link>
             <button
               onClick={() => setIsSearchOpen(true)}
               aria-label="Search"
-              className="text-[#181818] hover:opacity-70 transition-opacity"
+              className="text-[#242321] p-1.5"
             >
               <Search size={20} />
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
               aria-label="Open Cart"
-              className="text-[#181818] hover:opacity-70 transition-opacity relative"
+              className="text-[#242321] p-1.5 relative"
             >
               <ShoppingBag size={20} />
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#181818] text-[#F5F3EE] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  {totalItems}
-                </span>
-              )}
-            </button>
-          </div>
-
-          <div className="flex md:hidden items-center space-x-4">
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              aria-label="Search"
-              className="text-[#181818] hover:opacity-70 transition-opacity"
-            >
-              <Search size={22} />
-            </button>
-            <button
-              onClick={() => setIsCartOpen(true)}
-              aria-label="Open Cart"
-              className="text-[#181818] hover:opacity-70 transition-opacity relative"
-            >
-              <ShoppingBag size={22} />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#181818] text-[#F5F3EE] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-[#242321] text-[#F5F0E8] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {totalItems}
                 </span>
               )}
@@ -186,9 +209,9 @@ export function Navbar() {
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open Menu"
-              className="text-[#181818] hover:opacity-70 transition-opacity"
+              className="text-[#242321] p-1.5"
             >
-              <Menu size={24} />
+              <Menu size={22} />
             </button>
           </div>
         </div>
@@ -201,28 +224,28 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
-              className="absolute top-full left-0 right-0 bg-[#F4F1EA]/98 backdrop-blur-2xl border-b border-[#E8E5DE] shadow-xl pt-8 pb-8 px-6 lg:px-8 z-40"
+              className="absolute top-full left-0 right-0 bg-[#F5F0E8]/98 backdrop-blur-2xl border-b border-[#E8DCCB] shadow-xl pt-7 pb-8 px-6 lg:px-8 z-40"
               onMouseEnter={handleMouseEnterCategories}
               onMouseLeave={handleMouseLeaveCategories}
             >
               <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-8 border-b border-[#E8E5DE]/80">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-6 border-b border-[#E8DCCB]">
                   {CATEGORIES.map((category) => (
-                    <div key={category.slug} className="space-y-3">
+                    <div key={category.slug} className="space-y-2.5">
                       <Link
                         href={`/categories/${category.slug}`}
                         onClick={() => setIsCategoriesMenuOpen(false)}
-                        className="text-xs font-mono font-semibold uppercase tracking-wider text-[#171716] hover:text-[#777777] transition-colors block"
+                        className="text-xs font-mono font-semibold uppercase tracking-wider text-[#242321] hover:text-[#A58B70] transition-colors block"
                       >
                         {category.name}
                       </Link>
-                      <ul className="space-y-1.5">
-                        {category.subcategories.map((sub) => (
+                      <ul className="space-y-1">
+                        {category.subcategories.slice(0, 4).map((sub) => (
                           <li key={sub.slug}>
                             <Link
                               href={`/categories/${category.slug}?subcategory=${sub.slug}`}
                               onClick={() => setIsCategoriesMenuOpen(false)}
-                              className="text-xs text-[#6F6B63] hover:text-[#171716] transition-colors block py-0.5"
+                              className="text-xs text-[#6F6B63] hover:text-[#242321] transition-colors block py-0.5"
                             >
                               {sub.name}
                             </Link>
@@ -233,22 +256,31 @@ export function Navbar() {
                   ))}
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+                {/* Bottom Bar inside Mega Menu */}
+                <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+                  <div className="flex items-center gap-6">
+                    <Link
+                      href="/shop"
+                      onClick={() => setIsCategoriesMenuOpen(false)}
+                      className="font-mono uppercase tracking-wider text-[#242321] font-semibold hover:text-[#A58B70] transition-colors flex items-center gap-1.5"
+                    >
+                      BROWSE FULL SHOP CATALOG
+                      <ArrowRight size={13} />
+                    </Link>
+                    <Link
+                      href="/categories"
+                      onClick={() => setIsCategoriesMenuOpen(false)}
+                      className="font-mono uppercase tracking-wider text-[#6F6B63] hover:text-[#242321] transition-colors"
+                    >
+                      VIEW ALL 8 CATEGORIES
+                    </Link>
+                  </div>
                   <Link
-                    href="/categories"
+                    href="/custom-statues"
                     onClick={() => setIsCategoriesMenuOpen(false)}
-                    className="font-mono uppercase tracking-wider text-[#171716] font-semibold hover:text-[#6F6B63] transition-colors flex items-center gap-1.5"
+                    className="text-[#6F6B63] hover:text-[#242321] transition-colors"
                   >
-                    EXPLORE ALL 8 CATEGORIES
-                    <ArrowRight size={13} />
-                  </Link>
-                  <Link
-                    href="/custom"
-                    onClick={() => setIsCategoriesMenuOpen(false)}
-                    className="text-[#6F6B63] hover:text-[#171716] transition-colors"
-                  >
-                    Have a custom object idea? Start a bespoke commission →
+                    Want a personalised statue from photo? Start custom order →
                   </Link>
                 </div>
               </div>

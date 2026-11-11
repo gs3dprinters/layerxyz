@@ -129,7 +129,7 @@ export default function CartPage() {
               <span className="text-2xl font-semibold text-[#171716]">{formatPrice(subtotal)}</span>
             </div>
             <p className="text-xs text-[#6F6B63] leading-relaxed">
-              Made to order. Shipping destination and delivery details confirmed directly with our Tiruppur studio.
+              Made to order. Shipping destination and delivery details confirmed directly with our Tiruppur studio. Standard terms: 50% advance before fabrication · 50% during dispatch.
             </p>
             {(() => {
               const orderUrl = getWhatsAppOrderUrl(items, subtotal);

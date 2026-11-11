@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { submitQuote } from '@/lib/api';
 import { getWhatsAppUrl } from '@/lib/utils';
@@ -149,9 +150,23 @@ export default function CustomProjectPage() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-semibold tracking-tight text-[#171716] mb-6 leading-[1.1]">
             BRING YOUR IDEA INTO THE REAL WORLD.
           </h1>
-          <p className="text-base sm:text-lg text-[#6F6B63] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#6F6B63] leading-relaxed mb-8">
             From photographs and sketches to digital files and original concepts, we turn ideas into physical objects.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/custom-statues"
+              className="px-5 py-2.5 rounded-full bg-[#171716] text-[#F4F1EA] text-xs font-mono uppercase tracking-wider hover:bg-[#2A2A28] transition-colors"
+            >
+              Custom Statues & Figurines (From Photos) →
+            </Link>
+            <Link
+              href="/3d-printing"
+              className="px-5 py-2.5 rounded-full bg-white text-[#171716] border border-[#171716] text-xs font-mono uppercase tracking-wider hover:bg-[#F4F1EA] transition-colors"
+            >
+              3D Printing Services (CAD / STL) →
+            </Link>
+          </div>
         </header>
 
         {/* 5-Stage Visual Journey */}
