@@ -8,15 +8,16 @@
  */
 
 // Business WhatsApp Number (with country code, digits only)
-// Note: If NEXT_PUBLIC_WHATSAPP_NUMBER is not set, this default placeholder is used.
-// User can replace '919876543210' with their actual WhatsApp business phone number.
 export const BUSINESS_WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919876543210";
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "918610549543";
 
 export const STUDIO_INFO = {
   name: "Layer XYZ",
   legalName: "Layer XYZ Studio",
   tagline: "Your Imagination. Made Real.",
+  phone: "8610549543",
+  phoneDisplay: "+91 86105 49543",
+  whatsappUrl: "https://wa.me/918610549543",
   description:
     "Premium 3D printing and custom product manufacturing studio based in Tiruppur, Tamil Nadu, India. Specialising in custom statues, deity idols, personalised gifts, and industrial 3D printing services.",
   city: "Tiruppur",

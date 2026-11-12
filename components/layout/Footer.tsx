@@ -58,7 +58,10 @@ export function Footer() {
             <p className="text-xs text-[#6F6B63] leading-relaxed">
               {STUDIO_INFO.locationDisplay}
             </p>
-            <a href={`mailto:${STUDIO_INFO.email}`} className="hover:text-[#242321] text-[#6F6B63] transition-colors text-sm">
+            <a href="tel:+918610549543" className="hover:text-[#242321] text-[#6F6B63] transition-colors text-sm font-mono block">
+              +91 86105 49543
+            </a>
+            <a href={`mailto:${STUDIO_INFO.email}`} className="hover:text-[#242321] text-[#6F6B63] transition-colors text-sm block">
               {STUDIO_INFO.email}
             </a>
 
